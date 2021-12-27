@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Grid Left Sidebar | Porto - Responsive HTML5 Template</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link
+		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
+
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+            .collapse ul{
+                padding: 6px 0px;
+            }
+
+            .header-body{
+                background: #1a84ed !important;
+            }
+            #header i{
+                color:white;
+            }
+            a{
+                color: #0088CC;
+            }
+		</style>
+		{# <link rel="stylesheet" href="{{asset('externalAssets/custom.css')}}"> #}
+	</head>
+	<body data-plugin-page-transition>
+
+		<div class="body">
+			<header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 70}">
+				<div class="header-body border-top-0">
+					<div class="header-container container-fluid px-lg-4">
+						<div class="header-row">
+							<div class="header-column header-column-border-right flex-grow-0">
+								<div class="header-row pe-4">
+									<div class="header-logo">
+										<a href="index.html">
+											<img alt="Porto" width="100" height="48" data-sticky-width="82" data-sticky-height="40" src="img/logo-default-slim.png">
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="header-column">
+								<div class="header-row">
+									<div class="header-nav header-nav-links justify-content-center">
+										<div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
+											<nav class="collapse header-mobile-border-top">
+												<ul class="nav nav-pills" id="mainNav">
+													<li class="dropdown">
+														<a class="dropdown-item dropdown-toggle text-white" href="index.html">
+															Home
+														</a>
+														<ul class="dropdown-menu">
+															<li>
+																<a class="dropdown-item" href="index.html">
+																	Landing Page
+																</a>
+															</li>
+															<li class="dropdown-submenu">
+																<a class="dropdown-item" >Classic</a>
+																<ul class="dropdown-menu">
+																	<li>
+																		<a class="dropdown-item" href="index-classic.html">Classic - Original</a>
+																	</li>
+																	<li>
+																		<a class="dropdown-item" href="index-classic-color.html">Classic - Color</a>
+																	</li>
+																	<li>
+																		<a class="dropdown-item" href="index-classic-light.html">Classic - Light</a>
+																	</li>
+																	<li>
+																		<a class="dropdown-item" href="index-classic-video.html">Classic - Video</a>
+																	</li>
+																	<li>
+																		<a class="dropdown-item" href="index-classic-video-light.html">Classic - Video - Light</a>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="header-column header-column-border-left flex-grow-0 justify-content-center">
+								<div class="header-row ps-4 justify-content-end">
+									<ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean m-0">
+										<li class="social-icons-facebook">
+											<a href="http://www.facebook.com/" target="_blank" title="Facebook">
+												<i class="fab fa-facebook-f"></i>
+											</a>
+										</li>
+										<li class="social-icons-twitter">
+											<a href="http://www.twitter.com/" target="_blank" title="Twitter">
+												<i class="fab fa-twitter"></i>
+											</a>
+										</li>
+										<li class="social-icons-linkedin">
+											<a href="http://www.linkedin.com/" target="_blank" title="Linkedin">
+												<i class="fab fa-linkedin-in"></i>
+											</a>
+										</li>
+									</ul>
+									<button class="btn header-btn-collapse-nav ms-0 ms-sm-3" data-bs-toggle="collapse" data-bs-target=".header-nav-main nav">
+										<i class="fas fa-bars"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div role="main" class="main">
+
+
+				<div class="container py-4">
+
+					<div class="row">
+						<div class="col-lg-3">
+							<aside class="sidebar">
+								<form action="page-search-results.html" method="get">
+									<div class="input-group mb-3 pb-1">
+										<input class="form-control text-1" placeholder="Search..." name="s" id="s" type="text">
+										<button type="submit" class="btn btn-dark text-1 p-2">
+											<i class="fas fa-search m-2"></i>
+										</button>
+									</div>
+								</form>
+								<h5 class="font-weight-semi-bold pt-4">Categories</h5>
+								<ul class="nav nav-list flex-column mb-5">
+									<li class="nav-item">
+                                    <div class="accordion" id="accordion3">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1Headingthree">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1three" aria-expanded="false" aria-controls="collapse1three">
+                                                           Name <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1three" class="collapse" aria-labelledby="collapse1Headingthreee" style="">
+                                                    <div class="">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="first">
+                                                                        &nbsp; A-E
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="second">
+                                                                        &nbsp; F-J
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="third">
+                                                                        &nbsp; K-0
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="fourth">
+                                                                        &nbsp; P-T
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="fifth">
+                                                                        &nbsp;U-Z
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</li>
+									<li class="nav-item">	
+                                        <div class="accordion" id="accordion1">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1HeadingOne">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1One" aria-expanded="false" aria-controls="collapse1One">
+                                                           Sex <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne" style="">
+                                                    <div class="">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="male">
+                                                                        &nbsp; Male
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="female">
+                                                                        &nbsp; Female
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</li>
+									<li class="nav-item">
+                                        <div class="accordion" id="accordion2">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1Headingtwo">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1two" aria-expanded="false" aria-controls="collapse1two">
+                                                           Age <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1two" class="collapse" aria-labelledby="collapse1Headingtwo" style="">
+                                                    <div class="">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="smaller">
+                                                                        &nbsp; 18-24
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="small">
+                                                                        &nbsp; 25-29
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="big">
+                                                                        &nbsp; 30-34
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="bigger">
+                                                                        &nbsp; 35-40
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list" value="biggest">
+                                                                        &nbsp; >40
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										
+									</li>
+
+									<li class="nav-item">
+                                        <div class="accordion" id="accordion4">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1Headingfour">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1four" aria-expanded="false" aria-controls="collapse1four">
+                                                           Religion <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1four" class="collapse" aria-labelledby="collapse1Headingfour" style="">
+                                                    <div class=""> 
+                                                        <ul>
+                                                            {% for religion in religions %}
+                                                                <li class="nav-item">
+                                                                    <div class="switch switch-lg switch-primary">
+                                                                        <label>
+                                                                            <input type="checkbox" class="sub-list" value="{{religion.id}}">
+                                                                            &nbsp;
+                                                                            {{religion.name}}</label>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</li>
+
+								</ul>
+							</aside>
+						</div>
+						<div class="col-lg-9" style="border-left: 1px solid #b2d8f2;padding-left: 55px;">
+							<div class="blog-posts">
+
+								<div class="row px-3">
+                                {% for user in users %}
+                                    <div class="col-sm-6">
+										<article class="post post-medium border-0 pb-0 mb-5">
+											<div class="post-content">
+
+												<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2">
+													<a href="{{path('user_show', {id: user.id})}}">{{user.fname}} {{user.mname}}</a>
+												</h2>
+                                                <div class="post-meta">
+                                                    <span>
+                                                        {% if user.sex == "M" %}
+                                                            <i class="fas fa-mars"></i>
+                                                            <a > Male</a>
+                                                        {% elseif user.sex == "F" %}
+                                                            <i class="fas fa-venus"></i>
+                                                            <a ></a>
+                                                        {% endif %}
+													</span>
+													<span>
+														Age: <a >{{user.age}}</a>
+													</span>
+                                                </div>
+												<p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+
+												<div class="post-meta">
+													<span>
+                                                        {% if user.religion.id == 1 %}
+                                                            <i class="fas fa-cross"></i>
+														    <a >Orthodox</a>
+                                                        {% elseif user.religion.id == 2 %}
+                                                            <i class="fas fa-mosque"></i>
+														    <a >Muslim</a>
+                                                        {% elseif user.religion.id == 3 %}
+                                                            <i class="fas fa-bible"></i>
+														    <a >Protestant</a>
+                                                        {% elseif user.religion.id == 4 %}
+                                                            <i class="fas fa-cross"></i>
+														    <a >Catholic</a>
+                                                        {% else %}
+                                                            <i class="fas fa-bible"></i>
+														    <a >Orthodox</a>
+                                                        {% endif %}
+													</span>
+												</div>
+											</div>
+										</article>
+									</div>
+                                {% endfor %}
+									
+								</div>
+
+								<div class="row">
+									<div class="col">
+										<ul class="pagination float-end">
+											<li class="page-item">
+												<a class="page-link" >
+													<i class="fas fa-angle-left"></i>
+												</a>
+											</li>
+											<li class="page-item active">
+												<a class="page-link" >1</a>
+											</li>
+											<li class="page-item">
+												<a class="page-link" >2</a>
+											</li>
+											<li class="page-item">
+												<a class="page-link" >3</a>
+											</li>
+											<li class="page-item">
+												<a class="page-link" >
+													<i class="fas fa-angle-right"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<footer id="footer">
+				<div class="footer-copyright">
+					<div class="container py-2">
+						<div class="row py-4">
+							<div class="col-lg-1 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
+								<a href="index.html" class="logo pe-0 pe-lg-3">
+									<img alt="Porto Website Template" src="img/logo-footer.png" class="opacity-5" height="32">
+								</a>
+							</div>
+							<div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
+								<p>© Copyright 2021. All Rights Reserved.</p>
+							</div>
+							<div class="col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-end">
+								<nav id="sub-menu">
+									<ul>
+										<li>
+											<i class="fas fa-angle-right"></i>
+											<a href="page-faq.html" class="ms-1 text-decoration-none">
+												FAQ's</a>
+										</li>
+										<li>
+											<i class="fas fa-angle-right"></i>
+											<a href="sitemap.html" class="ms-1 text-decoration-none">
+												Sitemap</a>
+										</li>
+										<li>
+											<i class="fas fa-angle-right"></i>
+											<a href="contact-us.html" class="ms-1 text-decoration-none">
+												Contact Us</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+		<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+		<script src="{{asset('externalAssets/theme.js')}}"> </script>
+        <script src="{{asset('externalAssets/theme.init.js')}}"> </script>
+        <script> 
+            $(".nav-item").on("click", function(){
+                icon = $(this).find('i');
+                if($(icon).hasClass("fa-chevron-right")){
+                    $(icon).removeClass("fa-chevron-right");
+                    $(icon).addClass("fa-chevron-down");
+                }
+                else{
+                    $(icon).removeClass("fa-chevron-down");
+                    $(icon).addClass("fa-chevron-right");
+                }
+            });
+
+            $("input[type='checkbox']").on("change", function(){
+                
+            });
+        </script>
+	</body>
+</html>

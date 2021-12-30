@@ -12,13 +12,13 @@
 				{{ form_widget(form.roles,{'attr':{'class':form_errors(form.roles)? 'form-control is-invalid':'form-control','placeholder':"Enter..."}}) }}
 				<div class="help-block text-danger">{{form_errors(form.roles)}}</div>
 			</div> #}
-	<div class="col-md-6">
+	{# <div class="col-md-6">
 		<div class="form-group mt-2 ">
 			{{form_label(form.password)}}
 			{{ form_widget(form.password,{'attr':{'class':form_errors(form.password)? 'form-control  is-invalid':'form-control ','placeholder':"Enter..."}}) }}
 			<div class="help-block text-danger">{{form_errors(form.password)}}</div>
 		</div>
-	</div>
+	</div> #}
 </div>
 <div class="card-footer float-right">
 	<a href="{{app.request.headers.get('referer')}}" class="btn btn-info ">back</a>

@@ -81,8 +81,8 @@ class Religion
         return $this;
     }
 
-    // public function __toString()
-    // {
-    //     return $this->name;
-    // }
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

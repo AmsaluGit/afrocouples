@@ -54,103 +54,18 @@
             a{
                 color: #0088CC;
             }
+            .ds-none{
+                display: none;
+            }
 		</style>
 		{# <link rel="stylesheet" href="{{asset('externalAssets/custom.css')}}"> #}
 	</head>
 	<body data-plugin-page-transition>
 
 		<div class="body">
-			<header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 70}">
-				<div class="header-body border-top-0">
-					<div class="header-container container-fluid px-lg-4">
-						<div class="header-row">
-							<div class="header-column header-column-border-right flex-grow-0">
-								<div class="header-row pe-4">
-									<div class="header-logo">
-										<a href="index.html">
-											<img alt="Porto" width="100" height="48" data-sticky-width="82" data-sticky-height="40" src="img/logo-default-slim.png">
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="header-column">
-								<div class="header-row">
-									<div class="header-nav header-nav-links justify-content-center">
-										<div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
-											<nav class="collapse header-mobile-border-top">
-												<ul class="nav nav-pills" id="mainNav">
-													<li class="dropdown">
-														<a class="dropdown-item dropdown-toggle text-white" href="index.html">
-															Home
-														</a>
-														<ul class="dropdown-menu">
-															<li>
-																<a class="dropdown-item" href="index.html">
-																	Landing Page
-																</a>
-															</li>
-															<li class="dropdown-submenu">
-																<a class="dropdown-item" >Classic</a>
-																<ul class="dropdown-menu">
-																	<li>
-																		<a class="dropdown-item" href="index-classic.html">Classic - Original</a>
-																	</li>
-																	<li>
-																		<a class="dropdown-item" href="index-classic-color.html">Classic - Color</a>
-																	</li>
-																	<li>
-																		<a class="dropdown-item" href="index-classic-light.html">Classic - Light</a>
-																	</li>
-																	<li>
-																		<a class="dropdown-item" href="index-classic-video.html">Classic - Video</a>
-																	</li>
-																	<li>
-																		<a class="dropdown-item" href="index-classic-video-light.html">Classic - Video - Light</a>
-																	</li>
-																</ul>
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</nav>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="header-column header-column-border-left flex-grow-0 justify-content-center">
-								<div class="header-row ps-4 justify-content-end">
-									<ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean m-0">
-										<li class="social-icons-facebook">
-											<a href="http://www.facebook.com/" target="_blank" title="Facebook">
-												<i class="fab fa-facebook-f"></i>
-											</a>
-										</li>
-										<li class="social-icons-twitter">
-											<a href="http://www.twitter.com/" target="_blank" title="Twitter">
-												<i class="fab fa-twitter"></i>
-											</a>
-										</li>
-										<li class="social-icons-linkedin">
-											<a href="http://www.linkedin.com/" target="_blank" title="Linkedin">
-												<i class="fab fa-linkedin-in"></i>
-											</a>
-										</li>
-									</ul>
-									<button class="btn header-btn-collapse-nav ms-0 ms-sm-3" data-bs-toggle="collapse" data-bs-target=".header-nav-main nav">
-										<i class="fas fa-bars"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
-
+			{% include "home/navbar.html.twig" %}
 			<div role="main" class="main">
-
-
 				<div class="container py-4">
-
 					<div class="row">
 						<div class="col-lg-3">
 							<aside class="sidebar">
@@ -162,6 +77,7 @@
 										</button>
 									</div>
 								</form>
+                                <form id="filter-form">
 								<h5 class="font-weight-semi-bold pt-4">Categories</h5>
 								<ul class="nav nav-list flex-column mb-5">
 									<li class="nav-item">
@@ -180,7 +96,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="first">
+                                                                        <input type="checkbox" class="sub-list name-checkbox" name="name[]" value="first">
                                                                         &nbsp; A-E
                                                                     </label>
                                                                 </div>
@@ -188,7 +104,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="second">
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="second">
                                                                         &nbsp; F-J
                                                                     </label>
                                                                 </div>
@@ -197,7 +113,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="third">
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="third">
                                                                         &nbsp; K-0
                                                                     </label>
                                                                 </div>
@@ -205,7 +121,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="fourth">
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fourth">
                                                                         &nbsp; P-T
                                                                     </label>
                                                                 </div>
@@ -213,7 +129,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="fifth">
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fifth">
                                                                         &nbsp;U-Z
                                                                     </label>
                                                                 </div>
@@ -240,7 +156,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="male">
+                                                                        <input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="M">
                                                                         &nbsp; Male
                                                                     </label>
                                                                 </div>
@@ -248,7 +164,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="female">
+                                                                        <input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="F">
                                                                         &nbsp; Female
                                                                     </label>
                                                                 </div>
@@ -275,7 +191,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="smaller">
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="smaller">
                                                                         &nbsp; 18-24
                                                                     </label>
                                                                 </div>
@@ -283,7 +199,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="small">
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="small">
                                                                         &nbsp; 25-29
                                                                     </label>
                                                                 </div>
@@ -292,7 +208,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="big">
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="big">
                                                                         &nbsp; 30-34
                                                                     </label>
                                                                 </div>
@@ -301,7 +217,7 @@
 
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="bigger">
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="bigger">
                                                                         &nbsp; 35-40
                                                                     </label>
                                                                 </div>
@@ -309,7 +225,7 @@
                                                             <li class="nav-item">
                                                                 <div class="switch switch-lg switch-primary">
                                                                     <label>
-                                                                        <input type="checkbox" class="sub-list" value="biggest">
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="biggest">
                                                                         &nbsp; >40
                                                                     </label>
                                                                 </div>
@@ -339,7 +255,7 @@
                                                                 <li class="nav-item">
                                                                     <div class="switch switch-lg switch-primary">
                                                                         <label>
-                                                                            <input type="checkbox" class="sub-list" value="{{religion.id}}">
+                                                                            <input type="checkbox" class="religion-checkbox sub-list" name="religion" value="{{religion.id}}">
                                                                             &nbsp;
                                                                             {{religion.name}}</label>
                                                                     </div>
@@ -351,7 +267,7 @@
                                             </div>
                                         </div>
 									</li>
-
+                                </form>
 								</ul>
 							</aside>
 						</div>
@@ -365,7 +281,7 @@
 											<div class="post-content">
 
 												<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2">
-													<a href="{{path('user_show', {id: user.id})}}">{{user.fname}} {{user.mname}}</a>
+													<a href="{{path('user_detail', {id: user.userId})}}">{{user.fname}} {{user.mname}}</a>
 												</h2>
                                                 <div class="post-meta">
                                                     <span>
@@ -374,9 +290,10 @@
                                                             <a > Male</a>
                                                         {% elseif user.sex == "F" %}
                                                             <i class="fas fa-venus"></i>
-                                                            <a ></a>
+                                                            <a > Female</a>
                                                         {% endif %}
 													</span>
+                                                    
 													<span>
 														Age: <a >{{user.age}}</a>
 													</span>
@@ -407,86 +324,30 @@
 										</article>
 									</div>
                                 {% endfor %}
-									
 								</div>
-
-								<div class="row">
-									<div class="col">
-										<ul class="pagination float-end">
-											<li class="page-item">
-												<a class="page-link" >
-													<i class="fas fa-angle-left"></i>
-												</a>
-											</li>
-											<li class="page-item active">
-												<a class="page-link" >1</a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" >2</a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" >3</a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" >
-													<i class="fas fa-angle-right"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-
 							</div>
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
+			{% include "home/footer.html.twig" %}
 
-			<footer id="footer">
-				<div class="footer-copyright">
-					<div class="container py-2">
-						<div class="row py-4">
-							<div class="col-lg-1 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
-								<a href="index.html" class="logo pe-0 pe-lg-3">
-									<img alt="Porto Website Template" src="img/logo-footer.png" class="opacity-5" height="32">
-								</a>
-							</div>
-							<div class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
-								<p>© Copyright 2021. All Rights Reserved.</p>
-							</div>
-							<div class="col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-end">
-								<nav id="sub-menu">
-									<ul>
-										<li>
-											<i class="fas fa-angle-right"></i>
-											<a href="page-faq.html" class="ms-1 text-decoration-none">
-												FAQ's</a>
-										</li>
-										<li>
-											<i class="fas fa-angle-right"></i>
-											<a href="sitemap.html" class="ms-1 text-decoration-none">
-												Sitemap</a>
-										</li>
-										<li>
-											<i class="fas fa-angle-right"></i>
-											<a href="contact-us.html" class="ms-1 text-decoration-none">
-												Contact Us</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
 		</div>
 		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
 		<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
 		<script src="{{asset('externalAssets/theme.js')}}"> </script>
         <script src="{{asset('externalAssets/theme.init.js')}}"> </script>
         <script> 
+            var loadControl = {
+                start:0,
+                end: 20,
+                round: 1,
+                more: true,
+                free: true,
+            }
             $(".nav-item").on("click", function(){
                 icon = $(this).find('i');
                 if($(icon).hasClass("fa-chevron-right")){
@@ -496,12 +357,208 @@
                 else{
                     $(icon).removeClass("fa-chevron-down");
                     $(icon).addClass("fa-chevron-right");
+
                 }
             });
 
             $("input[type='checkbox']").on("change", function(){
+                $sex = [];
+                $religion = [];
+                $name = [];
+                $age = [];
+                $.each($(".age-checkbox:checked"), function(key, value)
+                {
+                    $age.push(value.value);
+                });
+
+                $.each($(".name-checkbox:checked"), function(key, value)
+                {
+                    $name.push(value.value);
+                });
+
+                $.each($(".sex-checkbox:checked"), function(key, value)
+                {
+                    $sex.push(value.value);
+                });
+
+                $.each($(".religion-checkbox:checked"), function(key, value)
+                {
+                    $religion.push(value.value);
+                });
                 
+                loadControl.start = 0;
+                loadControl.end = 20;
+                loadControl.round = 1
+                if(loadControl.more){
+                    $.ajax({
+                        method: 'POST',
+                        url: '{{path("user_filter")}}',
+                        data:{start:loadControl.start, end:loadControl.end, name:$name, age:$age, sex:$sex, religion:$religion, draw: loadControl.round },
+                        success: function(data){
+                            if(data.length == 0)
+                            {
+                                loadControl.more = false;
+                            }
+                            $container = $("<div class='row px-3'></div>");
+                            $(".blog-posts").html("");
+                            if(data['users'].length>0 && data['draw'] == loadControl.round){
+                                loadControl.round += 1;
+                                $.each(data['users'], function(){
+                                    $col = $('<div class="col-sm-6"><article class="post post-medium border-0 pb-0 mb-5"></article></div>');
+                                    $header = $('<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"></h2>');
+                                    $header.append('<a href="/user/'+$(this)[0].userId+'/detail">'+$(this)[0].id+" "+$(this)[0].fname+" "+$(this)[0].mname+" "+$(this)[0].lname+'</a>');
+                                    $col.append($header);
+
+                                    $meta = $('<div class="post-meta"></div>');
+                                    if($(this)[0].sex == "M"){
+                                        $meta.append('<span><i class="fas fa-mars"></i> Male</span>');
+                                    }
+                                    else if($(this)[0].sex == "F")
+                                    {
+                                        $meta.append(' <span> <i class="fas fa-mars"></i> Female </span>');
+                                    }
+                                    $meta.append(' <span>&nbsp; Age: <a>'+$(this)[0].age+'</a></span>')
+                                    $col.append($meta);
+                                    $col.append("<p>"+$(this)[0].description+"</p>");
+                                    $meta = $('<div class="post-meta"></div>');
+                                    if($(this)[0].religion.id == "1"){
+                                        $meta.append('<span><i class="fas fa-cross"></i><a> Orthodox</a></span>');
+                                    }
+                                    else if($(this)[0].religion.id == "2"){
+                                        $meta.append('<span><i class="fas fa-masque"></i><a> Muslim</a></span>');
+                                    }
+                                    else if($(this)[0].religion.id == "3"){
+                                        $meta.append('<span><i class="fas fa-bible"></i><a> Protestant</a></span>');
+                                    }
+                                    else if($(this)[0].religion.id == "4"){
+                                        $meta.append('<span><i class="fas fa-cross"></i><a> Catholic</a></span>');
+                                    }
+                                    $col.append($meta);
+                                    $container.append($col);
+                                });
+                            }
+                            else{
+                                if(loadControl.round>1){}
+                                else
+                                $container.append("<center>No Match Found!</center>");
+                            }
+
+
+                                $(".blog-posts").append($container);
+                            loadControl.round++;
+                        },
+                        error: function(data){
+                            console.log("lksjdf");
+                        }
+                    });
+                }
             });
+
+            $(window).bind('scroll', function() {
+                
+                if($(window).scrollTop() >= $('.main').offset().top + $('.main').outerHeight() - (window.innerHeight+300)) {
+                  if(loadControl.free)
+                  {  
+                    $sex = [];
+                    $religion = [];
+                    $name = [];
+                    $age = [];
+                    $.each($(".age-checkbox:checked"), function(key, value)
+                    {
+                        $age.push(value.value);
+                    });
+
+                    $.each($(".name-checkbox:checked"), function(key, value)
+                    {
+                        $name.push(value.value);
+                    });
+
+                    $.each($(".sex-checkbox:checked"), function(key, value)
+                    {
+                        $sex.push(value.value);
+                    });
+
+                    $.each($(".religion-checkbox:checked"), function(key, value)
+                    {
+                        $religion.push(value.value);
+                    });
+                    
+                    loadControl.start = loadControl.round * 20;
+                    if(loadControl.more){
+
+                        $(".spinner-border").removeClass("ds-none");
+                        loadControl.free = false;
+                        $.ajax({
+                            method: 'POST',
+                            url: '{{path("user_filter")}}',
+                            data:{start:loadControl.start, end:loadControl.end, name:$name, age:$age, sex:$sex, religion:$religion, draw: loadControl.round },
+                            success: function(data){
+                                if(data.length == 0)
+                                {
+                                    loadControl.more = false;
+                                }
+                                if(data['users'].length>0 ){
+                                    if(data['draw'] == loadControl.round){
+                                        $container = $("<div class='row px-3'></div>");
+                                        loadControl.round += 1;
+                                        $.each(data['users'], function(){
+                                            $col = $('<div class="col-sm-6"><article class="post post-medium border-0 pb-0 mb-5"></article></div>');
+                                            $header = $('<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"></h2>');
+                                            $header.append('<a href="/user/'+$(this)[0].userId+'/detail">'+$(this)[0].id+" "+$(this)[0].fname+" "+$(this)[0].mname+" "+$(this)[0].lname+'</a>');
+                                            $col.append($header);
+
+                                            $meta = $('<div class="post-meta"></div>');
+                                            if($(this)[0].sex == "M"){
+                                                $meta.append('<span><i class="fas fa-mars"></i> Male</span>');
+                                            }
+                                            else if($(this)[0].sex == "F")
+                                            {
+                                                $meta.append(' <span> <i class="fas fa-mars"></i> Female </span>');
+                                            }
+                                            $meta.append(' <span>&nbsp; Age: <a>'+$(this)[0].age+'</a></span>')
+                                            $col.append($meta);
+                                            $col.append("<p>"+$(this)[0].description+"</p>");
+                                            $meta = $('<div class="post-meta"></div>');
+                                            if($(this)[0].religion.id == "1"){
+                                                $meta.append('<span><i class="fas fa-cross"></i><a> Orthodox</a></span>');
+                                            }
+                                            else if($(this)[0].religion.id == "2"){
+                                                $meta.append('<span><i class="fas fa-masque"></i><a> Muslim</a></span>');
+                                            }
+                                            else if($(this)[0].religion.id == "3"){
+                                                $meta.append('<span><i class="fas fa-bible"></i><a> Protestant</a></span>');
+                                            }
+                                            else if($(this)[0].religion.id == "4"){
+                                                $meta.append('<span><i class="fas fa-cross"></i><a> Catholic</a></span>');
+                                            }
+                                            $col.append($meta);
+                                            $container.append($col);
+                                        });
+                                    }
+                                }
+                                else{
+                                    if(loadControl.round>1){}
+                                    else
+                                    $container.append("<center>No Match Found!</center>");
+                                }
+
+
+                                    $(".blog-posts").append($container);
+                                loadControl.round++;
+                            },
+                            error: function(data){
+                                console.log("lksjdf");
+                            }
+                        });
+                        
+                        setTimeout(tt, 10000);
+                        $(".spinner-border").addClass("ds-none");
+                        loadControl.free = true;
+                    }
+                  }
+                }
+            });
+            function tt(){}
         </script>
 	</body>
 </html>

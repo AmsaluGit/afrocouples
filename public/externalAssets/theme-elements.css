@@ -6998,7 +6998,7 @@ label.required:after {
 }
 
 .form-control {
-	border-color: rgba(0, 0, 0, 0.09);
+	border-color: rgba(0, 0, 0, 0.3);
 }
 
 .form-control:not(.form-control-lg) {

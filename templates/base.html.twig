@@ -10,13 +10,26 @@
         <title>Gentelella Alela! | </title>
 
         <!-- Bootstrap -->
-        <link href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+ 
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
 
-        <!-- Font Awesome -->
-        <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
 
-        <!-- Custom Theme Style -->
-        {# <link href="{{ asset('assets/css/custom.min.css')}}" rel="stylesheet"> #}
+            .collapse ul{
+                padding: 6px 0px;
+            }
+		</style>
 
         <title>{% block title %}Welcome!{% endblock %}</title>
 

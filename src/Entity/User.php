@@ -98,6 +98,41 @@ class User implements UserInterface
      */
     private $religion;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebookLink;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telegramUsername;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $height;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $faceColor;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $currentCity;
+
 
 
 
@@ -328,6 +363,90 @@ class User implements UserInterface
     public function setReligion(?Religion $religion): self
     {
         $this->religion = $religion;
+
+        return $this;
+    }
+
+    public function getFacebookLink(): ?string
+    {
+        return $this->facebookLink;
+    }
+
+    public function setFacebookLink(?string $facebookLink): self
+    {
+        $this->facebookLink = $facebookLink;
+
+        return $this;
+    }
+
+    public function getTelegramUsername(): ?string
+    {
+        return $this->telegramUsername;
+    }
+
+    public function setTelegramUsername(?string $telegramUsername): self
+    {
+        $this->telegramUsername = $telegramUsername;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getHeight(): ?float
+    {
+        return $this->height;
+    }
+
+    public function setHeight(float $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getFaceColor(): ?string
+    {
+        return $this->faceColor;
+    }
+
+    public function setFaceColor(string $faceColor): self
+    {
+        $this->faceColor = $faceColor;
+
+        return $this;
+    }
+
+    public function getCurrentCity(): ?string
+    {
+        return $this->currentCity;
+    }
+
+    public function setCurrentCity(string $currentCity): self
+    {
+        $this->currentCity = $currentCity;
 
         return $this;
     }

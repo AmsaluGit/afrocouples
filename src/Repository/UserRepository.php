@@ -46,6 +46,36 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult()
         ;
     }
+
+    public function getFilteredData($name, $sex, $religion, $age, $start, $end)
+    {
+        $qb = $this->createQueryBuilder('u')
+                ->select('u', 'r')
+                ->join('u.religion', 'r');
+            
+            if(sizeof($age)>0){
+                $qb->andWhere('u.age in (:age)');
+                $qb->setParameter('age', $age);
+            }
+
+            if(sizeof($sex)>0){
+                $qb->andWhere('u.sex in (:sex)');
+                $qb->setParameter('sex', $sex);
+            }
+
+            if(sizeof($religion)>0){
+                $qb->andWhere('r.id in (:religion)');
+                $qb->setParameter('religion', $religion);
+            }
+
+            // $qb->orderBy('u.id', 'ASC')
+
+            $qb->setMaxResults($end)
+            ->setFirstResult($start)
+        ;
+        return $qb->getQuery();
+    }
+    
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

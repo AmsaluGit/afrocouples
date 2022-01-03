@@ -5,10 +5,9 @@
 
 {% block body %}
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
+		<div class="row py-5">
 				<div class="col-md-3 col-lg-3"></div>
-				<div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+				<div class="col-md-6 col-lg-5 mb- mb-lg-0 my-5 py-">
 					<form method="post">
 						{% if error %}
 							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -21,7 +20,7 @@
 								<a href="{{ path('app_logout') }}">Logout</a>
 							</div>
 						{% endif %}
-						<h2 class="font-weight-bold text-5 mb-0">Login</h2>
+						<h2 class="font-weight-bold text-5 mb-4 text-center">Login</h2>
 						<div class="row">
 							<div class="form-group col">
 								<label class="form-label text-color-dark text-3">Email address

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Home</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link
+		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
+
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+            .collapse ul{
+                padding: 6px 0px;
+            }
+
+            .header-body{
+                background: #1a84ed !important;
+            }
+            #header i{
+                color:white;
+            }
+            a{
+                color: #0088CC;
+            }
+            .ds-none{
+                display: none;
+            }
+
+            
+		</style>
+		{# <link rel="stylesheet" href="{{asset('externalAssets/custom.css')}}"> #}
+	</head>
+	<body data-plugin-page-transition>
+
+		<div class="body">
+			{% include "home/navbar.html.twig" %}
+			<div role="main" class="main">
+				<div class="container py-4">
+					<div class="row">
+						<div class="col-lg-3">
+							<aside class="sidebar">
+								<form action="page-search-results.html" method="get">
+									<div class="input-group mb-3 pb-1">
+										<input class="form-control text-1" placeholder="Search..." name="s" id="s" type="text">
+										<button type="submit" class="btn btn-dark text-1 p-2">
+											<i class="fas fa-search m-2"></i>
+										</button>
+									</div>
+								</form>
+                                <form id="filter-form">
+								<h5 class="font-weight-semi-bold pt-4">Categories</h5>
+								<ul class="nav nav-list flex-column mb-5">
+									<li class="nav-item">
+                                    <div class="accordion" id="accordion3">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1Headingthree">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1three" aria-expanded="false" aria-controls="collapse1three">
+                                                           Name <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1three" class="collapse" aria-labelledby="collapse1Headingthreee" style="">
+                                                    <div class="">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sub-list name-checkbox" name="name[]" value="first">
+                                                                        &nbsp; A-E
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="second">
+                                                                        &nbsp; F-J
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="third">
+                                                                        &nbsp; K-0
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fourth">
+                                                                        &nbsp; P-T
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fifth">
+                                                                        &nbsp;U-Z
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</li>
+									<li class="nav-item">	
+                                        <div class="accordion" id="accordion1">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1HeadingOne">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1One" aria-expanded="false" aria-controls="collapse1One">
+                                                           Sex <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne" style="">
+                                                    <div class="">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="M">
+                                                                        &nbsp; Male
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="F">
+                                                                        &nbsp; Female
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</li>
+									<li class="nav-item">
+                                        <div class="accordion" id="accordion2">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1Headingtwo">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1two" aria-expanded="false" aria-controls="collapse1two">
+                                                           Age <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1two" class="collapse" aria-labelledby="collapse1Headingtwo" style="">
+                                                    <div class="">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="smaller">
+                                                                        &nbsp; 18-24
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="small">
+                                                                        &nbsp; 25-29
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="big">
+                                                                        &nbsp; 30-34
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="bigger">
+                                                                        &nbsp; 35-40
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <div class="switch switch-lg switch-primary">
+                                                                    <label>
+                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="biggest">
+                                                                        &nbsp; >40
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+										
+									</li>
+
+									<li class="nav-item">
+                                        <div class="accordion" id="accordion4">
+                                            <div class="card card-default">
+                                                <div class="card-header" id="collapse1Headingfour">
+                                                    <h4 class="card-title m-0">
+                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1four" aria-expanded="false" aria-controls="collapse1four">
+                                                           Religion <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1four" class="collapse" aria-labelledby="collapse1Headingfour" style="">
+                                                    <div class=""> 
+                                                        <ul>
+                                                            {% for religion in religions %}
+                                                                <li class="nav-item">
+                                                                    <div class="switch switch-lg switch-primary">
+                                                                        <label>
+                                                                            <input type="checkbox" class="religion-checkbox sub-list" name="religion" value="{{religion.id}}">
+                                                                            &nbsp;
+                                                                            {{religion.name}}</label>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+									</li>
+                                </form>
+								</ul>
+							</aside>
+						</div>
+						<div class="col-lg-9" style="border-left: 1px solid #b2d8f2;padding-left: 55px;">
+							<div class="blog-posts">
+
+								<div class="row px-3">
+                                {% for user in users %}
+                                    <div class="col-sm-6">
+										<article class="post post-medium border-0 pb-0 mb-5">
+											<div class="post-content">
+
+												<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2">
+													<a href="{{path('user_detail', {id: user.userId})}}">{{user.fname}} {{user.mname}}</a>
+												</h2>
+                                                <div class="post-meta">
+                                                    <span>
+                                                        {% if user.sex == "M" %}
+                                                            <i class="fas fa-mars"></i>
+                                                            <a > Male</a>
+                                                        {% elseif user.sex == "F" %}
+                                                            <i class="fas fa-venus"></i>
+                                                            <a > Female</a>
+                                                        {% endif %}
+													</span>
+                                                    
+													<span>
+														Age: <a >{{user.age}}</a>
+													</span>
+                                                </div>
+												<p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+
+												<div class="post-meta">
+													<span>
+                                                        {% if user.religion.id == 1 %}
+                                                            <i class="fas fa-cross"></i>
+														    <a >Orthodox</a>
+                                                        {% elseif user.religion.id == 2 %}
+                                                            <i class="fas fa-mosque"></i>
+														    <a >Muslim</a>
+                                                        {% elseif user.religion.id == 3 %}
+                                                            <i class="fas fa-bible"></i>
+														    <a >Protestant</a>
+                                                        {% elseif user.religion.id == 4 %}
+                                                            <i class="fas fa-cross"></i>
+														    <a >Catholic</a>
+                                                        {% else %}
+                                                            <i class="fas fa-bible"></i>
+														    <a >Orthodox</a>
+                                                        {% endif %}
+													</span>
+												</div>
+											</div>
+										</article>
+									</div>
+                                {% endfor %}
+								</div>
+							</div>
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% include "home/footer.html.twig" %}
+
+		</div>
+		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+		<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+		<script src="{{asset('externalAssets/theme.js')}}"> </script>
+        <script src="{{asset('externalAssets/theme.init.js')}}"> </script>
+        <script> 
+            var loadControl = {
+                start:0,
+                end: 20,
+                round: 1,
+                more: true,
+                free: true,
+            }
+            $(".nav-item").on("click", function(){
+                icon = $(this).find('i');
+                if($(icon).hasClass("fa-chevron-right")){
+                    $(icon).removeClass("fa-chevron-right");
+                    $(icon).addClass("fa-chevron-down");
+                }
+                else{
+                    $(icon).removeClass("fa-chevron-down");
+                    $(icon).addClass("fa-chevron-right");
+
+                }
+            });
+
+            $("input[type='checkbox']").on("change", function(){
+                $sex = [];
+                $religion = [];
+                $name = [];
+                $age = [];
+                $.each($(".age-checkbox:checked"), function(key, value)
+                {
+                    $age.push(value.value);
+                });
+
+                $.each($(".name-checkbox:checked"), function(key, value)
+                {
+                    $name.push(value.value);
+                });
+
+                $.each($(".sex-checkbox:checked"), function(key, value)
+                {
+                    $sex.push(value.value);
+                });
+
+                $.each($(".religion-checkbox:checked"), function(key, value)
+                {
+                    $religion.push(value.value);
+                });
+                
+                loadControl.start = 0;
+                loadControl.end = 20;
+                loadControl.round = 1
+                if(loadControl.more){
+                    $.ajax({
+                        method: 'POST',
+                        url: '{{path("user_filter")}}',
+                        data:{start:loadControl.start, end:loadControl.end, name:$name, age:$age, sex:$sex, religion:$religion, draw: loadControl.round },
+                        success: function(data){
+                            if(data.length == 0)
+                            {
+                                loadControl.more = false;
+                            }
+                            $container = $("<div class='row px-3'></div>");
+                            $(".blog-posts").html("");
+                            if(data['users'].length>0 && data['draw'] == loadControl.round){
+                                loadControl.round += 1;
+                                $.each(data['users'], function(){
+                                    $col = $('<div class="col-sm-6"><article class="post post-medium border-0 pb-0 mb-5"></article></div>');
+                                    $header = $('<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"></h2>');
+                                    $header.append('<a href="/user/'+$(this)[0].userId+'/detail">'+$(this)[0].id+" "+$(this)[0].fname+" "+$(this)[0].mname+" "+$(this)[0].lname+'</a>');
+                                    $col.append($header);
+
+                                    $meta = $('<div class="post-meta"></div>');
+                                    if($(this)[0].sex == "M"){
+                                        $meta.append('<span><i class="fas fa-mars"></i> Male</span>');
+                                    }
+                                    else if($(this)[0].sex == "F")
+                                    {
+                                        $meta.append(' <span> <i class="fas fa-mars"></i> Female </span>');
+                                    }
+                                    $meta.append(' <span>&nbsp; Age: <a>'+$(this)[0].age+'</a></span>')
+                                    $col.append($meta);
+                                    $col.append("<p>"+$(this)[0].description+"</p>");
+                                    $meta = $('<div class="post-meta"></div>');
+                                    if($(this)[0].religion.id == "1"){
+                                        $meta.append('<span><i class="fas fa-cross"></i><a> Orthodox</a></span>');
+                                    }
+                                    else if($(this)[0].religion.id == "2"){
+                                        $meta.append('<span><i class="fas fa-masque"></i><a> Muslim</a></span>');
+                                    }
+                                    else if($(this)[0].religion.id == "3"){
+                                        $meta.append('<span><i class="fas fa-bible"></i><a> Protestant</a></span>');
+                                    }
+                                    else if($(this)[0].religion.id == "4"){
+                                        $meta.append('<span><i class="fas fa-cross"></i><a> Catholic</a></span>');
+                                    }
+                                    $col.append($meta);
+                                    $container.append($col);
+                                });
+                            }
+                            else{
+                                if(loadControl.round>1){}
+                                else
+                                $container.append("<center>No Match Found!</center>");
+                            }
+
+
+                                $(".blog-posts").append($container);
+                            loadControl.round++;
+                        },
+                        error: function(data){
+                            console.log("lksjdf");
+                        }
+                    });
+                }
+            });
+
+            $(window).bind('scroll', function() {
+                
+                if($(window).scrollTop() >= $('.main').offset().top + $('.main').outerHeight() - (window.innerHeight+300)) {
+                  if(loadControl.free)
+                  {  
+                    $sex = [];
+                    $religion = [];
+                    $name = [];
+                    $age = [];
+                    $.each($(".age-checkbox:checked"), function(key, value)
+                    {
+                        $age.push(value.value);
+                    });
+
+                    $.each($(".name-checkbox:checked"), function(key, value)
+                    {
+                        $name.push(value.value);
+                    });
+
+                    $.each($(".sex-checkbox:checked"), function(key, value)
+                    {
+                        $sex.push(value.value);
+                    });
+
+                    $.each($(".religion-checkbox:checked"), function(key, value)
+                    {
+                        $religion.push(value.value);
+                    });
+                    
+                    loadControl.start = loadControl.round * 20;
+                    if(loadControl.more){
+
+                        $(".spinner-border").removeClass("ds-none");
+                        loadControl.free = false;
+                        $.ajax({
+                            method: 'POST',
+                            url: '{{path("user_filter")}}',
+                            data:{start:loadControl.start, end:loadControl.end, name:$name, age:$age, sex:$sex, religion:$religion, draw: loadControl.round },
+                            success: function(data){
+                                if(data.length == 0)
+                                {
+                                    loadControl.more = false;
+                                }
+                                if(data['users'].length>0 ){
+                                    if(data['draw'] == loadControl.round){
+                                        $container = $("<div class='row px-3'></div>");
+                                        loadControl.round += 1;
+                                        $.each(data['users'], function(){
+                                            $col = $('<div class="col-sm-6"><article class="post post-medium border-0 pb-0 mb-5"></article></div>');
+                                            $header = $('<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"></h2>');
+                                            $header.append('<a href="/user/'+$(this)[0].userId+'/detail">'+$(this)[0].id+" "+$(this)[0].fname+" "+$(this)[0].mname+" "+$(this)[0].lname+'</a>');
+                                            $col.append($header);
+
+                                            $meta = $('<div class="post-meta"></div>');
+                                            if($(this)[0].sex == "M"){
+                                                $meta.append('<span><i class="fas fa-mars"></i> Male</span>');
+                                            }
+                                            else if($(this)[0].sex == "F")
+                                            {
+                                                $meta.append(' <span> <i class="fas fa-mars"></i> Female </span>');
+                                            }
+                                            $meta.append(' <span>&nbsp; Age: <a>'+$(this)[0].age+'</a></span>')
+                                            $col.append($meta);
+                                            $col.append("<p>"+$(this)[0].description+"</p>");
+                                            $meta = $('<div class="post-meta"></div>');
+                                            if($(this)[0].religion.id == "1"){
+                                                $meta.append('<span><i class="fas fa-cross"></i><a> Orthodox</a></span>');
+                                            }
+                                            else if($(this)[0].religion.id == "2"){
+                                                $meta.append('<span><i class="fas fa-masque"></i><a> Muslim</a></span>');
+                                            }
+                                            else if($(this)[0].religion.id == "3"){
+                                                $meta.append('<span><i class="fas fa-bible"></i><a> Protestant</a></span>');
+                                            }
+                                            else if($(this)[0].religion.id == "4"){
+                                                $meta.append('<span><i class="fas fa-cross"></i><a> Catholic</a></span>');
+                                            }
+                                            $col.append($meta);
+                                            $container.append($col);
+                                        });
+                                    }
+                                }
+                                else{
+                                    if(loadControl.round>1){}
+                                    else
+                                    $container.append("<center>No Match Found!</center>");
+                                }
+
+
+                                    $(".blog-posts").append($container);
+                                loadControl.round++;
+                            },
+                            error: function(data){
+                                console.log("lksjdf");
+                            }
+                        });
+                        
+                        setTimeout(tt, 10000);
+                        $(".spinner-border").addClass("ds-none");
+                        loadControl.free = true;
+                    }
+                  }
+                }
+            });
+            function tt(){}
+        </script>
+	</body>
+</html>

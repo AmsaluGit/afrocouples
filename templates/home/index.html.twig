@@ -41,24 +41,66 @@
 				padding: 6px 10px;
 			}
 
-            .collapse ul{
-                padding: 6px 0px;
+			.collapse ul {
+				padding: 6px 0;
+			}
+
+			.header-body {
+				background: #1a84ed !important;
+			}
+			#header i {
+				color: white;
+			}
+			a {
+				color: #0088CC;
+			}
+			.ds-none {
+				display: none;
+			}
+
+         p{
+            margin: 2px 0 0;
+         }
+
+         .col-lg-custom > .card{
+            margin-bottom: 20px;
+            border: 1px solid #d9d9d9 !important;
+         }
+
+         .text-muted{
+            font-size: 0.8rem;
+         }
+
+         .card-body img{
+            height: 170px;
+            width: 190px !important;
+         }
+
+         @media (min-width: 992px){
+            .col-lg-custom{
+               flex: 0 0 auto;
+               width: 20%;
             }
 
-            .header-body{
-                background: #1a84ed !important;
-            }
-            #header i{
-                color:white;
-            }
-            a{
-                color: #0088CC;
-            }
-            .ds-none{
-                display: none;
+            .col-lg-10 {
+               flex: 0 0 auto;
+               width: 80%;
             }
 
-            
+            .col-lg-2 {
+               flex: 0 0 auto;
+               width: 20%;
+            }
+         }
+
+         @media (max-width: 992px){
+            a.dropdown-item{
+               color: black !important;
+            }
+         }
+
+         
+         
 		</style>
 		{# <link rel="stylesheet" href="{{asset('externalAssets/custom.css')}}"> #}
 	</head>
@@ -67,9 +109,9 @@
 		<div class="body">
 			{% include "home/navbar.html.twig" %}
 			<div role="main" class="main">
-				<div class="container py-4">
+				<div class="container-fluid py-4">
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-lg-2 col-md-3">
 							<aside class="sidebar">
 								<form action="page-search-results.html" method="get">
 									<div class="input-group mb-3 pb-1">
@@ -79,258 +121,261 @@
 										</button>
 									</div>
 								</form>
-                                <form id="filter-form">
-								<h5 class="font-weight-semi-bold pt-4">Categories</h5>
-								<ul class="nav nav-list flex-column mb-5">
-									<li class="nav-item">
-                                    <div class="accordion" id="accordion3">
-                                            <div class="card card-default">
-                                                <div class="card-header" id="collapse1Headingthree">
-                                                    <h4 class="card-title m-0">
-                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1three" aria-expanded="false" aria-controls="collapse1three">
-                                                           Name <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse1three" class="collapse" aria-labelledby="collapse1Headingthreee" style="">
-                                                    <div class="">
-                                                        <ul>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="sub-list name-checkbox" name="name[]" value="first">
-                                                                        &nbsp; A-E
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="second">
-                                                                        &nbsp; F-J
-                                                                    </label>
-                                                                </div>
-                                                            </li>
+								<form id="filter-form">
+									<h5 class="font-weight-semi-bold pt-4">Categories</h5>
+									<ul class="nav nav-list flex-column mb-5">
+										<li class="nav-item">
+											<div class="accordion" id="accordion3">
+												<div class="card card-default">
+													<div class="card-header" id="collapse1Headingthree">
+														<h4 class="card-title m-0">
+															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1three" aria-expanded="false" aria-controls="collapse1three">
+																Name
+																<span style="float:right">
+																	<i class="fa fa-chevron-right font-awesome"></i>
+																</span>
+															</a>
+														</h4>
+													</div>
+													<div id="collapse1three" class="collapse" aria-labelledby="collapse1Headingthreee" style="">
+														<div class="">
+															<ul>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="sub-list name-checkbox" name="name[]" value="first">
+																			&nbsp; A-E
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="name-checkbox sub-list" name="name[]" value="second">
+																			&nbsp; F-J
+																		</label>
+																	</div>
+																</li>
 
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="third">
-                                                                        &nbsp; K-0
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fourth">
-                                                                        &nbsp; P-T
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fifth">
-                                                                        &nbsp;U-Z
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-									</li>
-									<li class="nav-item">	
-                                        <div class="accordion" id="accordion1">
-                                            <div class="card card-default">
-                                                <div class="card-header" id="collapse1HeadingOne">
-                                                    <h4 class="card-title m-0">
-                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1One" aria-expanded="false" aria-controls="collapse1One">
-                                                           Sex <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne" style="">
-                                                    <div class="">
-                                                        <ul>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="M">
-                                                                        &nbsp; Male
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="F">
-                                                                        &nbsp; Female
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-									</li>
-									<li class="nav-item">
-                                        <div class="accordion" id="accordion2">
-                                            <div class="card card-default">
-                                                <div class="card-header" id="collapse1Headingtwo">
-                                                    <h4 class="card-title m-0">
-                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1two" aria-expanded="false" aria-controls="collapse1two">
-                                                           Age <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse1two" class="collapse" aria-labelledby="collapse1Headingtwo" style="">
-                                                    <div class="">
-                                                        <ul>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="smaller">
-                                                                        &nbsp; 18-24
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="small">
-                                                                        &nbsp; 25-29
-                                                                    </label>
-                                                                </div>
-                                                            </li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="name-checkbox sub-list" name="name[]" value="third">
+																			&nbsp; K-0
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fourth">
+																			&nbsp; P-T
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="name-checkbox sub-list" name="name[]" value="fifth">
+																			&nbsp;U-Z
+																		</label>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="nav-item">
+											<div class="accordion" id="accordion1">
+												<div class="card card-default">
+													<div class="card-header" id="collapse1HeadingOne">
+														<h4 class="card-title m-0">
+															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1One" aria-expanded="false" aria-controls="collapse1One">
+																Sex
+																<span style="float:right">
+																	<i class="fa fa-chevron-right font-awesome"></i>
+																</span>
+															</a>
+														</h4>
+													</div>
+													<div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne" style="">
+														<div class="">
+															<ul>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="M">
+																			&nbsp; Male
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="sex-checkbox sub-list" name="sex[]" value="F">
+																			&nbsp; Female
+																		</label>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+										<li class="nav-item">
+											<div class="accordion" id="accordion2">
+												<div class="card card-default">
+													<div class="card-header" id="collapse1Headingtwo">
+														<h4 class="card-title m-0">
+															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1two" aria-expanded="false" aria-controls="collapse1two">
+																Age
+																<span style="float:right">
+																	<i class="fa fa-chevron-right font-awesome"></i>
+																</span>
+															</a>
+														</h4>
+													</div>
+													<div id="collapse1two" class="collapse" aria-labelledby="collapse1Headingtwo" style="">
+														<div class="">
+															<ul>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="age-checkbox sub-list" name="age[]" value="smaller">
+																			&nbsp; 18-24
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="age-checkbox sub-list" name="age[]" value="small">
+																			&nbsp; 25-29
+																		</label>
+																	</div>
+																</li>
 
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="big">
-                                                                        &nbsp; 30-34
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="age-checkbox sub-list" name="age[]" value="big">
+																			&nbsp; 30-34
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
 
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="bigger">
-                                                                        &nbsp; 35-40
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <div class="switch switch-lg switch-primary">
-                                                                    <label>
-                                                                        <input type="checkbox" class="age-checkbox sub-list" name="age[]" value="biggest">
-                                                                        &nbsp; >40
-                                                                    </label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-										
-									</li>
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="age-checkbox sub-list" name="age[]" value="bigger">
+																			&nbsp; 35-40
+																		</label>
+																	</div>
+																</li>
+																<li class="nav-item">
+																	<div class="switch switch-lg switch-primary">
+																		<label>
+																			<input type="checkbox" class="age-checkbox sub-list" name="age[]" value="biggest">
+																			&nbsp; >40
+																		</label>
+																	</div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
 
-									<li class="nav-item">
-                                        <div class="accordion" id="accordion4">
-                                            <div class="card card-default">
-                                                <div class="card-header" id="collapse1Headingfour">
-                                                    <h4 class="card-title m-0">
-                                                        <a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1four" aria-expanded="false" aria-controls="collapse1four">
-                                                           Religion <span style="float:right"><i class="fa fa-chevron-right font-awesome"></i></span>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse1four" class="collapse" aria-labelledby="collapse1Headingfour" style="">
-                                                    <div class=""> 
-                                                        <ul>
-                                                            {% for religion in religions %}
-                                                                <li class="nav-item">
-                                                                    <div class="switch switch-lg switch-primary">
-                                                                        <label>
-                                                                            <input type="checkbox" class="religion-checkbox sub-list" name="religion" value="{{religion.id}}">
-                                                                            &nbsp;
-                                                                            {{religion.name}}</label>
-                                                                    </div>
-                                                                </li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-									</li>
-                                </form>
+										</li>
+
+										<li class="nav-item">
+											<div class="accordion" id="accordion4">
+												<div class="card card-default">
+													<div class="card-header" id="collapse1Headingfour">
+														<h4 class="card-title m-0">
+															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1four" aria-expanded="false" aria-controls="collapse1four">
+																Religion
+																<span style="float:right">
+																	<i class="fa fa-chevron-right font-awesome"></i>
+																</span>
+															</a>
+														</h4>
+													</div>
+													<div id="collapse1four" class="collapse" aria-labelledby="collapse1Headingfour" style="">
+														<div class="">
+															<ul>
+																{% for religion in religions %}
+																	<li class="nav-item">
+																		<div class="switch switch-lg switch-primary">
+																			<label>
+																				<input type="checkbox" class="religion-checkbox sub-list" name="religion" value="{{religion.id}}">
+																				&nbsp;
+																				{{religion.name}}</label>
+																		</div>
+																	</li>
+																{% endfor %}
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</li>
+									</form>
 								</ul>
 							</aside>
 						</div>
-						<div class="col-lg-9" style="border-left: 1px solid #b2d8f2;padding-left: 55px;">
+						<div class="col-lg-10 col-md-9" style="border-left: 1px solid #b2d8f2;padding: 0px auto;">
 							<div class="blog-posts">
 
-								<div class="row px-3">
-                                {% for user in users %}
-                                    <div class="col-sm-6">
-										<article class="post post-medium border-0 pb-0 mb-5">
-											<div class="post-content">
+								<div class="row users-list">
+									{% for user in users %}
+										<div
+											class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0">
+											<!-- Card-->
+											<div class="card shadow-sm border-0 rounded">
 
-												<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2">
-													<a href="{{path('user_detail', {id: user.userId})}}">{{user.fname}} {{user.mname}}</a>
-												</h2>
-                                                <div class="post-meta">
-                                                    <span>
-                                                        {% if user.sex == "M" %}
-                                                            <i class="fas fa-mars"></i>
-                                                            <a > Male</a>
-                                                        {% elseif user.sex == "F" %}
-                                                            <i class="fas fa-venus"></i>
-                                                            <a > Female</a>
-                                                        {% endif %}
-													</span>
-                                                    
-													<span>
-														Age: <a >{{user.age}}</a>
-													</span>
-                                                </div>
-												<p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-
-												<div class="post-meta">
-													<span>
-                                                        {% if user.religion.id == 1 %}
-                                                            <i class="fas fa-cross"></i>
-														    <a >Orthodox</a>
-                                                        {% elseif user.religion.id == 2 %}
-                                                            <i class="fas fa-mosque"></i>
-														    <a >Muslim</a>
-                                                        {% elseif user.religion.id == 3 %}
-                                                            <i class="fas fa-bible"></i>
-														    <a >Protestant</a>
-                                                        {% elseif user.religion.id == 4 %}
-                                                            <i class="fas fa-cross"></i>
-														    <a >Catholic</a>
-                                                        {% else %}
-                                                            <i class="fas fa-bible"></i>
-														    <a >Orthodox</a>
-                                                        {% endif %}
-													</span>
+												<div class="card-body p-0">
+                                    
+                                    <a href="{{path('user_detail', {id: user.userId})}}">
+                                       <img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top">
+                                    </a>
+													<div class="p-2">
+														<h4 class="mb-0">{{user.fname}}, {{user.age}}</h4>
+                                          <p>{{user.currentCity}}, Ethiopia</p>
+														<p class=" text-muted">
+                                             Ethipian/ 
+                                             <span>
+                                                {% if user.religion.id == 1 %}
+                                                   {# <i class="fas fa-cross"></i> #}
+                                                <a >Orthodox</a>
+                                                {% elseif user.religion.id == 2 %}
+                                                   {# <i class="fas fa-mosque"></i> #}
+                                                <a >Muslim</a>
+                                                {% elseif user.religion.id == 3 %}
+                                                   {# <i class="fas fa-bible"></i> #}
+                                                <a >Protestant</a>
+                                                {% elseif user.religion.id == 4 %}
+                                                   {# <i class="fas fa-cross"></i> #}
+                                                <a >Catholic</a>
+                                                {% else %}
+                                                   {# <i class="fas fa-bible"></i> #}
+                                                   <a>Orthodox</a>
+                                                {% endif %}
+													      </span> 
+                                          </p>
+													</div>
 												</div>
 											</div>
-										</article>
-									</div>
-                                {% endfor %}
+										</div>
+									{% endfor %}
 								</div>
 							</div>
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
+							<div class="spinner-border" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -338,7 +383,7 @@
 			{% include "home/footer.html.twig" %}
 
 		</div>
-		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+      <script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
 		<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
 		<script src="{{asset('externalAssets/theme.js')}}"> </script>
         <script src="{{asset('externalAssets/theme.init.js')}}"> </script>
@@ -401,42 +446,38 @@
                             {
                                 loadControl.more = false;
                             }
-                            $container = $("<div class='row px-3'></div>");
-                            $(".blog-posts").html("");
+                            $container = $(".users-list");
+                            $(".users-list").html("");
                             if(data['users'].length>0 && data['draw'] == loadControl.round){
                                 loadControl.round += 1;
                                 $.each(data['users'], function(){
-                                    $col = $('<div class="col-sm-6"><article class="post post-medium border-0 pb-0 mb-5"></article></div>');
-                                    $header = $('<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"></h2>');
-                                    $header.append('<a href="/user/'+$(this)[0].userId+'/detail">'+$(this)[0].id+" "+$(this)[0].fname+" "+$(this)[0].mname+" "+$(this)[0].lname+'</a>');
-                                    $col.append($header);
+                                    $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
+                                            $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 
-                                    $meta = $('<div class="post-meta"></div>');
-                                    if($(this)[0].sex == "M"){
-                                        $meta.append('<span><i class="fas fa-mars"></i> Male</span>');
-                                    }
-                                    else if($(this)[0].sex == "F")
-                                    {
-                                        $meta.append(' <span> <i class="fas fa-mars"></i> Female </span>');
-                                    }
-                                    $meta.append(' <span>&nbsp; Age: <a>'+$(this)[0].age+'</a></span>')
-                                    $col.append($meta);
-                                    $col.append("<p>"+$(this)[0].description+"</p>");
-                                    $meta = $('<div class="post-meta"></div>');
-                                    if($(this)[0].religion.id == "1"){
-                                        $meta.append('<span><i class="fas fa-cross"></i><a> Orthodox</a></span>');
-                                    }
-                                    else if($(this)[0].religion.id == "2"){
-                                        $meta.append('<span><i class="fas fa-masque"></i><a> Muslim</a></span>');
-                                    }
-                                    else if($(this)[0].religion.id == "3"){
-                                        $meta.append('<span><i class="fas fa-bible"></i><a> Protestant</a></span>');
-                                    }
-                                    else if($(this)[0].religion.id == "4"){
-                                        $meta.append('<span><i class="fas fa-cross"></i><a> Catholic</a></span>');
-                                    }
-                                    $col.append($meta);
-                                    $container.append($col);
+                                            $meta = $('<div class="card-body p-0"><a href="/user/'+$(this)[0].userId+'/detail"><img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top"></a></div>');
+                                             $wrapper = $('<div class="p-2"></div>');
+                                             $name = '<h4 class="mb-0">'+$(this)[0].fname+', '+$(this)[0].age+'</h4>';
+                                             $city = '<p>'+$(this)[0].currentCity+', Ethiopia</p>';
+                                             
+                                            if($(this)[0].religion.id == "1"){
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Orthodox<span></span>  </p>';
+                                            }
+                                            else if($(this)[0].religion.id == "2"){
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Muslim<span></span>  </p>';
+                                            }
+                                            else if($(this)[0].religion.id == "3"){
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Protestant<span></span>  </p>';
+                                            }
+                                            else if($(this)[0].religion.id == "4"){
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Catholic<span></span>  </p>';
+                                            }
+                                            $wrapper.append($name);
+                                            $wrapper.append($city);
+                                            $wrapper.append($citizenAndReleigion);
+                                            $meta.append($wrapper);
+                                            $card.append($meta);
+                                            $col.append($card);
+                                            $container.append($col);
                                 });
                             }
                             else{
@@ -501,39 +542,35 @@
                                 }
                                 if(data['users'].length>0 ){
                                     if(data['draw'] == loadControl.round){
-                                        $container = $("<div class='row px-3'></div>");
+                                        $container = $(".users-list");
                                         loadControl.round += 1;
                                         $.each(data['users'], function(){
-                                            $col = $('<div class="col-sm-6"><article class="post post-medium border-0 pb-0 mb-5"></article></div>');
-                                            $header = $('<h2 class="font-weight-semibold text-5 line-height-6 mt-3 mb-2"></h2>');
-                                            $header.append('<a href="/user/'+$(this)[0].userId+'/detail">'+$(this)[0].id+" "+$(this)[0].fname+" "+$(this)[0].mname+" "+$(this)[0].lname+'</a>');
-                                            $col.append($header);
+                                            $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
+                                            $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 
-                                            $meta = $('<div class="post-meta"></div>');
-                                            if($(this)[0].sex == "M"){
-                                                $meta.append('<span><i class="fas fa-mars"></i> Male</span>');
-                                            }
-                                            else if($(this)[0].sex == "F")
-                                            {
-                                                $meta.append(' <span> <i class="fas fa-mars"></i> Female </span>');
-                                            }
-                                            $meta.append(' <span>&nbsp; Age: <a>'+$(this)[0].age+'</a></span>')
-                                            $col.append($meta);
-                                            $col.append("<p>"+$(this)[0].description+"</p>");
-                                            $meta = $('<div class="post-meta"></div>');
+                                            $meta = $('<div class="card-body p-0"><a href="/user/'+$(this)[0].userId+'/detail"><img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top"></a></div>');
+                                             $wrapper = $('<div class="p-2"></div>');
+                                             $name = '<h4 class="mb-0">'+$(this)[0].fname+', '+$(this)[0].age+'</h4>';
+                                             $city = '<p>'+$(this)[0].currentCity+', Ethiopia</p>';
+                                             
                                             if($(this)[0].religion.id == "1"){
-                                                $meta.append('<span><i class="fas fa-cross"></i><a> Orthodox</a></span>');
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Orthodox<span></span>  </p>';
                                             }
                                             else if($(this)[0].religion.id == "2"){
-                                                $meta.append('<span><i class="fas fa-masque"></i><a> Muslim</a></span>');
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Muslim<span></span>  </p>';
                                             }
                                             else if($(this)[0].religion.id == "3"){
-                                                $meta.append('<span><i class="fas fa-bible"></i><a> Protestant</a></span>');
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Protestant<span></span>  </p>';
                                             }
                                             else if($(this)[0].religion.id == "4"){
-                                                $meta.append('<span><i class="fas fa-cross"></i><a> Catholic</a></span>');
+                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Catholic<span></span>  </p>';
                                             }
-                                            $col.append($meta);
+                                            $wrapper.append($name);
+                                            $wrapper.append($city);
+                                            $wrapper.append($citizenAndReleigion);
+                                            $meta.append($wrapper);
+                                            $card.append($meta);
+                                            $col.append($card);
                                             $container.append($col);
                                         });
                                     }

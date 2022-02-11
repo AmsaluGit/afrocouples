@@ -75,7 +75,11 @@
             height: 170px;
          /*   width: 100% !important;*/
          }
-
+			
+			.card-header{
+				background-color: white;
+				padding: 6px 10px;
+			}
 			.name{
 				margin-bottom: 2px;
 				font-weight: 700;
@@ -84,6 +88,11 @@
 				color: #414141;
 			}
 
+			label{
+				font-size: 0.93em;
+				color: rgb(162,162,177);
+			}
+			
 			.play-button{
 				color: #1a84ed;
 				float: right;
@@ -140,20 +149,18 @@
 									</div>
 								</form>
 								<form id="filter-form">
-									<h5 class="font-weight-semi-bold pt-4">Categories</h5>
+									<h5 class="font-weight-semi-bold pt-4">Filters</h5>
 									<ul class="nav nav-list flex-column mb-5">
 										<li class="nav-item">
 											<div class="accordion" id="accordion3">
 												<div class="card card-default">
 													<div class="card-header" id="collapse1Headingthree">
-														<h4 class="card-title m-0">
 															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1three" aria-expanded="false" aria-controls="collapse1three">
 																Name
 																<span style="float:right">
 																	<i class="fa fa-chevron-right font-awesome"></i>
 																</span>
 															</a>
-														</h4>
 													</div>
 													<div id="collapse1three" class="collapse" aria-labelledby="collapse1Headingthreee" style="">
 														<div class="">
@@ -209,14 +216,12 @@
 											<div class="accordion" id="accordion1">
 												<div class="card card-default">
 													<div class="card-header" id="collapse1HeadingOne">
-														<h4 class="card-title m-0">
 															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1One" aria-expanded="false" aria-controls="collapse1One">
 																Sex
 																<span style="float:right">
 																	<i class="fa fa-chevron-right font-awesome"></i>
 																</span>
 															</a>
-														</h4>
 													</div>
 													<div id="collapse1One" class="collapse" aria-labelledby="collapse1HeadingOne" style="">
 														<div class="">
@@ -247,14 +252,12 @@
 											<div class="accordion" id="accordion2">
 												<div class="card card-default">
 													<div class="card-header" id="collapse1Headingtwo">
-														<h4 class="card-title m-0">
 															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1two" aria-expanded="false" aria-controls="collapse1two">
 																Age
 																<span style="float:right">
 																	<i class="fa fa-chevron-right font-awesome"></i>
 																</span>
 															</a>
-														</h4>
 													</div>
 													<div id="collapse1two" class="collapse" aria-labelledby="collapse1Headingtwo" style="">
 														<div class="">
@@ -313,14 +316,12 @@
 											<div class="accordion" id="accordion4">
 												<div class="card card-default">
 													<div class="card-header" id="collapse1Headingfour">
-														<h4 class="card-title m-0">
 															<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#collapse1four" aria-expanded="false" aria-controls="collapse1four">
 																Religion
 																<span style="float:right">
 																	<i class="fa fa-chevron-right font-awesome"></i>
 																</span>
 															</a>
-														</h4>
 													</div>
 													<div id="collapse1four" class="collapse" aria-labelledby="collapse1Headingfour" style="">
 														<div class="">
@@ -359,7 +360,7 @@
                                        <img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top">
                                     </a>
 													<div class="p-2">
-														<p class="mb-0 name">{{user.fname}}, {{user.age}}<span class="play-button"><i class="fas fa-play"></i></span></p>
+														<p class="mb-0 name">{{user.fname}}, {{user.age}}<span class="play-button"><i class="far fa-play-circle"></i></span></p>
                                           <p>{{user.currentCity}}, Ethiopia</p>
 														<p class=" text-muted">
                                              Ethipian/ 

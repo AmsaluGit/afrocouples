@@ -350,21 +350,28 @@
 								</ul>
 							</aside>
 						</div>
+
+					
+
+
+
 						<div class="col-lg-10 col-md-9" style="border-left: 1px solid #b2d8f2;padding: 0px auto;">
 							<div class="blog-posts">
 
 								<div class="row users-list">
 									{% for user in users %}
+
+								 
 										<div
 											class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0">
 											<!-- Card-->
 											<div class="card shadow-sm border-0 rounded">
 												<div class="card-body p-0">
-                                    <a href="{{path('user_detail', {id: user.userId})}}">
+                                     <a href="{{path('user_detail', {id: 1})}}">
                                        <img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top">
-                                    </a>
+                                    </a> 
 													<div class="p-2">
-														<p class="mb-0 name">{{user.fname}}, {{user.age}}<span class="play-button"><i class="far fa-play-circle"></i></span></p>
+														<p class="mb-0 name">{{user.fname}}, 45<span class="play-button"><i class="far fa-play-circle"></i></span></p>
                                           <p>{{user.currentCity}}, Ethiopia</p>
 														<p class=" text-muted">
                                              Ethipian/ 
@@ -475,7 +482,7 @@
                                     $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
                                             $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 
-                                            $meta = $('<div class="card-body p-0"><a href="/user/'+$(this)[0].userId+'/detail"><img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top"></a></div>');
+                                            $meta = $('<div class="card-body p-0"><a href="/user/'+$(this)[0].idNumber+'/detail"><img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top"></a></div>');
                                              $wrapper = $('<div class="p-2"></div>');
                                              $name = '<h4 class="mb-0">'+$(this)[0].fname+', '+$(this)[0].age+'</h4>';
                                              $city = '<p>'+$(this)[0].currentCity+', Ethiopia</p>';

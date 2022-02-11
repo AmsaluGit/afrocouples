@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>{{user.fname}} {{user.mname}}</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link
+		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
+
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+            .collapse ul{
+                padding: 6px 0px;
+            }
+
+            .header-body{
+                background: #1a84ed !important;
+            }
+            #header i{
+                color:white;
+            }
+            span a{
+                color: #0088CC !important;
+            }
+            .ds-none{
+                display: none;
+            }
+            .col-md-5, .col-md-7{
+                padding: 0px 50px;
+            }
+		</style>
+		{# <link rel="stylesheet" href="{{asset('externalAssets/custom.css')}}"> #}
+	</head>
+	<body data-plugin-page-transition>
+
+		<div class="body">
+		{% include "home/navbar.html.twig" %}
+			<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-5 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-2"><img class="rounded-circle " width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <span class="font-weight-bold">{{user.fname}} {{user.mname}} {{user.lname}} - {{user.age}}</span><br>
+            <span class="text-black-50">{{user.description}}</span><span> </span></div>
+            <div class="col-md-12 px-4 py-3">
+
+            <span>
+                <i class="fas fa-map-marker-alt"></i>
+                <a > &nbsp; &nbsp;<b>{{user.currentCity}}</b></a>
+            </span>
+            <br><br>
+            <span>
+                {% if user.religion.id == 1 %}
+                    <i class="fas fa-cross"></i>
+                    <a >&nbsp; &nbsp;<b>Orthodox</b></a>
+                {% elseif user.religion.id == 2 %}
+                    <i class="fas fa-mosque"></i>
+                    <a > &nbsp; &nbsp;<b>Muslim</b></a>
+                {% elseif user.religion.id == 3 %}
+                    <i class="fas fa-bible"></i>
+                    <a >&nbsp; &nbsp;<b>Protestant</b></a>
+                {% elseif user.religion.id == 4 %}
+                    <i class="fas fa-cross"></i>
+                    <a > &nbsp; &nbsp;<b>Catholic</b></a>
+                {% else %}
+                    <i class="fas fa-times"></i>
+                    <a > &nbsp; &nbsp;<b>Pagan</b></a>
+                {% endif %}
+            </span>
+            <br><br>
+            <span>
+                {% if user.sex == "M" %}
+                    <i class="fas fa-mars"></i>
+                    <a > &nbsp; &nbsp;<b>Male</b></a>
+                {% elseif user.sex == "F" %}
+                    <i class="fas fa-venus"></i>
+                    <a > &nbsp; &nbsp;<b>Female</b></a>
+                {% endif %}
+            </span>
+            <br><br>
+            <span>
+                H:<a > &nbsp; &nbsp;<b>{{user.height}}</b></a>
+            </span>
+            <br><br>
+            <span>
+                <i class="fas fa-tint"></i>
+                <a > &nbsp; &nbsp;<b>{{user.faceColor}}</b></a>
+            </span>
+            
+        </div>
+        </div>
+        <div class="col-md-7">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Detail Information </h4>
+                    <a class="btn btn-sm btn-primary" href="#" style="float:right">Get Full Info</a>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+</div>
+
+			{% include "home/footer.html.twig" %}
+		</div>
+		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+		<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+		<script src="{{asset('externalAssets/theme.js')}}"> </script>
+        <script src="{{asset('externalAssets/theme.init.js')}}"> </script>
+        <script> 
+            $(".nav-item").on("click", function(){
+                console.log("sdflk");
+                icon = $(this).find('i');
+                if($(icon).hasClass("fa-chevron-right")){
+                    $(icon).removeClass("fa-chevron-right");
+                    $(icon).addClass("fa-chevron-down");
+                }
+                else{
+                    $(icon).removeClass("fa-chevron-down");
+                    $(icon).addClass("fa-chevron-right");
+                }
+            });
+        </script>
+	</body>
+</html>

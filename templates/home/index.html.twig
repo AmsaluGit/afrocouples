@@ -73,9 +73,21 @@
 
          .card-body img{
             height: 170px;
-            width: 190px !important;
+         /*   width: 100% !important;*/
          }
 
+			.name{
+				margin-bottom: 2px;
+				font-weight: 700;
+				font-size: 15px;
+				line-height: 22px;
+				color: #414141;
+			}
+
+			.play-button{
+				color: #1a84ed;
+				float: right;
+			}
          @media (min-width: 992px){
             .col-lg-custom{
                flex: 0 0 auto;
@@ -97,6 +109,12 @@
             a.dropdown-item{
                color: black !important;
             }
+         }
+
+			@media (max-width: 600){
+            .card-body img{
+					height: auto;
+				}
          }
 
          
@@ -336,14 +354,12 @@
 											class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0">
 											<!-- Card-->
 											<div class="card shadow-sm border-0 rounded">
-
 												<div class="card-body p-0">
-                                    
                                     <a href="{{path('user_detail', {id: user.userId})}}">
                                        <img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top">
                                     </a>
 													<div class="p-2">
-														<h4 class="mb-0">{{user.fname}}, {{user.age}}</h4>
+														<p class="mb-0 name">{{user.fname}}, {{user.age}}<span class="play-button"><i class="fas fa-play"></i></span></p>
                                           <p>{{user.currentCity}}, Ethiopia</p>
 														<p class=" text-muted">
                                              Ethipian/ 

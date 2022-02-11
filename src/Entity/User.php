@@ -171,6 +171,11 @@ class User implements UserInterface
      */
     private $chats;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $role;
+
     public function __construct()
     {
         $this->language = new ArrayCollection();
@@ -686,6 +691,18 @@ class User implements UserInterface
                 $chat->setMfrom(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(?string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

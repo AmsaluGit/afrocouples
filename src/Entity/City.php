@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +29,16 @@ class City
      * @ORM\JoinColumn(nullable=false)
      */
     private $country;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Organization::class, mappedBy="city")
+     */
+    private $organizations;
+
+    public function __construct()
+    {
+        $this->organizations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -53,6 +65,36 @@ class City
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Organization[]
+     */
+    public function getOrganizations(): Collection
+    {
+        return $this->organizations;
+    }
+
+    public function addOrganization(Organization $organization): self
+    {
+        if (!$this->organizations->contains($organization)) {
+            $this->organizations[] = $organization;
+            $organization->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganization(Organization $organization): self
+    {
+        if ($this->organizations->removeElement($organization)) {
+            // set the owning side to null (unless already changed)
+            if ($organization->getCity() === $this) {
+                $organization->setCity(null);
+            }
+        }
 
         return $this;
     }

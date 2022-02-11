@@ -126,9 +126,53 @@ class User implements UserInterface
      */
     private $language;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Gallery::class, mappedBy="user")
+     */
+    private $galleries;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Likes::class, mappedBy="likedBy")
+     */
+    private $LikedBy;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Likes::class, mappedBy="liker")
+     */
+    private $liker;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Nationality::class, inversedBy="users")
+     */
+    private $nationality;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Education::class, inversedBy="users")
+     */
+    private $education;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Occupation::class, inversedBy="users")
+     */
+    private $occupation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=MaritalStatus::class, inversedBy="users")
+     */
+    private $maritalStatus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Interest::class, mappedBy="user")
+     */
+    private $interests;
+
     public function __construct()
     {
         $this->language = new ArrayCollection();
+        $this->galleries = new ArrayCollection();
+        $this->LikedBy = new ArrayCollection();
+        $this->liker = new ArrayCollection();
+        $this->interests = new ArrayCollection();
     }
 
    
@@ -438,6 +482,174 @@ class User implements UserInterface
     public function removeLanguage(Languages $language): self
     {
         $this->language->removeElement($language);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gallery[]
+     */
+    public function getGalleries(): Collection
+    {
+        return $this->galleries;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries[] = $gallery;
+            $gallery->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->galleries->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getUser() === $this) {
+                $gallery->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Likes[]
+     */
+    public function getLikedBy(): Collection
+    {
+        return $this->LikedBy;
+    }
+
+    public function addLikedBy(Likes $likedBy): self
+    {
+        if (!$this->LikedBy->contains($likedBy)) {
+            $this->LikedBy[] = $likedBy;
+            $likedBy->setLikedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedBy(Likes $likedBy): self
+    {
+        if ($this->LikedBy->removeElement($likedBy)) {
+            // set the owning side to null (unless already changed)
+            if ($likedBy->getLikedBy() === $this) {
+                $likedBy->setLikedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Likes[]
+     */
+    public function getLiker(): Collection
+    {
+        return $this->liker;
+    }
+
+    public function addLiker(Likes $liker): self
+    {
+        if (!$this->liker->contains($liker)) {
+            $this->liker[] = $liker;
+            $liker->setLiker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLiker(Likes $liker): self
+    {
+        if ($this->liker->removeElement($liker)) {
+            // set the owning side to null (unless already changed)
+            if ($liker->getLiker() === $this) {
+                $liker->setLiker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNationality(): ?Nationality
+    {
+        return $this->nationality;
+    }
+
+    public function setNationality(?Nationality $nationality): self
+    {
+        $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    public function getEducation(): ?Education
+    {
+        return $this->education;
+    }
+
+    public function setEducation(?Education $education): self
+    {
+        $this->education = $education;
+
+        return $this;
+    }
+
+    public function getOccupation(): ?Occupation
+    {
+        return $this->occupation;
+    }
+
+    public function setOccupation(?Occupation $occupation): self
+    {
+        $this->occupation = $occupation;
+
+        return $this;
+    }
+
+    public function getMaritalStatus(): ?MaritalStatus
+    {
+        return $this->maritalStatus;
+    }
+
+    public function setMaritalStatus(?MaritalStatus $maritalStatus): self
+    {
+        $this->maritalStatus = $maritalStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Interest[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(Interest $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+            $interest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(Interest $interest): self
+    {
+        if ($this->interests->removeElement($interest)) {
+            // set the owning side to null (unless already changed)
+            if ($interest->getUser() === $this) {
+                $interest->setUser(null);
+            }
+        }
 
         return $this;
     }

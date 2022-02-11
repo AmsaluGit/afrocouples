@@ -29,9 +29,15 @@ class Country
      */
     private $cities;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Interest::class, mappedBy="country")
+     */
+    private $interests;
+
     public function __construct()
     {
         $this->cities = new ArrayCollection();
+        $this->interests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +81,36 @@ class Country
             // set the owning side to null (unless already changed)
             if ($city->getCountry() === $this) {
                 $city->setCountry(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Interest[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(Interest $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+            $interest->setCountry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(Interest $interest): self
+    {
+        if ($this->interests->removeElement($interest)) {
+            // set the owning side to null (unless already changed)
+            if ($interest->getCountry() === $this) {
+                $interest->setCountry(null);
             }
         }
 

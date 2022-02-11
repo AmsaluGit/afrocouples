@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\NationalityRepository;
+use App\Repository\OccupationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=NationalityRepository::class)
+ * @ORM\Entity(repositoryClass=OccupationRepository::class)
  */
-class Nationality
+class Occupation
 {
     /**
      * @ORM\Id
@@ -25,7 +25,7 @@ class Nationality
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="nationality")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="occupation")
      */
     private $users;
 
@@ -63,7 +63,7 @@ class Nationality
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setNationality($this);
+            $user->setOccupation($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Nationality
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getNationality() === $this) {
-                $user->setNationality(null);
+            if ($user->getOccupation() === $this) {
+                $user->setOccupation(null);
             }
         }
 

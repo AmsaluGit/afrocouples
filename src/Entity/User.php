@@ -166,6 +166,11 @@ class User implements UserInterface
      */
     private $interests;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Chat::class, mappedBy="mfrom", orphanRemoval=true)
+     */
+    private $chats;
+
     public function __construct()
     {
         $this->language = new ArrayCollection();
@@ -173,6 +178,7 @@ class User implements UserInterface
         $this->LikedBy = new ArrayCollection();
         $this->liker = new ArrayCollection();
         $this->interests = new ArrayCollection();
+        $this->chats = new ArrayCollection();
     }
 
    
@@ -648,6 +654,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($interest->getUser() === $this) {
                 $interest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Chat[]
+     */
+    public function getChats(): Collection
+    {
+        return $this->chats;
+    }
+
+    public function addChat(Chat $chat): self
+    {
+        if (!$this->chats->contains($chat)) {
+            $this->chats[] = $chat;
+            $chat->setMfrom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChat(Chat $chat): self
+    {
+        if ($this->chats->removeElement($chat)) {
+            // set the owning side to null (unless already changed)
+            if ($chat->getMfrom() === $this) {
+                $chat->setMfrom(null);
             }
         }
 

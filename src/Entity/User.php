@@ -60,7 +60,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $phoneNumber;
+    private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -72,25 +72,11 @@ class User implements UserInterface
      */
     private $sex;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $age;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $likes;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $dislikes;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $userId;
+    private $idNumber;
 
     /**
      * @ORM\ManyToOne(targetEntity=Religion::class, inversedBy="users")
@@ -98,25 +84,7 @@ class User implements UserInterface
      */
     private $religion;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $facebookLink;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $telegramUsername;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
 
     /**
      * @ORM\Column(type="float")
@@ -126,13 +94,44 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $faceColor;
+    private $color;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $currentCity;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthdate;
+
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $quote;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $message;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $audio;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Languages::class)
+     */
+    private $language;
+
+    public function __construct()
+    {
+        $this->language = new ArrayCollection();
+    }
+
+   
 
 
 
@@ -271,14 +270,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPhoneNumber(): ?string
+    public function getPhone(): ?string
     {
-        return $this->phoneNumber;
+        return $this->phone;
     }
 
-    public function setPhoneNumber(string $phoneNumber): self
+    public function setPhone(string $phone): self
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phone = $phone;
 
         return $this;
     }
@@ -307,50 +306,15 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAge(): ?int
+
+    public function getIdNumber(): ?string
     {
-        return $this->age;
+        return $this->idNumber;
     }
 
-    public function setAge(int $age): self
+    public function setIdNumber(string $idNumber): self
     {
-        $this->age = $age;
-
-        return $this;
-    }
-
-    public function getLikes(): ?string
-    {
-        return $this->likes;
-    }
-
-    public function setLikes(?string $likes): self
-    {
-        $this->likes = $likes;
-
-        return $this;
-    }
-
-    public function getDislikes(): ?string
-    {
-        return $this->dislikes;
-    }
-
-    public function setDislikes(?string $dislikes): self
-    {
-        $this->dislikes = $dislikes;
-
-        return $this;
-    }
-
-    public function getUserId(): ?string
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(string $userId): self
-    {
-        $this->userId = $userId;
+        $this->idNumber = $idNumber;
 
         return $this;
     }
@@ -367,54 +331,9 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFacebookLink(): ?string
-    {
-        return $this->facebookLink;
-    }
+    
 
-    public function setFacebookLink(?string $facebookLink): self
-    {
-        $this->facebookLink = $facebookLink;
-
-        return $this;
-    }
-
-    public function getTelegramUsername(): ?string
-    {
-        return $this->telegramUsername;
-    }
-
-    public function setTelegramUsername(?string $telegramUsername): self
-    {
-        $this->telegramUsername = $telegramUsername;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
+    
     public function getHeight(): ?float
     {
         return $this->height;
@@ -427,14 +346,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFaceColor(): ?string
+    public function getColor(): ?string
     {
-        return $this->faceColor;
+        return $this->color;
     }
 
-    public function setFaceColor(string $faceColor): self
+    public function setColor(string $color): self
     {
-        $this->faceColor = $faceColor;
+        $this->color = $color;
 
         return $this;
     }
@@ -450,6 +369,80 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    public function getQuote(): ?string
+    {
+        return $this->quote;
+    }
+
+    public function setQuote(?string $quote): self
+    {
+        $this->quote = $quote;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getAudio(): ?string
+    {
+        return $this->audio;
+    }
+
+    public function setAudio(string $audio): self
+    {
+        $this->audio = $audio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Languages[]
+     */
+    public function getLanguage(): Collection
+    {
+        return $this->language;
+    }
+
+    public function addLanguage(Languages $language): self
+    {
+        if (!$this->language->contains($language)) {
+            $this->language[] = $language;
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(Languages $language): self
+    {
+        $this->language->removeElement($language);
+
+        return $this;
+    }
+
+
 
 
 }

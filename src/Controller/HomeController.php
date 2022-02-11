@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\User;
 use App\Entity\Religion;
 use App\Repository\UserRepository;
-use App\Form\UserType;
+use App\Form\RegistrationType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
 {
@@ -165,17 +166,22 @@ class HomeController extends AbstractController
     /**
      *  @Route("/register", name="user_register", methods={"GET", "POST"})
      */
-    public function register(Request $request)
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            dd("");
+            $em = $this->getDoctrine()->getManager();
+            $password = $form['plainPassword']->getData();
+            $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $password));
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute("app_login");
         }
-        return $this->render("home/register.html.twig",[
+        return $this->render("home/register_temp.html.twig",[
             'form' => $form->createView()
         ]);
     }

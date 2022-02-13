@@ -23,17 +23,14 @@
 		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 
 		<!-- Web Fonts  -->
-		<link
-		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+		<link id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
-		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		{# <link rel="stylesheet" href="{{asset('assets/vendor/materialize/css/materialize.css')}}"> #}
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}"> <link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
 		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
-		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
-		<link rel="stylesheet" href="{{asset('externalAssets/jquery.dropdown.css')}}">
 		<link
-		rel="stylesheet" href="{{asset('externalAssets/wizard/css/smart_wizard_all.css')}}">
+		rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
 
 		<!-- Skin CSS -->
 		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
@@ -42,14 +39,61 @@
 				padding: 6px 10px;
 			}
 
+			.sign-up-form {
+				max-width: 680px;
+				margin: 0 auto;
+			}
+
+         .form-group .row{
+            margin-bottom: 20px;
+         }
+
+         div > ul{
+            display: none;
+         }
+
+         .help-block > ul{
+            display: block;
+         }
+
+         .row .form-control{
+
+         }
+
+			.card {
+				position: relative;
+				border: 1px solid rgba(0, 0, 0, 0.06);
+				padding: 30px 50px;
+            border-radius: 10px;
+			}
+
 			.collapse ul {
 				padding: 6px 0;
 			}
 
-			.dropdown-toggle i{
-            display:none;
+         .sign-up-form h2 {
+            color: #636363;
+            margin: 0 0 15px;
+            position: relative;
+            text-align: center;
          }
-         
+
+         .sign-up-form h2:before, .sign-up-form h2:after {
+            content: "";
+            height: 2px;
+            width: 30%;
+            background: #d4d4d4;
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+         }	
+         .sign-up-form h2:before {
+            left: 0;
+         }
+         .sign-up-form h2:after {
+            right: 0;
+         }
+
 			.header-body {
 				background: #1a84ed !important;
 			}
@@ -60,13 +104,13 @@
 				color: #0088CC;
 			}
 
-			.card {
-				padding: 10px 50px;
-			}
-
 			.tab-content {
 				overflow: scroll;
 			}
+
+         .body{
+            background: linear-gradient(to top right,#b9a0a9 0%,#0675b7 100%);
+         }
 
 			@media(max-width: 800px) {
 				#smartwizard .nav {
@@ -83,229 +127,83 @@
 
 			<div role="main" class="main mt-5">
 				<div class="container">
-					<div class="row">
-						{% if not form.vars.valid %}
-							<div class="alert alert-error">
-								<div class="alert alert-warning alert-dismissible fade show" role="alert">
-									<strong>Info!</strong>
-									You should check in on some of those fields below.
-									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-								</div>
-							</div>
-						{% endif %}
-					</div>
-					<div id="smartwizard">
-						<ul class="nav">
-							<li>
-								<a class="nav-link" href="#step-1">
-									Step 1<br>
-									Personal Information
-								</a>
-							</li>
-							<li>
-								<a class="nav-link" href="#step-2">
-									Step 2<br>
-									Addresses
-								</a>
-							</li>
-							<li>
-								<a class="nav-link" href="#step-3">
-									Step 3<br>
-									Detail information
-								</a>
-							</li>
-						</ul>
-						{{form_start(form)}}
-						<div class="tab-content">
-							<div id="step-1" class="tab-pane" role="tabpanel">
-								<div class="row">
-									<div class="col-md-4">
-										<label>{{form_label(form.fname)}}</label>
-										{{form_widget(form.fname)}}
-										<div class="form-error">
-											{{ form_errors(form.fname) }}
-										</div>
-									</div>
-									<div class="col-md-4">
-										<label>{{form_label(form.mname)}}</label>
-										{{form_widget(form.mname)}}
-										<div class="form-error">
-											{{ form_errors(form.mname) }}
-										</div>
-									</div>
-									<div class="col-md-4">
-										<label>{{form_label(form.lname)}}</label>
-										{{form_widget(form.lname)}}
-										<div class="form-error">
-											{{ form_errors(form.lname) }}
-										</div>
-									</div>
-								</div>
-
-								<div class="row mt-4">
-									<div class="col-md-4">
-										<label>{{form_label(form.username)}}</label>
-										{{form_widget(form.username)}}
-										<div class="form-error">
-											{{ form_errors(form.username) }}
-										</div>
-									</div>
-									<div class="col-md-4">
-										<label>{{form_label(form.sex)}}</label>
-										{{form_widget(form.sex)}}
-										<div class="form-error">
-											{{ form_errors(form.sex) }}
-										</div>
-									</div>
-								</div>
-
-								<div class="row mt-4">
-									<div class="col-md-4">
-										<label>{{form_label(form.religion)}}</label>
-										{{form_widget(form.religion)}}
-										<div class="form-error">
-											{{ form_errors(form.religion) }}
-										</div>
-									</div>
-									<div class="col-md-4">
-										<label>{{form_label(form.age)}}</label>
-										{{form_widget(form.age)}}
-										<div class="form-error">
-											{{ form_errors(form.age) }}
-										</div>
-									</div>
-								</div>
-
-								<div class="row mt-4">
-									<div class="col-md-4">
-										<label>{{form_label(form.faceColor)}}</label>
-										{{form_widget(form.faceColor)}}
-										<div class="form-error">
-											{{ form_errors(form.faceColor) }}
-										</div>
-									</div>
-									<div class="col-md-4">
-										<label>{{form_label(form.height)}}</label>
-										{{form_widget(form.height)}}
-										<div class="form-error">
-											{{ form_errors(form.height) }}
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div id="step-2" class="tab-pane" role="tabpanel">
-								<div class="row mt-4">
-									<div class="col-md-5">
-										<label>{{form_label(form.email)}}</label>
-										{{form_widget(form.email)}}
-										<div class="form-error">
-											{{ form_errors(form.email) }}
-										</div>
-									</div>
-									<div class="col-md-5">
-										<label>{{form_label(form.phone_number)}}</label>
-										{{form_widget(form.phone_number)}}
-										<div class="form-error">
-											{{ form_errors(form.phone_number) }}
-										</div>
-									</div>
-								</div>
-
-								<div class="row mt-4">
-									<div class="col-md-5">
-										<label>{{form_label(form.currentCity)}}</label>
-										{{form_widget(form.currentCity)}}
-										<div class="form-error">
-											{{ form_errors(form.currentCity) }}
-										</div>
-									</div>
-								</div>
-
-								<div class="row mt-4">
-									<div class="col-md-5">
-										<label>{{form_label(form.facebookLink)}}</label>
-										{{form_widget(form.facebookLink)}}
-										<div class="form-error">
-											{{ form_errors(form.facebookLink) }}
-										</div>
-									</div>
-								</div>
-								<div class="row mt-4">
-									<div class="col-md-5">
-										<label>{{form_label(form.telegramUsername)}}</label>
-										{{form_widget(form.telegramUsername)}}
-										<div class="form-error">
-											{{ form_errors(form.telegramUsername) }}
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div id="step-3" class="tab-pane" role="tabpanel">
-								<div class="row mt-4">
-									<div class="col-md-6 likes">
-										<label>{{form_label(form.likes)}}</label>
-										{{form_widget(form.likes)}}
-										<div class="form-error">
-											{{ form_errors(form.likes) }}
-										</div>
-									</div>
-									<div class="col-md-6 dislikes">
-										<label>{{form_label(form.dislikes)}}</label>
-										{{form_widget(form.dislikes)}}
-										<div class="form-error">
-											{{ form_errors(form.dislikes) }}
-										</div>
-									</div>
-								</div>
-								<div class="row mt-4">
-									<div class="col-md-6 ">
-										<label>{{form_label(form.description)}}</label>
-										{{form_widget(form.description)}}
-										<div class="form-error">
-											{{ form_errors(form.description) }}
-										</div>
-									</div>
-								</div>
-								<div class="row mt-4">
-									<div class="col-md-6 ">
-										<label>{{form_label(form.image)}}</label>
-										{{form_widget(form.image)}}
-										<div class="form-error">
-											{{ form_errors(form.image) }}
-										</div>
-									</div>
-								</div>
-								<div class="row mt-4">
-									<div class="col-md-6 ">
-										<label>{{form_label(form.save)}}</label>
-										{{form_widget(form.save)}}
-									</div>
-								</div>
+					{% if not form.vars.valid %}
+						<div class="alert alert-error">
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<strong>Info!</strong>
+								You should check in on some of those fields below.
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 							</div>
 						</div>
-						{{form_end(form)}}
-					</div>
+					{% endif %}
 				</div>
+				{{form_start(form)}}
+				<div class="card sign-up-form">
+               <h2>Register</h2>
+         		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.fname,{'label':'First Name' })}}
+								<div class="help-block text-danger">{{form_errors(form.fname)}}</div>
+							</div>
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.username,{'label':'Username' })}}
+								<div class="help-block text-danger">{{form_errors(form.username)}}</div>
+							</div>
+						</div>
+                  <div class="row">
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.city,{'label':'City' })}}
+								<div class="help-block text-danger">{{form_errors(form.city)}}</div>
+							</div>
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.birthdate,{'label':'Date of birth' })}}
+								<div class="help-block text-danger">{{form_errors(form.birthdate)}}</div>
+							</div>
+						</div>
+
+                  <div class="row">
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.sex,{'label':'Gender' })}}
+								<div class="help-block text-danger">{{form_errors(form.sex)}}</div>
+							</div>
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.religion,{'label':'Religion'})}}
+								<div class="help-block text-danger">{{form_errors(form.religion)}}</div>
+							</div>
+						</div>
+
+                  <div class="row">
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.plainPassword.first,{'label':'Password' })}}
+								<div class="help-block text-danger">{{form_errors(form.plainPassword.first)}}</div>
+							</div>
+   							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.plainPassword.second,{'label':'Repeat Password' })}}
+								<div class="help-block text-danger">{{form_errors(form.plainPassword.second)}}</div>
+							</div>
+						</div>
+                  <br>
+                   <div class="row">
+                     <div class="col"></div>
+							<div class="col-md-4 col-xs-12">
+								{{ form_row(form.save,{'label':'Save' })}}
+                     </div>
+                     <div class="col"></div>
+						</div>
+                  
+					</div>
+				{{form_end(form)}}
 			</div>
 			{% include "home/footer.html.twig" %}
 
 		</div>
 		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+		<script src="{{asset('assets/vendor/materialize/js/materialize.min.js')}}"></script>
 		<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-		<script src="{{asset('externalAssets/theme.js')}}"></script>
-		<script src="{{asset('externalAssets/wizard/js/jquery.smartWizard.js')}}"></script>
 		<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
 		<script src="{{asset('externalAssets/theme.init.js')}}"></script>
-		<script src="{{asset('externalAssets/jquery.dropdown.js')}}"></script>
-		<script>
-			$(".likes").dropdown({multipleMode: 'label'});
-$(".dislikes").dropdown({multipleMode: 'label'});
-$(document).ready(function () { // SmartWizard initialize
-$('#smartwizard').smartWizard();
 
-});
-		</script>
 	</body>
 </html>

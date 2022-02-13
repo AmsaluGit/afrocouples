@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>{{user.fname}}
+			{{user.mname}}</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link
+		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/vendor/owl-carousel/owl-carousel.min.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
+
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+			.dropdown-toggle i {
+				display: none;
+			}
+
+			.collapse ul {
+				padding: 6px 0;
+			}
+
+			.header-body {
+				background: #1a84ed !important;
+			}
+
+			hr {
+				margin: 15px 0 !important;
+			}
+
+			#header i {
+				color: white;
+			}
+			span a {
+				color: #0088CC !important;
+			}
+			.ds-none {
+				display: none;
+			}
+
+			.main-info {
+				font-size: 20px;
+			}
+
+			.main-info p {
+				margin: 0 !important;
+				padding-top: 10px;
+				font-size: 0.8em;
+			}
+
+			.main-info h4 {
+				margin-bottom: 10px;
+			}
+
+			.name {
+				margin-bottom: 2px;
+				font-weight: 700;
+				line-height: 22px;
+				color: #414141;
+			}
+
+			.images_list {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: left;
+				width: 100%;
+				padding-left: 9px;
+				padding-top: 15px;
+			}
+
+			.icons-list {
+				margin-top: 20px;
+				display: flex;
+				justify-content: center;
+				cursor: pointer;
+			}
+			.icons-list img {
+				width: 30px;
+			}
+
+			.icons-list p {
+				width: 60px;
+				margin: 0 10px !important;
+				padding: 14px !important;
+				border: 1px solid #99927a;
+				border-radius: 30px;
+			}
+
+			.images_list img {
+				padding-right: 10px;
+				padding-top: 10px;
+				width: 33.3%;
+			}
+
+			.col-md-5,
+			.col-md-7 {
+				padding: 0 50px;
+			}
+		</style>
+		{# <link rel="stylesheet" href="{{asset('externalAssets/custom.css')}}"> #}
+	</head>
+	<body data-plugin-page-transition>
+
+		<div class="body">
+			{% include "home/navbar.html.twig" %}
+			<div class="container rounded bg-white mt-5 mb-5">
+				<div class="row">
+					<div class="container">
+						<div class="row gutters-sm">
+							<div class="col-md-4 mb-3">
+								<div class="card">
+									<div class="card-body" style="padding: 3px;border-radius: 3px;">
+										<div class="d-flex flex-column align-items-center text-center">
+
+											<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+												<div class="carousel-inner">
+													<div class="carousel-item active" data-bs-interval="10000">
+														<img src="{{ user.profileImage }}" class="d-block w-100" alt="...">
+														<div
+															class="carousel-caption d-none d-md-block">{# <h5>First slide label</h5>																																																			                                             <p>Some representative placeholder content for the first slide.</p> #}
+														</div>
+													</div>
+													{% for images in user.galleries %}
+														<div class="carousel-item">
+															<img src="{{images.photo}}" class="d-block w-100" alt="...">
+															<div class="carousel-caption d-none d-md-block">{# <h5>Third slide label</h5> #}
+																{# <p>Some representative placeholder content for the third slide.</p> #}
+															</div>
+														</div>
+													{% endfor %}
+												</div>
+											</div>
+											<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+												<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+												<span class="visually-hidden">Previous</span>
+											</button>
+											<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+												<span class="carousel-control-next-icon" aria-hidden="true"></span>
+												<span class="visually-hidden">Next</span>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="card mb-3">
+									<div class="card-body main-info">
+										<h4 class="name">{{user.fname | capitalize}}, 4</h4>
+										{% if user.city %}
+											<p>{{ user.city.name }},
+												{{user.city.country.name}}</p>
+										{% else %}
+											<p>Unkown Address</p>
+										{% endif %}
+										<p class=" text-muted">
+											{% if user.nationality %}
+												{{ user.nationality }}/
+											{% endif %}
+											{{ user.religion.name }}
+										</p>
+									</div>
+								</div>
+								<div class="card mb-3">
+									<div class="card-body">
+										{% if user.quote %}
+											<section style="background-color: #FFE7C7;">
+												<blockquote class="blockquote">
+													<p>
+														<i class="fas fa-angle-double-left" style="color: #f9a169;"></i>
+														<span class="lead font-italic">{{ user.quote }}</span>
+														<i class="fas fa-angle-double-right" style="color: #f9a169;"></i>
+													</p>
+												</blockquote>
+											</section>
+										{% endif %}
+										{% if user.message %}
+											<blockquote class="blockquote px-2">
+												<p>
+													<span class="lead font-italic" style="font-size: 0.8em;">{{ user.message }}</span>
+												</p>
+											</blockquote>
+										{% endif %}
+										
+									</div>
+								</div>
+								<div class="card">
+									<div class="card-body">
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Full Name</h6>
+												</div>
+												<div class="col-sm-9 text-primary font-bold">
+													{{user.fname}}
+													{{user.mname}}
+													{{user.lname}}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Sex</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.sex %}
+														{{user.sex}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">City</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.city %}
+														{{user.city.name}},
+														{{user.city.country.name}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Nationality</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.nationality %}
+														{{user.nationality.name}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Education Level</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.education %}
+														{{user.education.name}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Occupation</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.occupation %}
+														{{user.occupation.name}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Martial Status</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.maritalStatus %}
+														{{user.maritalStatus.name}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Ethinicity</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.color %}
+														{{user.color}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+											<hr>
+											<div class="row">
+												<div class="col-sm-3">
+													<h6 class="mb-0">Height</h6>
+												</div>
+												<div class="col-sm-9 text-primary">
+													{% if user.height %}
+														{{user.height}}
+													{% else %}
+														<span class="text-muted">not provided</span>
+													{% endif %}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+      {% include "home/footer.html.twig" %}
+		</div>
+		<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+	      <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script>
+	      <script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+	      <script src="{{asset('externalAssets/theme.js')}}"> </script>
+	      <script src="{{asset('externalAssets/theme.init.js')}}"> </script>
+	      <script> 
+				var like = true;
+	         $(".nav-item").on("click", function(){
+	               icon = $(this).find('i');
+	               if($(icon).hasClass("fa-chevron-right")){
+	                  $(icon).removeClass("fa-chevron-right");
+	                  $(icon).addClass("fa-chevron-down");
+	               }
+	               else{
+	                  $(icon).removeClass("fa-chevron-down");
+	                  $(icon).addClass("fa-chevron-right");
+	               }
+	         });
+	   
+	         var myCarousel = document.getElementById('#carouselExampleDark');
+	         var carousel = new bootstrap.Carousel(myCarousel,{
+	            wrap: false
+	         });
+	      </script>
+		</body>
+	</html>

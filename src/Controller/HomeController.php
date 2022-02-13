@@ -9,8 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\User;
 use App\Entity\Religion;
+use App\Entity\Likes;
 use App\Repository\UserRepository;
 use App\Form\RegistrationType;
+use App\Form\UserType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
@@ -29,10 +31,18 @@ class HomeController extends AbstractController
             
         $users = $query->setMaxResults(20)->getResult();
 
+        $age_array = array();
+        
+        foreach ($users as $key => $value) {
+            $diff = date_diff(date_create($value->getBirthdate()->format("Y-m-d")), date_create(date("Y-m-d")));
+            $age_array[$value->getId()] = $diff->format('%y');
+        }
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'religions' => $religion,
-            'users' => $users
+            'users' => $users,
+            'age_array' => $age_array
         ]);
     }
 
@@ -67,36 +77,42 @@ class HomeController extends AbstractController
             {
                 if(preg_match($pattern, $value)){
                     if($value == "smaller"){
-                        for($i=18; $i<=24; $i++)
-                        {
-                            $age[] = $i;
-                        }
+                        $age[] = date("Y-m-d", $this->getYearAndDate(18));
+                        $age[] = date("Y-m-d", $this->getYearAndDate(24));
                     }
                     if($value == "small"){
-                        for($i=25; $i<30; $i++)
-                        {
-                            $age[] = $i;
-                        }
+                        $age[] = date("Y-m-d", $this->getYearAndDate(24));
+                        $age[] = date("Y-m-d", $this->getYearAndDate(29));
+                        // for($i=25; $i<30; $i++)
+                        // {
+                        //     $age[] = date("Y-m-d", $this->getYearAndDate($i));
+                        // }
                     }
                     if($value == "big"){
-                        for($i=30; $i<35; $i++)
-                        {
-                            $age[] = $i;
-                        }
+                        $age[] = date("Y-m-d", $this->getYearAndDate(29));
+                        $age[] = date("Y-m-d", $this->getYearAndDate(34));
+                        // for($i=30; $i<35; $i++)
+                        // {
+                        //     $age[] = date("Y-m-d", $this->getYearAndDate($i));
+                        // }
                     }
                     if($value == "bigger"){
-                        for($i=35; $i<40; $i++)
-                        {
-                            $age[] = $i;
-                        }
+                        $age[] = date("Y-m-d", $this->getYearAndDate(34));
+                        $age[] = date("Y-m-d", $this->getYearAndDate(39));
+                        // for($i=35; $i<40; $i++)
+                        // {
+                        //     $age[] = date("Y-m-d", $this->getYearAndDate($i));
+                        // }
                     }
 
                     if($value == "biggest")
                     {
-                        for($i=40; $i<60; $i++)
-                        {
-                            $age[] = $i;
-                        }
+                        $age[] = date("Y-m-d", $this->getYearAndDate(39));
+                        $age[] = date("Y-m-d", $this->getYearAndDate(60));
+                        // for($i=40; $i<60; $i++)
+                        // {
+                        //     $age[] = date("Y-m-d", $this->getYearAndDate($i));
+                        // }
                     }
 
                 }
@@ -151,16 +167,47 @@ class HomeController extends AbstractController
     }
 
     /**
-     *  @Route("/user/{id}/detail", name="user_detail", methods={"GET", "POST"})
+     *  @Route("/profile", name="profile", methods={"GET", "POST"})
      */
-    public function detail($id)
+    public function profile(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(array("userId"=> $id));
-        
+        $user = $em->getRepository(User::class)->find($this->getUser()->getId());
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->render("home/edit.html.twig", [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     *  @Route("/user/{id}/detail", name="user_detail", methods={"GET", "POST"})
+     */
+    public function detail(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $like = $em->getRepository(Likes::class)->findOneBy(array('likedBy'=>$this->getUser(),'liker'=>$user));
+
+        $diff = date_diff(date_create($user->getBirthdate()->format("Y-m-d")), date_create(date("Y-m-d")));
+        $age = $diff->format('%y');
         return $this->render("home/show.html.twig", [
             'user' => $user,
+            'like' => $like,
+            'age' => $age
         ]);
+    }
+
+    public function getYearAndDate($difference){
+        $currentDate = date("Y-m-d", time());
+        $date = strtotime("$currentDate -$difference year");
+        return $date;
     }
 
     /**
@@ -177,11 +224,12 @@ class HomeController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $password = $form['plainPassword']->getData();
             $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $password));
+            $user->setIdNumber(time());
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute("app_login");
         }
-        return $this->render("home/register_temp.html.twig",[
+        return $this->render("home/register.html.twig",[
             'form' => $form->createView()
         ]);
     }

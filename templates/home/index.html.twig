@@ -351,48 +351,30 @@
 							</aside>
 						</div>
 
-					
-
-
-
 						<div class="col-lg-10 col-md-9" style="border-left: 1px solid #b2d8f2;padding: 0px auto;">
 							<div class="blog-posts">
 
 								<div class="row users-list">
 									{% for user in users %}
-
-								 
-										<div
-											class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0">
+										<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0">
 											<!-- Card-->
 											<div class="card shadow-sm border-0 rounded">
 												<div class="card-body p-0">
-                                     <a href="{{path('user_detail', {id: 1})}}">
-                                       <img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top">
+                                     <a href="{{path('user_detail', {id: user.id})}}">
+                                       <img src="{{ user.profileImage }}" alt="" class="w-100 card-img-top">
                                     </a> 
 													<div class="p-2">
-														<p class="mb-0 name">{{user.fname}}, 45<span class="play-button"><i class="far fa-play-circle"></i></span></p>
-                                          <p>{{user.currentCity}}, Ethiopia</p>
+														<p class="mb-0 name">{{user.fname}}, {{age_array[user.id]}}<span class="play-button"><i class="far fa-play-circle"></i></span></p>
+                                          {% if user.city %}														
+															<p>{{ user.city.name }}, {{user.city.country.name}}</p>
+															{% else %}
+																<p>Unkown Address</p>
+														{% endif %}
 														<p class=" text-muted">
-                                             Ethipian/ 
-                                             <span>
-                                                {% if user.religion.id == 1 %}
-                                                   {# <i class="fas fa-cross"></i> #}
-                                                <a >Orthodox</a>
-                                                {% elseif user.religion.id == 2 %}
-                                                   {# <i class="fas fa-mosque"></i> #}
-                                                <a >Muslim</a>
-                                                {% elseif user.religion.id == 3 %}
-                                                   {# <i class="fas fa-bible"></i> #}
-                                                <a >Protestant</a>
-                                                {% elseif user.religion.id == 4 %}
-                                                   {# <i class="fas fa-cross"></i> #}
-                                                <a >Catholic</a>
-                                                {% else %}
-                                                   {# <i class="fas fa-bible"></i> #}
-                                                   <a>Orthodox</a>
-                                                {% endif %}
-													      </span> 
+                                             {% if user.nationality %}
+																{{user.nationality.name}}/ 
+															{% endif %} 
+                                             <span><a>Orthodox</a></span> 
                                           </p>
 													</div>
 												</div>
@@ -481,24 +463,23 @@
                                 $.each(data['users'], function(){
                                     $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
                                             $card = $('<div class="card shadow-sm border-0 rounded"></div>');
-
-                                            $meta = $('<div class="card-body p-0"><a href="/user/'+$(this)[0].idNumber+'/detail"><img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top"></a></div>');
+														  var user = $(this)[0][0];
+                                            $meta = $('<div class="card-body p-0"><a href="/user/'+user.idNumber+'/detail"><img src="'+user.profileImage+'" alt="" class="w-100 card-img-top"></a></div>');
                                              $wrapper = $('<div class="p-2"></div>');
-                                             $name = '<h4 class="mb-0">'+$(this)[0].fname+', '+$(this)[0].age+'</h4>';
-                                             $city = '<p>'+$(this)[0].currentCity+', Ethiopia</p>';
+
+															//age calculation
+															var today = new Date();
+															var birthDate = new Date($(this)[0].dob);
+															var age1 = today.getFullYear() - birthDate.getFullYear();
+															var m = today.getMonth() - birthDate.getMonth();
+															if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+																age1--;
+															}
+															
+                                             $name = '<p class="mb-0 name">'+user.fname+', '+age1+'<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
+                                             $city = '<p>'+user.currentCity+', Ethiopia</p>';
                                              
-                                            if($(this)[0].religion.id == "1"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Orthodox<span></span>  </p>';
-                                            }
-                                            else if($(this)[0].religion.id == "2"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Muslim<span></span>  </p>';
-                                            }
-                                            else if($(this)[0].religion.id == "3"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Protestant<span></span>  </p>';
-                                            }
-                                            else if($(this)[0].religion.id == "4"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Catholic<span></span>  </p>';
-                                            }
+                                             $citizenAndReleigion = '<p class=" text-muted">'+user.nationality+'/ '+$(this)[0].religionName+'<span></span>  </p>';
                                             $wrapper.append($name);
                                             $wrapper.append($city);
                                             $wrapper.append($citizenAndReleigion);
@@ -575,24 +556,23 @@
                                         $.each(data['users'], function(){
                                             $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
                                             $card = $('<div class="card shadow-sm border-0 rounded"></div>');
-
-                                            $meta = $('<div class="card-body p-0"><a href="/user/'+$(this)[0].userId+'/detail"><img src="https://bootstrapious.com/i/snippets/sn-cards/profile-1_dewapk.jpg" alt="" class="w-100 card-img-top"></a></div>');
+														  var user = $(this)[0][0];
+                                            $meta = $('<div class="card-body p-0"><a href="/user/'+user.userId+'/detail"><img src="'+user.profileImage+'" alt="" class="w-100 card-img-top"></a></div>');
                                              $wrapper = $('<div class="p-2"></div>');
-                                             $name = '<h4 class="mb-0">'+$(this)[0].fname+', '+$(this)[0].age+'</h4>';
+
+															//age calculation
+															var today = new Date();
+															var birthDate = new Date($(this)[0].dob);
+															var age1 = today.getFullYear() - birthDate.getFullYear();
+															var m = today.getMonth() - birthDate.getMonth();
+															if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+																age1--;
+															}
+
+                                             $name = '<p class="mb-0 name">'+user.fname+', '+age1+'<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
                                              $city = '<p>'+$(this)[0].currentCity+', Ethiopia</p>';
                                              
-                                            if($(this)[0].religion.id == "1"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Orthodox<span></span>  </p>';
-                                            }
-                                            else if($(this)[0].religion.id == "2"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Muslim<span></span>  </p>';
-                                            }
-                                            else if($(this)[0].religion.id == "3"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Protestant<span></span>  </p>';
-                                            }
-                                            else if($(this)[0].religion.id == "4"){
-                                               $citizenAndReleigion = '<p class=" text-muted">Ethipian/ Catholic<span></span>  </p>';
-                                            }
+                                            $citizenAndReleigion = '<p class=" text-muted">'+user.nationality +'/ '+$(this)[0].religionName+'<span></span>  </p>';
                                             $wrapper.append($name);
                                             $wrapper.append($city);
                                             $wrapper.append($citizenAndReleigion);

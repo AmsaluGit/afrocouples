@@ -176,6 +176,17 @@ class User implements UserInterface
      */
     private $role;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profileImage;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="usersInCity")
+     */
+    private $city;
+
+
     public function __construct()
     {
         $this->language = new ArrayCollection();
@@ -707,7 +718,28 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
 
+    public function setProfileImage(string $profileImage): self
+    {
+        $this->profileImage = $profileImage;
 
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
 
 }

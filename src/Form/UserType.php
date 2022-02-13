@@ -8,10 +8,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Religion;
+use App\Entity\Nationality;
+use App\Entity\Education;
+use App\Entity\Occupation;
+use App\Entity\City;
+use App\Entity\MaritalStatus;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class UserType extends AbstractType
 {
@@ -24,15 +31,17 @@ class UserType extends AbstractType
             ])
             ->add('mname', null, [
                 'label' => 'Middle Name',
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
             ->add('lname', null, [
+                'required' => false,
                 'label' => 'Last Name (optional)',
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('username', null, [
-                'label' => 'Username',
-                'attr' => ['class'=>'form-control']
+            ->add('message', null, [
+                'label' => 'Message',
+                'attr' => ['class' => 'form-control']
             ])
             ->add('sex' ,ChoiceType::class,[
                 'required' => true,
@@ -42,97 +51,72 @@ class UserType extends AbstractType
                     'Female' => "f",
                  ],
             ])
-            ->add('age', null, [
-                'attr' => ['class'=>'form-control']
+            ->add('birthdate', DateType::class, [
+                'widget' => 'single_text',
+                
+                // adds a class that can be selected in JavaScript
+                'attr' => ['class' => 'form-control'],
             ])
-            ->add('likes', ChoiceType::class, [
-                // 'mapped' => false,
-                'multiple' => true,
-                'attr' => ['class'=>'form-control', 'style'=>'display:none'],
-                'choices'=> [
-                    'Writing' => "writing",
-                    'Photography' => "photography",
-                    'Walking' => "walking",
-                    'Exercise' => "exercise",
-                    'Gardening' => "gardening",
-                    'Dance' => "dance",
-                    'Drawing/painting' => "drawing",
-                    'Reading' => 'reading',
-                    'Video Games' => "videoGames",
-                    'Writing' => "writing",
-                    'Photography' => "photography",
-                    "Movie Watching" => "watchMovies",
-                    "Listen music" => "listenMusic",
-                    "Team Sports" => "teamSports",
-                    "Traveling" => "traveling",
-                    "Watching Sports" => "watchingSports",
-                    "Volunteer Work" => "volunteerWork",
-                    "Cooking" => "Cooking",
-                    "Shopping" => "Shopping"
-                 ],
-            ])
-            ->add('dislikes', ChoiceType::class, [
-                'mapped' => false,
-                'multiple' => true,
-                'attr' => ['class'=>'form-control', 'style'=>'display:none'],
-                'choices'=> [
-                    'Writing' => "writing",
-                    'Photography' => "photography",
-                    'Walking' => "walking",
-                    'Exercise' => "exercise",
-                    'Gardening' => "gardening",
-                    'Dance' => "dance",
-                    'Drawing/painting' => "drawing",
-                    'Reading' => 'reading',
-                    'Video Games' => "videoGames",
-                    'Writing' => "writing",
-                    'Photography' => "photography",
-                    "Movie Watching" => "watchMovies",
-                    "Listen music" => "listenMusic",
-                    "Team Sports" => "teamSports",
-                    "Traveling" => "traveling",
-                    "Watching Sports" => "watchingSports",
-                    "Volunteer Work" => "volunteerWork",
-                    "Cooking" => "Cooking",
-                    "Shopping" => "Shopping"
-                 ],
-            ])
+           
             ->add('email', EmailType::class, [
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('phone_number', null, [
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
             ->add('religion', EntityType::class,[
                 'class' => Religion::class,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('facebookLink', null, [
-                'label' => 'Facebook Link (optional)',
+            ->add('height', NumberType::class, [
+                'label' => 'Height(in meter)',
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('telegramUsername', null, [
-                'label' => "Telegram Username(optional)",
+            ->add('nationality', EntityType::class, [
+                'class' => Nationality::class,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('currentCity', null, [
-                'label' => "Current City",
+            ->add('education', EntityType::class, [
+                'class' => Education::class,
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('height', null, [
-                'label' => "Height",
+
+            ->add('city', EntityType::class, [
+                'class' => City::class,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('faceColor', null, [
-                'label' => "Face Color",
+
+            ->add('occupation', EntityType::class, [
+                'class' => Occupation::class,
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('description', null,[
-                'label' => "Write short Bio about yourself",
+            ->add('maritalStatus', EntityType::class, [
+                'class' => MaritalStatus::class,
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('image', FileType::class,[
+            ->add('phone', NumberType::class, [
+                'label' => "Phone Number",
+                'required' => false,
+                'attr' => ['class'=>'form-control']
+            ])
+            ->add('color' ,ChoiceType::class,[
+                'required' => false,
+                'attr'=>['class'=>'form-control'],
+                'choices'  => [
+                    'Black' => "black",
+                    'White' => "white",
+                 ],
+            ])
+            ->add('quote', null,[
+                'required' => false,
+                'label' => "Short Quote",
+                'attr' => ['class'=>'form-control']
+            ])
+            ->add('profileImage', FileType::class,[
                 'label' => "Image",
+                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
             ->add('save', SubmitType::class, [

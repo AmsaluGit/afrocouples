@@ -49,14 +49,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function getFilteredData($name, $sex, $religion, $age, $start, $end)
     {
-        $qb = $this->createQueryBuilder('u')
-                ->select('u', 'r')
-                ->join('u.religion', 'r');
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('u','r.id as religion', 'r.name as religionName', "DATE_FORMAT(u.birthdate, '%Y-%m-%d') as dob")->join('u.religion', 'r');
             
             if(sizeof($age)>0){
-                $qb->andWhere('u.age in (:age)');
-                $qb->setParameter('age', $age);
+                $totalRange = sizeof($age);
+                for($i=0; $i<$totalRange; $i++){
+                    if($i%2==0)
+                    {
+                        $minYear = $age[$i];
+                        $maxYear = $age[$i+1];
+                        // $qb->orWhere("(DATE_FORMAT(u.birthdate, '%Y-%m-%d') <= $minYear and DATE_FORMAT(u.birthdate, '%Y-%m-%d') >= $maxYear)");
+                        $qb->orWhere("u.birthdate between '$maxYear' and '$minYear'");
+                    }
+                }
             }
+
+            // dd($qb->getDQL());
 
             if(sizeof($sex)>0){
                 $qb->andWhere('u.sex in (:sex)');
@@ -69,7 +78,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             }
 
             // $qb->orderBy('u.id', 'ASC')
-
+            // dd($qb->getDQL());
             $qb->setMaxResults($end)
             ->setFirstResult($start)
         ;

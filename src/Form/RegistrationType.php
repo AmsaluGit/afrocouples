@@ -8,11 +8,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Religion;
+use App\Entity\City;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -27,8 +29,8 @@ class RegistrationType extends AbstractType
                 'label' => 'First Name',
                 'attr' => ['class'=>'form-control col-3']
             ])
-            ->add('mname', null, [
-               'label' => 'First Name',
+            ->add('username', null, [
+               'label' => 'Username Name',
                'attr' => ['class'=>'form-control col-3']
            ])
             ->add('sex' ,ChoiceType::class,[
@@ -39,7 +41,22 @@ class RegistrationType extends AbstractType
                     'Female' => "f",
                  ],
             ])
-            ->add('email', EmailType::class, [
+
+            ->add('birthdate', DateType::class, [
+                'widget' => 'single_text',
+
+                // prevents rendering it as type="date", to avoid HTML5 date pickers
+                // 'html5' => false,
+
+                // adds a class that can be selected in JavaScript
+                'attr' => ['class' => 'form-control'],
+            ])
+            // ->add('email', EmailType::class, [
+            //     'attr' => ['class'=>'form-control']
+            // ])
+
+            ->add('city', EntityType::class,[
+                'class' => City::class,
                 'attr' => ['class'=>'form-control']
             ])
             ->add('religion', EntityType::class,[

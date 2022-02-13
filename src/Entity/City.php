@@ -35,9 +35,17 @@ class City
      */
     private $organizations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="city")
+     */
+    private $usersInCity;
+
+
+
     public function __construct()
     {
         $this->organizations = new ArrayCollection();
+        $this->usersInCity = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,4 +106,40 @@ class City
 
         return $this;
     }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsersInCity(): Collection
+    {
+        return $this->usersInCity;
+    }
+
+    public function addUsersInCity(User $usersInCity): self
+    {
+        if (!$this->usersInCity->contains($usersInCity)) {
+            $this->usersInCity[] = $usersInCity;
+            $usersInCity->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersInCity(User $usersInCity): self
+    {
+        if ($this->usersInCity->removeElement($usersInCity)) {
+            // set the owning side to null (unless already changed)
+            if ($usersInCity->getCity() === $this) {
+                $usersInCity->setCity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }

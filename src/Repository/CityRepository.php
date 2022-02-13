@@ -47,4 +47,16 @@ class CityRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function filterCity($name)
+    {
+       
+        return  $this->createQueryBuilder('u')
+            ->Where('u.name LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

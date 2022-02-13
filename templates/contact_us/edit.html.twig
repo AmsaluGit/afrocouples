@@ -1,0 +1,25 @@
+{% extends 'master/base.html.twig' %}
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Edit ContactUs{% endblock %}
+  #}
+
+{% block body %}
+    <h1>Edit ContactUs</h1>
+
+    {{ include('contact_us/_form.html.twig', {'button_label': 'Update'}) }}
+<hr>
+
+<table>
+        <tr>
+        <td><a href="{{ path('contact_us_index') }}" class="btn  btn-info">back to list</a> </td>
+
+        <td> {{ include('contact_us/_delete_form.html.twig') }} </td>
+
+        </tr>
+    </table>
+{% endblock %}
+ 
+       
+   
+

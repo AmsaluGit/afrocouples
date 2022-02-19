@@ -10,9 +10,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\User;
 use App\Entity\Religion;
 use App\Entity\Likes;
+use App\Entity\Gallery;
 use App\Repository\UserRepository;
 use App\Form\RegistrationType;
 use App\Form\UserType;
+use App\Form\GalleryType;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
@@ -24,7 +27,6 @@ class HomeController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $religion = $em->getRepository(Religion::class)->findAll();
-        // $users = $em->getRepository(User::class)->findAll();
         $query = $em->createQuery(
             'SELECT u FROM App\Entity\User u ORDER BY u.id'
             );
@@ -183,6 +185,54 @@ class HomeController extends AbstractController
 
         return $this->render("home/edit.html.twig", [
             'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     *  @Route("/gallery", name="gallery", methods={"GET", "POST"})
+     */
+    public function gallery(SluggerInterface $slugger,
+    Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $gly = new Gallery();
+        $form = $this->createForm(GalleryType::class, $gly);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $uploads_directory  = $this->getParameter('uploads_directory');
+            $files = $request->files->get('gallery')['photos'];
+
+            foreach($files as $file){
+                $gly = new Gallery();
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $gly->setPhoto($newFilename);
+                $gly->setUser($this->getUser());
+                $em->persist($gly);
+                $em->flush();
+            }
+        }
+
+        $gallery = $em->getRepository(Gallery::class)->findBy(array("user" => $this->getUser()->getId()));
+
+        return $this->render("home/gallery.html.twig", [
+            'gallery' => $gallery,
             'form' => $form->createView()
         ]);
     }

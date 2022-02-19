@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Gallery -
+			{{app.user.fname}}
+		</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link
+		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/vendor/owl-carousel/owl-carousel.min.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
+		{# <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+		<script src="https://unpkg.com/dropzone"></script>
+		<script src="https://unpkg.com/cropperjs"></script> #}
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+			.dropdown-toggle i {
+				display: none;
+			}
+
+			.collapse ul {
+				padding: 6px 0;
+			}
+
+			.header-body {
+				background: #1a84ed !important;
+			}
+
+			hr {
+				margin: 15px 0 !important;
+			}
+
+			#header i {
+				color: white;
+			}
+			span a {
+				color: #0088CC !important;
+			}
+			.ds-none {
+				display: none;
+			}
+
+			.body {
+				margin-top: 20px !important;
+			}
+
+			.col-md-5,
+			.col-md-7 {
+				padding: 0 50px;
+			}
+
+			.image-container {
+				width: 100%;
+				display: flex;
+			}
+			.image-add-icon {
+				width: 100px;
+				height: 100px;
+				border-radius: 60px;
+			}
+
+			.image-add-icon i {
+				;
+				width: 50px;
+				height: 50px;
+				padding-top: 20px;
+			}
+
+			.image-add {
+				margin: 0 35px;
+			}
+
+			.image-uploader {
+				clear: both;
+				display: none;
+			} 
+
+			/* .image-list img {
+				width: 23%;
+				margin: 5px;
+			} */
+
+			#image-uploader-hide i{
+				padding:10px 15px;
+				background: white;
+				color: blue;
+				cursor: pointer;
+				border-radius: 40px;   
+			}
+
+			.card-header{
+				padding: 5px 20px;
+			}
+
+            .img-fluid {
+                max-width: 100%;
+                height: auto;
+            }
+
+			/* @media(min-width: 1501px) {
+				.image-list img {
+					width: 18%;
+					margin: 5px;
+				}
+			}
+
+			@media(max-width: 1154px) {
+				.image-list img {
+					width: 31%;
+					margin: 5px;
+				}
+			}
+
+			@media(max-width: 850px) {
+				.image-list img {
+					width: 47%;
+					margin: 5px;
+				}
+			}
+
+			@media(max-width: 500px) {
+				.image-list img {
+					width: 100%;
+					margin: 5px;
+				}
+			} */
+		</style>
+	</head>
+	<body data-plugin-page-transition>
+		{% include "home/navbar.html.twig" %}
+		<div class="body">
+			<div class="container-fluid">
+				<div class="row">
+					{# <div class="col-md-3">
+						<div class=""><img src="{{ app.user.profileImage }}" alt="sdf" width="100%"></div>
+						
+					</div> #}
+					<div class="col-md-12">
+							<div class"row">
+								<div class="col-md-12 main-area">
+									<div class="image-list">
+										<div class="card">
+											<div class="card-header">
+												<button class="btn btn-primary float-end" id="image-uploader-show"><i class="fas fa-plus"></i> Add Image</button>
+												<span  id="image-uploader-hide" style="display:none"><i class="fas fa-times fa-2x float-end"></i></span>
+												<div class="image-uploader">
+													{{form_start(form)}}
+													<div class="container">
+														<div class="row">
+															<div class="col-md-6 col-xs-12">
+																{{ form_row(form.photos,{'label':'Photo' })}}
+																<div class="help-block text-danger">{{form_errors(form.photos)}}</div>
+															</div>
+														</div>
+														<br>
+														<div class="row">
+															<div class="col-md-4 col-xs-12">
+																{{ form_row(form.Upload,{'label':'Upload' })}}
+															</div>
+														</div>
+													</div>
+													{{form_end(form)}}
+												</div>
+											</div>
+											<div class="card-body" style="wd">
+                                            <div class="row portfolio-list sort-destination" data-sort-id="portfolio" data-filter="*" style="position: relative; height: 296px;">
+
+												{% for image in gallery %}
+<div class="col-12 col-sm-6 col-lg-3 isotope-item websites">
+										<div class="portfolio-item">
+											<a href="portfolio-single-wide-slider.html">
+												<span class="thumb-info thumb-info-lighten border-radius-0">
+													<span class="thumb-info-wrapper border-radius-0">
+														<img src="/uploads/{{image.photo}}" class="img-fluid border-radius-0" alt="">
+														<span class="thumb-info-title">
+															<span class="thumb-info-inner">Presentation</span>
+															<span class="thumb-info-type">Website</span>
+														</span>
+														<span class="thumb-info-action">
+															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+														</span>
+													</span>
+												</span>
+											</a>
+										</div>
+									</div>												{% endfor %}
+                                                    <div class="sort-destination-loader mt-4 pt-2 sort-destination-loader-loaded">
+									<div class="col-12 col-sm-6 col-lg-3 isotope-item websites" style="position: absolute; left: 0px; top: 0px;">
+										<div class="portfolio-item">
+											<a href="portfolio-single-wide-slider.html">
+												<span class="thumb-info thumb-info-lighten border-radius-0">
+													<span class="thumb-info-wrapper border-radius-0">
+														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
+														<span class="thumb-info-title">
+															<span class="thumb-info-inner">Presentation</span>
+															<span class="thumb-info-type">Website</span>
+														</span>
+														<span class="thumb-info-action">
+															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+														</span>
+													</span>
+												</span>
+											</a>
+										</div>
+									</div>
+									<div class="col-12 col-sm-6 col-lg-3 isotope-item medias" style="position: absolute; left: 285px; top: 0px;">
+										<div class="portfolio-item">
+											<a href="portfolio-single-wide-slider.html">
+												<span class="thumb-info thumb-info-lighten border-radius-0">
+													<span class="thumb-info-wrapper border-radius-0">
+														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
+														<span class="thumb-info-title">
+															<span class="thumb-info-inner">Porto Watch</span>
+															<span class="thumb-info-type">Media</span>
+														</span>
+														<span class="thumb-info-action">
+															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+														</span>
+													</span>
+												</span>
+											</a>
+										</div>
+									</div>
+									<div class="col-12 col-sm-6 col-lg-3 isotope-item logos" style="position: absolute; left: 570px; top: 0px;">
+										<div class="portfolio-item">
+											<a href="portfolio-single-wide-slider.html">
+												<span class="thumb-info thumb-info-lighten border-radius-0">
+													<span class="thumb-info-wrapper border-radius-0">
+														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
+														<span class="thumb-info-title">
+															<span class="thumb-info-inner">Identity</span>
+															<span class="thumb-info-type">Logo</span>
+														</span>
+														<span class="thumb-info-action">
+															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+														</span>
+													</span>
+												</span>
+											</a>
+										</div>
+									</div>
+									<div class="col-12 col-sm-6 col-lg-3 isotope-item brands" style="position: absolute; left: 855px; top: 0px;">
+										<div class="portfolio-item">
+											<a href="portfolio-single-wide-slider.html">
+												<span class="thumb-info thumb-info-lighten border-radius-0">
+													<span class="thumb-info-wrapper border-radius-0">
+														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
+														<span class="thumb-info-title">
+															<span class="thumb-info-inner">Watch Mockup</span>
+															<span class="thumb-info-type">Brand</span>
+														</span>
+														<span class="thumb-info-action">
+															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
+														</span>
+													</span>
+												</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							<div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>    
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			  	<div class="modal-dialog modal-lg" role="document">
+			    	<div class="modal-content">
+			      		<div class="modal-header">
+			        		<h5 class="modal-title">Crop Image Before Upload</h5>
+			        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          			<span aria-hidden="true">×</span>
+			        		</button>
+			      		</div>
+			      		<div class="modal-body">
+			        		<div class="img-container">
+			            		<div class="row">
+			                		<div class="col-md-8">
+			                    		<img src="" id="sample_image" />
+			                		</div>
+			                		<div class="col-md-4">
+			                    		<div class="preview"></div>
+			                		</div>
+			            		</div>
+			        		</div>
+			      		</div>
+			      		<div class="modal-footer">
+			      			<button type="button" id="crop" class="btn btn-primary">Crop</button>
+			        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			      		</div>
+			    	</div>
+			  	</div>
+			</div>
+	</body>
+   <script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+   <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script> 
+	<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+
+   {# <script src="{{asset('externalAssets/theme.init.js')}}"> </script> #}
+   <script>
+      $("#image-uploader-show").on("click", function(e){
+			$("#image-uploader-hide").show();
+			$(".image-uploader").css("display", "block");
+			$(this).hide();
+      });
+
+		$("#image-uploader-hide").on("click", function(e){
+			$("#image-uploader-show").show();
+			$(".image-uploader").css("display", "none");
+			$(this).hide();
+		});
+
+		$(document).ready(function(){
+
+	var $modal = $('#modal');
+
+	var image = document.getElementById('sample_image');
+
+	var cropper;
+
+	$('#upload_image').change(function(event){
+		var files = event.target.files;
+
+		var done = function(url){
+			image.src = url;
+			$modal.modal('show');
+		};
+
+		if(files && files.length > 0)
+		{
+			reader = new FileReader();
+			reader.onload = function(event)
+			{
+				done(reader.result);
+			};
+			reader.readAsDataURL(files[0]);
+		}
+	});
+
+	$modal.on('shown.bs.modal', function() {
+		cropper = new Cropper(image, {
+			aspectRatio: 1,
+			viewMode: 3,
+			preview:'.preview'
+		});
+	}).on('hidden.bs.modal', function(){
+		cropper.destroy();
+   		cropper = null;
+	});
+
+	$('#crop').click(function(){
+		canvas = cropper.getCroppedCanvas({
+			width:400,
+			height:400
+		});
+
+		canvas.toBlob(function(blob){
+			url = URL.createObjectURL(blob);
+			var reader = new FileReader();
+			reader.readAsDataURL(blob);
+			reader.onloadend = function(){
+				var base64data = reader.result;
+				$.ajax({
+					url:'upload.php',
+					method:'POST',
+					data:{image:base64data},
+					success:function(data)
+					{
+						$modal.modal('hide');
+						$('#uploaded_image').attr('src', data);
+					}
+				});
+			};
+		});
+	});
+	
+});
+</script>
+   </script>
+</html>

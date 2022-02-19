@@ -118,7 +118,7 @@ class UserType extends AbstractType
                 'label' => "Image",
                 'required' => false,
                 'mapped' => false,
-                'attr' => ['class'=>'form-control']
+                'attr' => ['class'=>"form-control profile-image-input"]
             ])
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'save btn btn-primary', 'style'=>'width: 200px'],

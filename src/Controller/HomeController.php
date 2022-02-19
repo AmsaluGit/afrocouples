@@ -171,7 +171,7 @@ class HomeController extends AbstractController
     /**
      *  @Route("/profile", name="profile", methods={"GET", "POST"})
      */
-    public function profile(Request $request)
+    public function profile(SluggerInterface $slugger, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($this->getUser()->getId());
@@ -180,6 +180,27 @@ class HomeController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            $gly = new Gallery();
+            $file = $form['profileImage']->getData();
+            if($file){
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $user->setProfileImage($newFilename);
+            }
+            
             $this->getDoctrine()->getManager()->flush();
         }
 

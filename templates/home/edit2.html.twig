@@ -85,35 +85,35 @@
 			<div class="container pt-3 pb-2">
 
                 <div class="row pt-2">
-                    <div class="col-lg-3 mt-4 mt-lg-0">
-
+                    <div class="col-lg-4 mt-4 mt-lg-0">
+                        {{form_start(form)}}
                         <div class="d-flex justify-content-center mb-4">
                             <div class="profile-image-outer-container">
                                 <div class="profile-image-inner-container bg-color-primary">
-                                    <img src="img/avatars/avatar.jpg">
+                                    <img src="/uploads/{{user.profileImage}}">
                                     <span class="profile-image-button bg-color-dark">
 											<i class="fas fa-camera text-light"></i>
 										</span>
                                 </div>
-                                <input type="file" id="file" class="form-control profile-image-input">
+                                {{form_widget(form.profileImage)}}
+                                <div class="form-error">
+                                    {{ form_errors(form.profileImage) }}
+                                </div> 
+                                {# <input type="file" id="file" class="form-control profile-image-input"> #}
                             </div>
                         </div>
 
                         <aside class="sidebar mt-2" id="sidebar">
                             <ul class="nav nav-list flex-column mb-5">
                                 <li class="nav-item"><a class="nav-link text-3 text-dark active" href="#">My Profile</a></li>
-                                <li class="nav-item"><a class="nav-link text-3" href="#">User Preferences</a></li>
-                                <li class="nav-item"><a class="nav-link text-3" href="#">Billing</a></li>
-                                <li class="nav-item"><a class="nav-link text-3" href="#">Invoices</a></li>
                             </ul>
                         </aside>
 
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
 
-                        <form role="form" class="needs-validation" novalidate="novalidate">
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.fname)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 ">{{form_label(form.fname)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.fname)}}
                                     <div class="form-error">
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.mname)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 ">{{form_label(form.mname)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.mname)}}
                                     <div class="form-error">
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.mname)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.lname)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.lname)}}
                                     <div class="form-error">
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.sex)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.sex)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.sex)}}
                                     <div class="form-error">
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.email)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.email)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.email)}}
                                     <div class="form-error">
@@ -194,7 +194,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.phone)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.phone)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.phone)}}
                                     <div class="form-error">
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.city)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.city)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.city)}}
                                     <div class="form-error">
@@ -212,7 +212,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.nationality)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.nationality)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.nationality)}}
                                     <div class="form-error">
@@ -221,7 +221,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.maritalStatus)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.maritalStatus)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.maritalStatus)}}
                                     <div class="form-error">
@@ -230,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.education)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.education)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.education)}}
                                     <div class="form-error">
@@ -239,7 +239,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.occupation)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2">{{form_label(form.occupation)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.occupation)}}
                                     <div class="form-error">
@@ -248,7 +248,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.quote)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 ">{{form_label(form.quote)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.quote)}}
                                     <div class="form-error">
@@ -257,7 +257,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.message)}}</label>
+                                <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 ">{{form_label(form.message)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.message)}}
                                     <div class="form-error">
@@ -265,7 +265,7 @@
                                     </div>                                
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {# <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label line-height-9 pt-2 text-2 required">{{form_label(form.profileImage)}}</label>
                                 <div class="col-lg-9">
                                     {{form_widget(form.profileImage)}}
@@ -273,16 +273,14 @@
                                         {{ form_errors(form.profileImage) }}
                                     </div>                                
                                 </div>
-                            </div>
+                            </div> #}
+                            <br>
                             <div class="form-group row">
-                                <div class="form-group col-lg-9">
-
-                                </div>
-                                <div class="form-group col-lg-3">
-                                    <input type="submit" value="Save" class="btn btn-primary btn-modern float-end" data-loading-text="Loading...">
+                                <div class="form-group col-lg-12">
+                                    <center>{{form_widget(form.save)}}</center>
                                 </div>
                             </div>
-                        </form>
+                        {{form_end(form)}}
 
                     </div>
                 </div>

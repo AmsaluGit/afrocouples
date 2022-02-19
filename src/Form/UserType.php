@@ -117,6 +117,7 @@ class UserType extends AbstractType
             ->add('profileImage', FileType::class,[
                 'label' => "Image",
                 'required' => false,
+                'mapped' => false,
                 'attr' => ['class'=>'form-control']
             ])
             ->add('save', SubmitType::class, [

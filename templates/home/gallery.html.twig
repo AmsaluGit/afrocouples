@@ -34,14 +34,12 @@
 		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
 		<link rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/vendor/owl-carousel/owl-carousel.min.css')}}">
-		<link
-		rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme-blog.css')}}">
 		{# <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
-		<script src="https://unpkg.com/dropzone"></script>
-		<script src="https://unpkg.com/cropperjs"></script> #}
+								<script src="https://unpkg.com/dropzone"></script>
+								<script src="https://unpkg.com/cropperjs"></script> #}
 		<!-- Skin CSS -->
-		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
-		<style>
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}"> <style>
 			.switch-primary {
 				padding: 6px 10px;
 			}
@@ -105,29 +103,29 @@
 			.image-uploader {
 				clear: both;
 				display: none;
-			} 
+			}
 
 			/* .image-list img {
 				width: 23%;
 				margin: 5px;
 			} */
 
-			#image-uploader-hide i{
-				padding:10px 15px;
+			#image-uploader-hide i {
+				padding: 10px 15px;
 				background: white;
-				color: blue;
+				color: #1884ed;
 				cursor: pointer;
-				border-radius: 40px;   
+				border-radius: 40px;
 			}
 
-			.card-header{
+			.card-header {
 				padding: 5px 20px;
 			}
 
-            .img-fluid {
-                max-width: 100%;
-                height: auto;
-            }
+			.img-fluid {
+				max-width: 100%;
+				height: auto;
+			}
 
 			/* @media(min-width: 1501px) {
 				.image-list img {
@@ -162,175 +160,94 @@
 		{% include "home/navbar.html.twig" %}
 		<div class="body">
 			<div class="container-fluid">
-				<div class="row">
-					{# <div class="col-md-3">
-						<div class=""><img src="{{ app.user.profileImage }}" alt="sdf" width="100%"></div>
-						
-					</div> #}
-					<div class="col-md-12">
-							<div class"row">
-								<div class="col-md-12 main-area">
-									<div class="image-list">
-										<div class="card">
-											<div class="card-header">
-												<button class="btn btn-primary float-end" id="image-uploader-show"><i class="fas fa-plus"></i> Add Image</button>
-												<span  id="image-uploader-hide" style="display:none"><i class="fas fa-times fa-2x float-end"></i></span>
-												<div class="image-uploader">
-													{{form_start(form)}}
-													<div class="container">
-														<div class="row">
-															<div class="col-md-6 col-xs-12">
-																{{ form_row(form.photos,{'label':'Photo' })}}
-																<div class="help-block text-danger">{{form_errors(form.photos)}}</div>
-															</div>
-														</div>
-														<br>
-														<div class="row">
-															<div class="col-md-4 col-xs-12">
-																{{ form_row(form.Upload,{'label':'Upload' })}}
-															</div>
+				<div
+					class="row">
+					<div class="col-md-3">
+					<div class="">
+						<img src="{{ app.user.profileImage }}" alt="sdf" width="100%"></div>
+					</div>
+					<div class="col-md-9">
+						<div class"row">
+							<div class="col-md-12 main-area">
+								<div class="image-list">
+									<div class="card">
+										<div class="card-header">
+											<button class="btn btn-primary float-end" id="image-uploader-show">
+												<i class="fas fa-plus"></i>
+												Add Image</button>
+											<span id="image-uploader-hide" style="display:none">
+												<i class="fas fa-times fa-2x float-end"></i>
+											</span>
+											<div class="image-uploader">
+												{{form_start(form)}}
+												<div class="container">
+													<div class="row">
+														<div class="col-md-6 col-xs-12">
+															{{ form_row(form.photos,{'label':'Photo' })}}
+															<div class="help-block text-danger">{{form_errors(form.photos)}}</div>
 														</div>
 													</div>
-													{{form_end(form)}}
+													<br>
+													<div class="row">
+														<div class="col-md-4 col-xs-12">
+															{{ form_row(form.Upload,{'label':'Upload' })}}
+														</div>
+													</div>
 												</div>
+												{{form_end(form)}}
 											</div>
-											<div class="card-body" style="wd">
-                                            <div class="row portfolio-list sort-destination" data-sort-id="portfolio" data-filter="*" style="position: relative; height: 296px;">
+										</div>
+										<div class="card-body" style="wd">
+											<div class="row portfolio-list sort-destination" data-sort-id="portfolio" data-filter="*" style="">
 
 												{% for image in gallery %}
-<div class="col-12 col-sm-6 col-lg-3 isotope-item websites">
-										<div class="portfolio-item">
-											<a href="portfolio-single-wide-slider.html">
-												<span class="thumb-info thumb-info-lighten border-radius-0">
-													<span class="thumb-info-wrapper border-radius-0">
-														<img src="/uploads/{{image.photo}}" class="img-fluid border-radius-0" alt="">
-														<span class="thumb-info-title">
-															<span class="thumb-info-inner">Presentation</span>
-															<span class="thumb-info-type">Website</span>
-														</span>
-														<span class="thumb-info-action">
-															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
-														</span>
-													</span>
-												</span>
-											</a>
-										</div>
-									</div>												{% endfor %}
-                                                    <div class="sort-destination-loader mt-4 pt-2 sort-destination-loader-loaded">
-									<div class="col-12 col-sm-6 col-lg-3 isotope-item websites" style="position: absolute; left: 0px; top: 0px;">
-										<div class="portfolio-item">
-											<a href="portfolio-single-wide-slider.html">
-												<span class="thumb-info thumb-info-lighten border-radius-0">
-													<span class="thumb-info-wrapper border-radius-0">
-														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
-														<span class="thumb-info-title">
-															<span class="thumb-info-inner">Presentation</span>
-															<span class="thumb-info-type">Website</span>
-														</span>
-														<span class="thumb-info-action">
-															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
-														</span>
-													</span>
-												</span>
-											</a>
-										</div>
-									</div>
-									<div class="col-12 col-sm-6 col-lg-3 isotope-item medias" style="position: absolute; left: 285px; top: 0px;">
-										<div class="portfolio-item">
-											<a href="portfolio-single-wide-slider.html">
-												<span class="thumb-info thumb-info-lighten border-radius-0">
-													<span class="thumb-info-wrapper border-radius-0">
-														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
-														<span class="thumb-info-title">
-															<span class="thumb-info-inner">Porto Watch</span>
-															<span class="thumb-info-type">Media</span>
-														</span>
-														<span class="thumb-info-action">
-															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
-														</span>
-													</span>
-												</span>
-											</a>
-										</div>
-									</div>
-									<div class="col-12 col-sm-6 col-lg-3 isotope-item logos" style="position: absolute; left: 570px; top: 0px;">
-										<div class="portfolio-item">
-											<a href="portfolio-single-wide-slider.html">
-												<span class="thumb-info thumb-info-lighten border-radius-0">
-													<span class="thumb-info-wrapper border-radius-0">
-														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
-														<span class="thumb-info-title">
-															<span class="thumb-info-inner">Identity</span>
-															<span class="thumb-info-type">Logo</span>
-														</span>
-														<span class="thumb-info-action">
-															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
-														</span>
-													</span>
-												</span>
-											</a>
-										</div>
-									</div>
-									<div class="col-12 col-sm-6 col-lg-3 isotope-item brands" style="position: absolute; left: 855px; top: 0px;">
-										<div class="portfolio-item">
-											<a href="portfolio-single-wide-slider.html">
-												<span class="thumb-info thumb-info-lighten border-radius-0">
-													<span class="thumb-info-wrapper border-radius-0">
-														<img src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" class="img-fluid border-radius-0" alt="">
-														<span class="thumb-info-title">
-															<span class="thumb-info-inner">Watch Mockup</span>
-															<span class="thumb-info-type">Brand</span>
-														</span>
-														<span class="thumb-info-action">
-															<span class="thumb-info-action-icon bg-dark opacity-8"><i class="fas fa-plus"></i></span>
-														</span>
-													</span>
-												</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							<div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>    
+													<div class="col-12 col-sm-6 col-lg-3 isotope-item websites">
+														<div class="portfolio-item">
+															<span class="thumb-info thumb-info-lighten border-radius-0">
+																<span class="thumb-info-wrapper border-radius-0">
+																	<img src="/uploads/{{image.photo}}" class="img-fluid border-radius-0" alt="">
+																	<span class="thumb-info-title" st>
+																			<a data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%; padding: 0 21px;">
+																				<i class="fas fa-ellipsis-v"></i>
+																			</a>
+																			<ul class="dropdown-menu">
+																				<li>
+																					<a class="dropdown-item" href="#">Profile Picture</a>
+																				</li>
+																				<li>
+																					<form method="post" action="{{ path('gallery_delete', {'id': image.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+																						<input type="hidden" name="_method" value="DELETE">
+																						<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+																						<button class="dropdown-item">Delete</button>
+																					</form>
+																				</li>
+																			</ul>
+																	</span>
+
+																</span>
+															</span>
+														</div>
+													</div>
+												{% endfor %}
+
+											</div>
+											<div class="bounce-loader">
+												<div class="bounce1"></div>
+												<div class="bounce2"></div>
+												<div class="bounce3"></div>
 											</div>
 										</div>
 									</div>
-									
 								</div>
 							</div>
+
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-			  	<div class="modal-dialog modal-lg" role="document">
-			    	<div class="modal-content">
-			      		<div class="modal-header">
-			        		<h5 class="modal-title">Crop Image Before Upload</h5>
-			        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          			<span aria-hidden="true">×</span>
-			        		</button>
-			      		</div>
-			      		<div class="modal-body">
-			        		<div class="img-container">
-			            		<div class="row">
-			                		<div class="col-md-8">
-			                    		<img src="" id="sample_image" />
-			                		</div>
-			                		<div class="col-md-4">
-			                    		<div class="preview"></div>
-			                		</div>
-			            		</div>
-			        		</div>
-			      		</div>
-			      		<div class="modal-footer">
-			      			<button type="button" id="crop" class="btn btn-primary">Crop</button>
-			        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			      		</div>
-			    	</div>
-			  	</div>
-			</div>
 	</body>
-   <script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+	<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
    <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script> 
 	<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
 
@@ -414,5 +331,4 @@
 	
 });
 </script>
-   </script>
 </html>

@@ -183,7 +183,7 @@ class HomeController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->render("home/edit.html.twig", [
+        return $this->render("home/edit2.html.twig", [
             'user' => $user,
             'form' => $form->createView()
         ]);
@@ -192,8 +192,7 @@ class HomeController extends AbstractController
     /**
      *  @Route("/gallery", name="gallery", methods={"GET", "POST"})
      */
-    public function gallery(SluggerInterface $slugger,
-    Request $request)
+    public function gallery(SluggerInterface $slugger,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $gly = new Gallery();

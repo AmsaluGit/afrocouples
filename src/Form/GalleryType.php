@@ -18,6 +18,7 @@ class GalleryType extends AbstractType
                'multiple' => true,
                'mapped' => false,
                'attr'     => [
+                    'class' => 'form-control',
                     'accept' => 'image/*',
                     'multiple' => 'multiple',
                     'id' => 'upload_image'

@@ -16259,14 +16259,15 @@ html.gecko .sort-destination.sort-destination-margin > [class*="col-"] {
 	background: rgba(33, 37, 41, 0.8);
 	color: #FFF;
 	font-weight: 600;
-	left: 0;
+	top: 0;
+	right: 0;
 	letter-spacing: -.05em;
 	position: absolute;
 	z-index: 2;
 	max-width: 90%;
 	font-size: 17px;
-	padding: 13px 21px 2px;
-	bottom: 13%;
+	width: 44px;
+    padding: 3px 0px;
 }
 
 .thumb-info .thumb-info-type {

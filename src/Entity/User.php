@@ -43,7 +43,7 @@ class User implements UserInterface
     private $userGroup;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $fname;
 

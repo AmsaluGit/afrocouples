@@ -51,75 +51,14 @@ class UserType extends AbstractType
                     'Female' => "f",
                  ],
             ])
-            ->add('birthdate', DateType::class, [
-                'widget' => 'single_text',
-                
-                // adds a class that can be selected in JavaScript
-                'attr' => ['class' => 'form-control'],
-            ])
-           
+        
             ->add('email', EmailType::class, [
-                'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('religion', EntityType::class,[
-                'class' => Religion::class,
+            ->add('phone', null, [
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('height', NumberType::class, [
-                'label' => 'Height(in meter)',
-                'required' => false,
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('nationality', EntityType::class, [
-                'class' => Nationality::class,
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('education', EntityType::class, [
-                'class' => Education::class,
-                'required' => false,
-                'attr' => ['class'=>'form-control']
-            ])
-
-            ->add('city', EntityType::class, [
-                'class' => City::class,
-                'attr' => ['class'=>'form-control']
-            ])
-
-            ->add('occupation', EntityType::class, [
-                'class' => Occupation::class,
-                'required' => false,
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('maritalStatus', EntityType::class, [
-                'class' => MaritalStatus::class,
-                'required' => false,
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('phone', NumberType::class, [
-                'label' => "Phone Number",
-                'required' => false,
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('color' ,ChoiceType::class,[
-                'required' => false,
-                'attr'=>['class'=>'form-control'],
-                'choices'  => [
-                    'Black' => "black",
-                    'White' => "white",
-                 ],
-            ])
-            ->add('quote', null,[
-                'required' => false,
-                'label' => "Short Quote",
-                'attr' => ['class'=>'form-control']
-            ])
-            ->add('profileImage', FileType::class,[
-                'label' => "Image",
-                'required' => false,
-                'mapped' => false,
-                'attr' => ['class'=>"form-control profile-image-input"]
-            ])
+             
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'save btn btn-primary', 'style'=>'width: 200px'],
             ]);

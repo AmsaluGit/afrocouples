@@ -1,0 +1,72 @@
+{% extends 'master/base.html.twig' %}
+{# {% extends 'base.html.twig' %}
+
+{% block title %}ContactUs index{% endblock %}
+  #}
+
+{% block body %}
+    <h1>ContactUs index</h1>
+    <a href="{{ path('contact_us_new') }}" class="btn btn-primary" style="float:right;" ><span class="fa fa-plus"></span>Add new</a>
+
+
+
+{{ form_start(searchForm,{'attr': {'role':'form'}, 'method': 'GET'}) }}
+	<div class="row">
+
+					<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-8 control-label no-padding-right">{% trans %}Search{% endtrans %}</label>
+								{{ form_widget(searchForm.name  ,{'attr':{'class':'form-control'},'name':'name','value':app.request.get('name') })}}
+					
+								<div class="help-block with-errors"></div>
+							</div>
+					</div>
+
+                 <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label no-padding-right"></label>
+                        <button class="btn btn-info" style="margin-top: 17px;width:100%;">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+      </div>
+
+
+{{ form_end(searchForm) }}
+
+
+
+
+    <table class="table  table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+                <th>Email</th>
+                <th>CreatedAt</th>
+                <th style="text-align: end;">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact_u in contactuses %}
+            <tr>
+                <td>{{ contact_u.id }}</td>
+                <td>{{ contact_u.message }}</td>
+                <td>{{ contact_u.email }}</td>
+                <td>{{ contact_u.createdAt ? contact_u.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td style="text-align: end;">
+                    <a href="{{ path('contact_us_show', {'id': contact_u.id}) }}" class="btn  btn-info" ><span class="fa fa-eye"></span>show</a>
+                    <a href="{{ path('contact_us_edit', {'id': contact_u.id}) }}" class="btn  btn-warning"><span class="fa fa-pencil"></span>edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="float-right">{{ knp_pagination_render(contactuses) }}</div>
+    
+{% endblock %}

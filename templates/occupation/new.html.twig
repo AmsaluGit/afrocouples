@@ -1,0 +1,13 @@
+{% extends 'master/base.html.twig' %}
+{# {% extends 'base.html.twig' %}
+
+{% block title %}New Occupation{% endblock %}
+  #}
+
+{% block body %}
+    <h1>Create new Occupation</h1>
+
+    {{ include('occupation/_form.html.twig') }}
+<br>
+    <a href="{{ path('occupation_index') }}" class="btn  btn-info" >back to list</a>
+{% endblock %}

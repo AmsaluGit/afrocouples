@@ -47,4 +47,17 @@ class NationalityRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function filterNationality($name)
+    {
+       
+        return  $this->createQueryBuilder('u')
+            ->Where('u.name LIKE :name')
+            ->setParameter('name', '%'.$name.'%')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

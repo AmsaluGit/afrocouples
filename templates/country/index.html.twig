@@ -1,0 +1,68 @@
+{% extends 'master/base.html.twig' %}
+
+{% block title %}Country index{% endblock %}
+{% block stylesheets %}
+ 
+{% endblock %}
+{% block body %}
+   
+
+<h3>Country index</h3>
+<a href="{{ path('country_new') }}" class="btn btn-primary" style="float:right;"><span class="fa fa-plus"></span> Add New</a>
+    
+
+{{ form_start(searchForm,{'attr': {'role':'form'}, 'method': 'GET'}) }}
+	<div class="row">
+
+					<div class="col-sm-8">
+							<div class="form-group">
+								<label class="col-sm-8 control-label no-padding-right">{% trans %}Search{% endtrans %}</label>
+								{{ form_widget(searchForm.name  ,{'attr':{'class':'form-control','name':'amsalu2'},'name':'amsalu','value':app.request.get('name') })}}
+								{# {# <input type="text" class="form-control" name="name"/>  #}
+								<div class="help-block with-errors"></div>
+							</div>
+					</div>
+
+                 <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="col-sm-12 control-label no-padding-right"></label>
+                        <button class="btn btn-info" style="margin-top: 17px;width:100%;">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+      </div>
+
+
+{{ form_end(searchForm) }}
+
+
+                        
+
+    <table class="table table-hover table-responsive" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th style="text-align: end;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for country in countries %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ country.name }}</td>
+                <td style="text-align: end;">
+                    <a href="{{ path('country_show', {'id': country.id}) }}" class="btn  btn-info"><span class="fa fa-eye"></span>show</a>
+                    <a href="{{ path('country_edit', {'id': country.id}) }}" class="btn  btn-warning"><span class="fa fa-pencil"></span>edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<div class="float-right">{{ knp_pagination_render(countries) }}</div>
+{% endblock %}

@@ -50,6 +50,13 @@
 			.dropdown-toggle i{
             display:none;
          }
+
+         .profile-image-outer-container .profile-image-inner-container img {
+            height: 250px;
+            width: 250px;
+            border-radius: 50%;
+            border: 5px solid white;
+        }
          
 			.header-body {
 				background: #1a84ed !important;
@@ -91,23 +98,17 @@
                             <div class="profile-image-outer-container">
                                 <div class="profile-image-inner-container bg-color-primary">
                                     <img src="/uploads/{{user.profileImage}}">
-                                    <span class="profile-image-button bg-color-dark">
-											<i class="fas fa-camera text-light"></i>
-										</span>
+                                    {# <span class="profile-image-button bg-color-dark"> #}
+											{# <i class="fas fa-camera text-light"></i> #}
+										{# </span> #}
                                 </div>
-                                {{form_widget(form.profileImage)}}
+                                {# {{form_widget(form.profileImage)}} #}
                                 <div class="form-error">
-                                    {{ form_errors(form.profileImage) }}
+                                    {# {{ form_errors(form.profileImage) }} #}
                                 </div> 
                                 {# <input type="file" id="file" class="form-control profile-image-input"> #}
                             </div>
                         </div>
-
-                        <aside class="sidebar mt-2" id="sidebar">
-                            <ul class="nav nav-list flex-column mb-5">
-                                <li class="nav-item"><a class="nav-link text-3 text-dark active" href="#">My Profile</a></li>
-                            </ul>
-                        </aside>
 
                     </div>
                     <div class="col-lg-8">

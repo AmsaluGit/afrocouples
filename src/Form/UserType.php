@@ -58,7 +58,37 @@ class UserType extends AbstractType
             ->add('phone', null, [
                 'attr' => ['class'=>'form-control']
             ])
-             
+
+            ->add('maritalStatus', EntityType::class, [
+                'class' => MaritalStatus::class,
+                'required' => false,
+                'attr' => ['class'=>'form-control']
+            ])
+            ->add('phone', NumberType::class, [
+                'label' => "Phone Number",
+                'required' => false,
+                'attr' => ['class'=>'form-control']
+            ])
+            ->add('color' ,ChoiceType::class,[
+                'required' => false,
+                'attr'=>['class'=>'form-control'],
+                'choices'  => [
+                    'Black' => "black",
+                    'White' => "white",
+                 ],
+            ])
+            ->add('quote', null,[
+                'required' => false,
+                'label' => "Short Quote",
+                'attr' => ['class'=>'form-control']
+            ])
+            // ->add('profileImage', FileType::class,[
+            //     'label' => "Image",
+            //     'required' => false,
+            //     'mapped' => false,
+            //     'attr' => ['class'=>"form-control profile-image-input"]
+            // ])
+          
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'save btn btn-primary', 'style'=>'width: 200px'],
             ]);

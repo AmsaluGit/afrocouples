@@ -24,9 +24,6 @@ class GalleryType extends AbstractType
                     'id' => 'upload_image'
                 ]
             ])
-            ->add('Upload', SubmitType::class, [
-               'attr' => ['class' => 'btn btn-primary']
-            ])
         ;
     }
 

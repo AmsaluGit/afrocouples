@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Gallery;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,6 +91,24 @@ class UserController extends AbstractController
             'searchForm' => $searchForm->createView(),
             'edit'=>false
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="update_profile")
+    */
+    public function changeProfile(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $gallery = $em->getRepository(Gallery::class)->findOneBy(array('photo'=>$id, 'user'=>$this->getUser()));
+        if($gallery){
+            $user = $this->getUser();
+            $user->setProfileImage($gallery->getPhoto());
+            $em->persist($user);
+            $em->flush();          
+        }
+        
+        return $this->redirectToRoute("gallery");
     }
 
     /**

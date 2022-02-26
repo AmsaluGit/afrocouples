@@ -181,7 +181,7 @@ class HomeController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $gly = new Gallery();
-            $file = $form['profileImage']->getData();
+            /*$file = $form['profileImage']->getData();
             if($file){
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -199,7 +199,7 @@ class HomeController extends AbstractController
                 }
 
                 $user->setProfileImage($newFilename);
-            }
+            }*/
             
             $this->getDoctrine()->getManager()->flush();
         }
@@ -222,7 +222,7 @@ class HomeController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $uploads_directory  = $this->getParameter('uploads_directory');
+            $uploads_directory  = $this->getParameter('uploads_directory')."/".$this->getUser()->getUsername();
             $files = $request->files->get('gallery')['photos'];
 
             foreach($files as $file){
@@ -235,7 +235,7 @@ class HomeController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $file->move(
-                        $this->getParameter('uploads_directory'),
+                        $uploads_directory,
                         $newFilename
                     );
                 } catch (FileException $e) {

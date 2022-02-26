@@ -51,7 +51,15 @@ class GalleryController extends AbstractController
             $image_array_2 = explode(",", $image_array_1[1]);
             $data = base64_decode($image_array_2[1]);
             $image_name = time() . '.png';
-            $image_path = $this->getParameter('uploads_directory').$image_name;
+            //$image_path = $this->getParameter('uploads_directory').$image_name;
+             
+                $personnel_folder = $this->getParameter('uploads_directory').$this->getUser()->getUsername();
+            if (!file_exists($personnel_folder)) {
+                mkdir($personnel_folder, 0777, true);
+            }
+
+            $image_path  = $personnel_folder.'/'.$image_name;
+
             
             try{
                 file_put_contents($image_path, $data);
@@ -63,7 +71,7 @@ class GalleryController extends AbstractController
                 $em->flush();
 
                 $response["status"] = true;
-                $response["image"] = "/uploads/".$image_name;;
+                $response["image"] = $image_path;
                 $returnResponse = new JsonResponse();
                 $returnResponse->setJson(json_encode($response));
                 return $returnResponse;

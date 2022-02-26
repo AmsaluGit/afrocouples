@@ -176,7 +176,7 @@
 					class="row">
 					<div class="col-md-3">
 					<div class="">
-						<img src="/uploads/{{ app.user.profileImage }}" alt="sdf" width="100%"></div>
+						<img src="/uploads/{{app.user.username}}/{{ app.user.profileImage }}" alt="sdf" width="100%"></div>
 					</div>
 					<div class="col-md-9">
 						<div class"row">
@@ -215,7 +215,7 @@
 														<div class="portfolio-item">
 															<span class="thumb-info thumb-info-lighten border-radius-0">
 																<span class="thumb-info-wrapper border-radius-0">
-																	<img src="/uploads/{{image.photo}}" class=" border-radius-0" alt="">
+																	<img src="/uploads/{{app.user.username}}/{{image.photo}}" class=" border-radius-0" alt="">
 																	<span class="thumb-info-title" >
 																			<a data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%; padding: 0 21px;">
 																				<i class="fas fa-ellipsis-v"></i>

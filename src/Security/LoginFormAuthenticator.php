@@ -146,7 +146,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         );
 
 
-        if($role === "ROLE_USER")
+        if($role === "USER_ROLE")
          {
             return new RedirectResponse($this->urlGenerator->generate('home'));
          }

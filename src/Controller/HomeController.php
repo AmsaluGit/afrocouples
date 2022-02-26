@@ -227,9 +227,9 @@ class HomeController extends AbstractController
 
             foreach($files as $file){
                 $gly = new Gallery();
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
+                // $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
                 // Move the file to the directory where brochures are stored

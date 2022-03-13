@@ -30,7 +30,7 @@ class HomeController extends AbstractController
     public function send(): Response
     {
          //sending.. 
-        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+        $connection = new AMQPStreamConnection('localhost', 42186, 'guest', 'guest');
         $channel = $connection->channel();
         $channel->queue_declare('hello', false, false, false, false);
 
@@ -48,7 +48,7 @@ class HomeController extends AbstractController
     public function message(): Response
     {
         //receiving..
-        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+        $connection = new AMQPStreamConnection('localhost', 42186, 'guest', 'guest');
         $channel = $connection->channel();
         
         $channel->queue_declare('hello', false, false, false, false);

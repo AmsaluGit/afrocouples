@@ -186,6 +186,11 @@ class User implements UserInterface
      */
     private $city;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $uuid;
+
 
     public function __construct()
     {
@@ -738,6 +743,18 @@ class User implements UserInterface
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?string $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }

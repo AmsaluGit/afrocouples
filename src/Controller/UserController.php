@@ -38,6 +38,8 @@ class UserController extends AbstractController
         $pageSize=5;
 
         $user = new User();
+        $user->setUuid(uniqid("",true));
+        
         $searchForm = $this->createForm(userFilterType::class,$user);
         $searchForm->handleRequest($request);
         

@@ -87,8 +87,10 @@ body{margin-top:20px;}
 .border-top {
     border-top: 1px solid #dee2e6!important;
 }
-
-
+.card {
+	
+}
+ 
 
 
 
@@ -98,13 +100,13 @@ body{margin-top:20px;}
 <main class="content">
     <div class="container p-0">
 
-		<h1 class="h3 mb-3">Messages</h1>
+		{# <h1 class="h3 mb-3">Messages</h1> #}
 
 		
         
         
         
-        <div class="card">
+        <div class="card align-center">
 			<div class="row g-0">
 				{# <div class="col-12 col-lg-5 col-xl-3 border-right"> #}
 
@@ -289,9 +291,10 @@ body{margin-top:20px;}
 					<div class="flex-grow-0 py-3 px-4 border-top">
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Type your message"  id="message">
-							<button class="btn btn-primary" id="sendBtn">Send</button>
+							<button class="btn btn-success" id="sendBtn">Send</button>
 						</div>
 					</div>
+					
 
 				</div>
 			</div>
@@ -299,9 +302,13 @@ body{margin-top:20px;}
 	</div>
 </main>
 
+<div class="flex-grow-0 py-3 px-4 border-top">
+						<div class="input-group">
+ 							<a class="btn btn-primary " href="{{path('home')}}">Back to Home</a>
+						</div>
+					</div>
 
-
-  <div id="chat">
+  {# <div id="chat">
 
 </div>
 <div>
@@ -312,7 +319,7 @@ body{margin-top:20px;}
         <label for="message">Message:</label> <input type="text" id="message1">
     </div>
     <button type="button" id="sendBtn1">Send</button>
-</div> 
+</div>  #}
 
 <script type="text/javascript">
     const socket = new WebSocket("ws://localhost:3001");
@@ -323,8 +330,8 @@ body{margin-top:20px;}
     });
 
     function addMessage(name, message) {
-        const messageHTML = "<div class='message'><strong>" + name + ":</strong> " + message + "</div>";
-        document.getElementById("chat").innerHTML += messageHTML;
+        //const messageHTML = "<div class='message'><strong>" + name + ":</strong> " + message + "</div>";
+       // document.getElementById("chat").innerHTML += messageHTML;
 
 var is_left_side="chat-message-left";
 var is_right_side="chat-message-right";
@@ -351,7 +358,7 @@ var is_right_side="chat-message-right";
     document.getElementById("sendBtn").addEventListener("click", function() {
 
         const message = {
-            name: document.getElementById("name").value,
+            //name: document.getElementById("name").value,
             name: 'the CEO', // get the logged in user
             message: document.getElementById("message").value
         };

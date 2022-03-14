@@ -22,13 +22,13 @@ class PasswordChangeType extends AbstractType
             ->add('password', PasswordType::class, [
                 'mapped'=>false,
                 'label' => 'Old Password',
-                'attr'=>['class'=>'form-control mb-1', 'data-parsley-minlength'=>'8'],
+                'attr'=>['class'=>'form-control mb-1', 'data-parsley-minlength'=>'5'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 8
+                        'min' => 5
                     ])
                 ]
             ])
@@ -44,7 +44,7 @@ class PasswordChangeType extends AbstractType
                         'message' => 'Please enter a new password',
                     ]),
                     new Length([
-                        'min' => 8,
+                        'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,

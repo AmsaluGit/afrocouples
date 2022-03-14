@@ -19,55 +19,20 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
-
- 
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class HomeController extends AbstractController
 {
+ 
     /**
-     * @Route("/send", name="send")
-     */
-    public function send(): Response
-    {
-         //sending.. 
-        $connection = new AMQPStreamConnection('localhost', 42186, 'guest', 'guest');
-        $channel = $connection->channel();
-        $channel->queue_declare('hello', false, false, false, false);
-
-        $msg = new AMQPMessage('Hello World!');
-        $channel->basic_publish($msg, '', 'hello');
-
-        echo " [x] Sent 'Hello World!'\n";
-        $channel->close();
-        $connection->close();
-        return new Response("sent");
-    }
-    /**
-     * @Route("/receive", name="receive")
+     * @Route("/message", name="message")
      */
     public function message(): Response
     {
-        //receiving..
-        $connection = new AMQPStreamConnection('localhost', 42186, 'guest', 'guest');
-        $channel = $connection->channel();
-        
-        $channel->queue_declare('hello', false, false, false, false);
-        
-        echo " [*] Waiting for messages. To exit press CTRL+C\n";
-        
-        $callback = function ($msg) {
-            echo ' [x] Received ', $msg->body, "\n";
-        };
-        
-        $channel->basic_consume('hello', '', false, true, false, false, $callback);
-        
-        while ($channel->is_open()) {
-            $channel->wait();
-        }
-        
-        $channel->close();
-        $connection->close();
-        return new Response("received");
+        return $this->render('websocket/index.html.twig', [
+            'controller_name' => 'HomeController',
+            'religions' => 12
+        ]);
 
     }
     /**
@@ -277,9 +242,9 @@ class HomeController extends AbstractController
 
             foreach($files as $file){
                 $gly = new Gallery();
-                // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                // $safeFilename = $slugger->slug($originalFilename);
+                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
                 // Move the file to the directory where brochures are stored
@@ -308,10 +273,16 @@ class HomeController extends AbstractController
     }
 
     /**
-     *  @Route("/user/{id}/detail", name="user_detail", methods={"GET", "POST"})
+     *  @Route("/user/{uuid}/detail", name="user_detail", methods={"GET", "POST"})
      */
-    public function detail(User $user)
+    public function detail($uuid, UserRepository $userRepository)
     {
+        $user = $userRepository->findOneBy(['uuid'=>$uuid]);
+        if(!$user)
+        {
+            $this->addFlash("No user found with this UUID", 'danger');
+            return $this->redirectToRoute("home");
+        }
         $em = $this->getDoctrine()->getManager();
         $like = $em->getRepository(Likes::class)->findOneBy(array('likedBy'=>$this->getUser(),'liker'=>$user));
 
@@ -336,6 +307,7 @@ class HomeController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface)
     {
         $user = new User();
+        $user->setUuid(uniqid("",true));
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 

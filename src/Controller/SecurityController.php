@@ -54,6 +54,7 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $checkPass = $passwordEncoder->isPasswordValid($this->getUser(), $form['password']->getData());
             if ($checkPass) {
                 $entityManager = $this->getDoctrine()->getManager();

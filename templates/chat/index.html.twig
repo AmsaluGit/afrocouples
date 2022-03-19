@@ -408,16 +408,16 @@ hub = hub.replace("app.user.uuid", my_uuid);
 
 const eventSource = new EventSource(hub);
 var friend_uuid = "{{app.request.attributes.get('_route_params').uuid}}";
-	  
+ 	  
 eventSource.onmessage = event => {
     // Will be called every time an update is published by the server
-    //console.log(JSON.parse(event.data));
+    
  
     
     const message = JSON.parse(event.data);
  	
 
-	if (message.fromuuid == friend_uuid)
+	if (message.fromuuid == friend_uuid || message.fromuuid == my_uuid)
 	{
 		 
 		addMessage(message.name, message.message, message.direction);

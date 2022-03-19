@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Chat;
 use App\Entity\User;
+use App\Repository\ChatRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +32,7 @@ class ChatController extends AbstractController
 
          if($toUser===$fromUser )
          {
-            $this->addFlash("error","self messaging is disabled for the time being.");
+            $this->addFlash("error","self messaging is disabled for now.");
             return $this->redirectToRoute('home');
          }
 
@@ -46,12 +47,14 @@ class ChatController extends AbstractController
 
 
         //now publish the message to the reciver(s).
+        $channel = $toUser->getUuid();
            $update = new Update (
-             $toUser->getUuid(),
+            $channel,
              json_encode([
                  'message' => $message,
                  'name' => $fromUser->getFname(),
                  'direction' => 'left',
+                 'fromuuid' => $fromUser->getUuid(),
             ]),
              // true // private
          );
@@ -69,17 +72,21 @@ class ChatController extends AbstractController
      /**
      * @Route("/message/{uuid}", name="message")
      */
-    public function message($uuid, UserRepository $userRepository)
+    public function message($uuid, UserRepository $userRepository, ChatRepository $chatRepository)
     {
 
-        $user = $userRepository->findOneBy(['uuid' => $uuid]);
-        if(!$user)
+        $currentUser = $this->getUser();
+        $friend = $userRepository->findOneBy(['uuid' => $uuid]);
+        $chats = $chatRepository->findChatHistory($currentUser, $friend);
+ 
+        if(!$currentUser)
         {
-dd("user not found");
+            dd("user not found");
         }
 
-        return $this->render('websocket/index.html.twig', [
-            'user' => $user,
+        return $this->render('chat/index.html.twig', [
+            'user' => $friend,
+            'chats'=> $chats,
         ]);
     }
 

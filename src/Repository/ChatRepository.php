@@ -36,15 +36,23 @@ class ChatRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Chat
+   
+    public function findChatHistory($user1, $user2)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
+        $query =  $this->createQueryBuilder('c')
+            ->andWhere('c.mfrom = :mfrom1 and c.mto = :mto1 ')
+            ->orWhere('c.mfrom = :mfrom2 and c.mto = :mto2 ')
+            ->setParameter('mfrom1', $user1)
+            ->setParameter('mto1', $user2)
+            ->setParameter('mfrom2', $user2)
+            ->setParameter('mto2', $user1)
+            ->orderBy('c.createdAt', 'ASC')
+            //->setMaxResults(10)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
+ 
+        return $query;
     }
-    */
+   
 }

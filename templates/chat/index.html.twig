@@ -216,7 +216,29 @@ body{margin-top:20px;}
 					<div class="position-relative">
 						<div class="chat-messages p-4" id="chatbox">
 
-							<div class="chat-message-right pb-4">
+
+				{% for chat in chats %}
+
+				{% set dirction = "chat-message-left" %}
+
+				{% if app.user.id == chat.mfrom.id %}
+
+				{% set dirction = "chat-message-right" %}
+
+				{% endif %}
+							<div class="{{dirction}} pb-4">
+								<div>
+									<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+									<div class="text-muted small text-nowrap mt-2">2:33 am</div>
+								</div>
+								<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+									<div class="font-weight-bold mb-1">{{ chat.mfrom.fname }}</div>
+									{{chat.message}}
+								</div>
+							</div>
+
+				{% endfor %}
+							{# <div class="chat-message-right pb-4">
 								<div>
 									<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
 									<div class="text-muted small text-nowrap mt-2">2:33 am</div>
@@ -283,7 +305,7 @@ body{margin-top:20px;}
 									<div class="font-weight-bold mb-1">Sharon Lessman</div>
 									Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
 								</div>
-							</div>
+							</div> #}
 
 						</div>
 					</div>
@@ -329,30 +351,35 @@ body{margin-top:20px;}
 
        $("#chatbox").append(msg);
 
-//scroll animation
+		//scroll animation
 	 $('#chatbox').animate({scrollTop: $('#chatbox').prop("scrollHeight")}, 500);
 
 
 
     }
 
-
  
     document.getElementById("sendBtn").addEventListener("click", function() {
 
+	if(document.getElementById("message").value == '')
+	{
+		alert("Please enter your message.");
+		return 0;
+	}
 		//cook the message and send it.
         const message = {
-            name: "{{ user.fname }}", // get the logged in user
+            name: "{{ app.user.fname }}", // get the logged in user
             message: document.getElementById("message").value,
             direction: "right"
         };
        
         addMessage(message.name, message.message, message.direction);
 
+		$("#message").val('');
+
 		var uuid = "{{app.request.attributes.get('_route_params').uuid}}";
 		var url = "{{path('chat',{uuid:'temp' })}}" ;
 		url = url.replace("temp", uuid);
-
 
 		 
 		$.ajax(
@@ -363,7 +390,7 @@ body{margin-top:20px;}
 			}
 		).success(function(data){
 
-console.log(data);
+				//console.log(data);
 		});
        
     });
@@ -375,18 +402,27 @@ console.log(data);
 
 
 <script>
-var username = "{{ app.user.uuid }}";
+var my_uuid = "{{ app.user.uuid }}";
 var hub = "{{ mercure('app.user.uuid')|escape('js') }}";
-hub = hub.replace("app.user.uuid", username);
+hub = hub.replace("app.user.uuid", my_uuid);
 
 const eventSource = new EventSource(hub);
-
+var friend_uuid = "{{app.request.attributes.get('_route_params').uuid}}";
+	  
 eventSource.onmessage = event => {
     // Will be called every time an update is published by the server
     //console.log(JSON.parse(event.data));
+ 
     
     const message = JSON.parse(event.data);
-    addMessage(message.name, message.message, message.direction);
+ 	
+
+	if (message.fromuuid == friend_uuid)
+	{
+		 
+		addMessage(message.name, message.message, message.direction);
+	}
+    
 	  
 	
 

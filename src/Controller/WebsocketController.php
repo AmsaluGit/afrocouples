@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WebsocketController extends AbstractController
 {
     /**
-     * @Route("/message/{uuid}", name="message")
+     * @Route("/messageolder/{uuid}/7777", name="messagesolder")
      */
     public function messages($uuid, UserRepository $userRepository)
     {

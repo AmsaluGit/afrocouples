@@ -134,6 +134,7 @@
 	</head>
 	<body data-plugin-page-transition>
 
+{# <div {{ turbo_stream_listen('product_views') }}></div> #}
 		<div class="body">
 			{% include "home/navbar.html.twig" %}
 			<div role="main" class="main">
@@ -358,7 +359,7 @@
 											<!-- Card-->
 											<div class="card shadow-sm border-0 rounded">
 												<div class="card-body p-0">
-													<a href="{{path('user_detail', { uuid: user.uuid})}}">
+													<a href="{{ path('user_detail', { uuid: user.uuid}) }}">
 														<img src="{{ user.profileImage }}" alt="" class="w-100 card-img-top">
 													</a>
 													<div class="p-2">

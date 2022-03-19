@@ -192,7 +192,11 @@
 										{% if app.user %}
 											<div class="icons-list">
 												<p>
-													<a href="{{path('message',{uuid: user.uuid })}}"> <img src="{{asset('assets/icons/email.png')}}" alt="message-icon"> </a>
+									<a href="{{ path('message', { uuid: user.uuid}) }}">
+
+													{# <a href="{{ path('message',{uuid: user.uuid }) }}"> #}
+													
+													 <img src="{{asset('assets/icons/email.png')}}" alt="message-icon"> </a>
 												</p>
 												{% if like %}
 													<p id="like" data-label="{{user.idNumber}}">
@@ -414,5 +418,12 @@
                 
 				});
 	      </script>
+
+
+		 
+
+
+
+
 		</body>
 	</html>

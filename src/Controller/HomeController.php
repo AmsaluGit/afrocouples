@@ -20,26 +20,67 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Mercure\Authorization;
+use Symfony\Component\Mercure\Discovery;
+use Symfony\Component\Mercure\HubInterface;
+use Symfony\Component\Mercure\Update;
 
 class HomeController extends AbstractController
 {
  
+   
     /**
-     * @Route("/message", name="message")
+     * @Route("/messages", name="messages")
      */
-    public function message(): Response
+    public function messagePublisher(HubInterface $mercurHub, UserRepository $userRepository): Response
     {
-        return $this->render('websocket/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'religions' => 12
-        ]);
+       //send message, or publish.
+       /* $update  = new Update(
+            'http://localhost/country/1/edit',
+            json_encode(['status' => 'OutOfStock'])// you can make html here.
+        );
+        $mercurHub->publish($update);
+*/
+        $toUser = $userRepository->find(3); //solomon
+        $update = new Update(
+            $toUser->getUuid(),
+            json_encode(['status' => 'OutOfStock']),
+            // true // private
+        );
+
+        // Publisher's JWT must contain this topic, a URI template it matches or * in mercure.publish or you'll get a 401
+        // Subscriber's JWT must contain this topic, a URI template it matches or * in mercure.subscribe to receive the update
+        $mercurHub->publish($update);
+
+        return new Response('private update published!');
 
     }
+
+     /**
+     * @Route("/tempo", name="tempo")
+     */
+    public function temp(): Response
+    {
+        /**
+         * this is for training server deployment preparation.
+         */
+        return $this->render('home/delete.html.twig', [
+            
+        ]);
+
+
+    }
+
+ 
+
+
+
     /**
      * @Route("/", name="home")
      */
     public function index(): Response
     {
+        
         $em = $this->getDoctrine()->getManager();
         $religion = $em->getRepository(Religion::class)->findAll();
         $query = $em->createQuery(

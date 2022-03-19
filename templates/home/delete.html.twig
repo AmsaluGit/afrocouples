@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+ {% for i in 26..35 %}
+  CREATE DATABASE site{{i}}db;<br>
+CREATE USER 'site{{i}}user'@'localhost' IDENTIFIED BY 'S{{i}}te6730.@';<br>
+GRANT ALL PRIVILEGES ON site{{i}}db.* TO 'site{{i}}user'@'localhost';<br><br>
+{% endfor %}
+
+ {% for i in 1..35 %}
+&lt;VirtualHost *:{{ 50000 + i}}&gt;<br>
+        &nbsp; &nbsp; ServerAdmin webmaster@localhost <br>
+        &nbsp; &nbsp; DocumentRoot /var/www/training/site{{i}} <br>
+       &nbsp; &nbsp; &lt;Directory "/var/www/training/site{{i}}"&gt; <br>
+         &nbsp; &nbsp;  Options FollowSymLinks <br>
+        &nbsp; &nbsp; AllowOverride All <br>
+        &nbsp; &nbsp; Order allow,deny <br>
+       &nbsp; &nbsp;  Allow from all <br>
+        &nbsp; &nbsp; FallbackResource /index.php <br>
+      &nbsp; &nbsp; {{'&lt;/Directory&gt;'}} <br>
+       &nbsp; &nbsp;  {{'ErrorLog ${APACHE_LOG_DIR}/'}}site{{i}}_error.log  <br>
+       &nbsp; &nbsp;  {{'CustomLog ${APACHE_LOG_DIR}/'}}site{{i}}_acces.log combined <br>
+&lt;/VirtualHost> <br><br>
+{% endfor %}
+
+
+</html>
+
+

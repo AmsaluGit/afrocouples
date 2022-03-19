@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello WebsocketController!{% endblock %}
+{% block title %}Hello Controller!{% endblock %}
 
 {% block body %}
 <style>
@@ -55,8 +55,8 @@ body{margin-top:20px;}
 .chat-messages {
     display: flex;
     flex-direction: column;
-    max-height: 800px;
-    overflow-y: scroll
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 .chat-message-left,
@@ -308,67 +308,100 @@ body{margin-top:20px;}
 						</div>
 					</div>
 
-  {# <div id="chat">
-
-</div>
-<div>
-    <div class="form-group">
-        <label for="name">Name:</label> <input type="text" id="name">
-    </div>
-    <div class="form-group">
-        <label for="message">Message:</label> <input type="text" id="message1">
-    </div>
-    <button type="button" id="sendBtn1">Send</button>
-</div>  #}
+ 
 
 <script type="text/javascript">
-    const socket = new WebSocket("ws://localhost:3001");
-   // const socket = new WebSocket("ws://localhost:80/message");
+   
 
-    socket.addEventListener("open", function() {
-        console.log("CONNECTED");
-    });
+    function addMessage(name, message, direction) {
+      
+	var is_left_side="chat-message-left";
+	var is_right_side="chat-message-right";
 
-    function addMessage(name, message) {
-        //const messageHTML = "<div class='message'><strong>" + name + ":</strong> " + message + "</div>";
-       // document.getElementById("chat").innerHTML += messageHTML;
-
-var is_left_side="chat-message-left";
-var is_right_side="chat-message-right";
-
-        const msg = '<div class="'+is_right_side+' mb-4"> <div> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"><div class="text-muted small text-nowrap mt-2">2:35 am</div></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">You</div>'+message+'</div></div>';
+	var final_class = is_left_side;
+	if(direction=="right")
+	{
+		final_class = is_right_side;
+	}
+  
+ 
+        const msg = '<div class="'+final_class+' mb-4"> <div> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"><div class="text-muted small text-nowrap mt-2">2:35 am</div></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">'+ name +'</div>'+message+'</div></div>';
 
        $("#chatbox").append(msg);
+
+//scroll animation
+	 $('#chatbox').animate({scrollTop: $('#chatbox').prop("scrollHeight")}, 500);
+
+
+
     }
 
-    socket.addEventListener("message", function(e) {
-        console.log(e.data);
-        try
-        {
-            const message = JSON.parse(e.data);
-            addMessage(message.name, message.message);
-        }
-        catch(e)
-        {
-            // Catch any errors
-        }
-    });
 
-
+ 
     document.getElementById("sendBtn").addEventListener("click", function() {
 
+		//cook the message and send it.
         const message = {
-            //name: document.getElementById("name").value,
-            name: 'the CEO', // get the logged in user
-            message: document.getElementById("message").value
+            name: "{{ user.fname }}", // get the logged in user
+            message: document.getElementById("message").value,
+            direction: "right"
         };
-        socket.send(JSON.stringify(message));
-        addMessage(message.name, message.message);
-    });
+       
+        addMessage(message.name, message.message, message.direction);
 
-    
+		var uuid = "{{app.request.attributes.get('_route_params').uuid}}";
+		var url = "{{path('chat',{uuid:'temp' })}}" ;
+		url = url.replace("temp", uuid);
+
+
+		 
+		$.ajax(
+			{
+				method:"POST",
+				data: message,
+				url:url
+			}
+		).success(function(data){
+
+console.log(data);
+		});
+       
+    });
+  
+  
 </script>
+
+
+
+
+<script>
+var username = "{{ app.user.uuid }}";
+var hub = "{{ mercure('app.user.uuid')|escape('js') }}";
+hub = hub.replace("app.user.uuid", username);
+
+const eventSource = new EventSource(hub);
+
+eventSource.onmessage = event => {
+    // Will be called every time an update is published by the server
+    //console.log(JSON.parse(event.data));
+    
+    const message = JSON.parse(event.data);
+    addMessage(message.name, message.message, message.direction);
+	  
+	
+
+}
+
+</script>
+
+
+
+
+
   <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+
+
 {% endblock %}

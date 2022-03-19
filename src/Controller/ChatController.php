@@ -24,6 +24,7 @@ class ChatController extends AbstractController
     public function messagePublisher($uuid, HubInterface $mercurHub, UserRepository $userRepository, Request $request)
     {
 
+
         $em = $this->getDoctrine()->getManager();
 
          $message = $request->request->get('message');

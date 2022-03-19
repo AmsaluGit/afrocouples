@@ -360,7 +360,7 @@
 											<div class="card shadow-sm border-0 rounded">
 												<div class="card-body p-0">
 													<a href="{{ path('user_detail', { uuid: user.uuid}) }}">
-														<img src="{{ user.profileImage }}" alt="" class="w-100 card-img-top">
+				<img src="{{ asset('uploads/'~ user.username ~'/' ~ user.profileImage ~'') }}" alt="" class="w-100 card-img-top1">
 													</a>
 													<div class="p-2">
 														<p class="mb-0 name">{{user.fname}},
@@ -472,7 +472,7 @@ $.each(data['users'], function () {
 $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
 $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 var user = $(this)[0][0];
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top"></a></div>');
+$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top2"></a></div>');
 $wrapper = $('<div class="p-2"></div>');
 
 // age calculation
@@ -566,7 +566,7 @@ $.each(data['users'], function () {
 $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
 $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 var user = $(this)[0][0];
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.userId + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top"></a></div>');
+$meta = $('<div class="card-body p-0"><a href="/user/' + user.userId + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top3"></a></div>');
 $wrapper = $('<div class="p-2"></div>');
 
 // age calculation

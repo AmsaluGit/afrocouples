@@ -204,7 +204,7 @@ body{margin-top:20px;}
 				<div class="col-12 col-lg-12 col-xl-12">
 					<div class="py-2 px-4 border-bottom d-none d-lg-block">
 						<div class="d-flex align-items-center py-1">
-							<div class="position-relative">
+							<div class="position-relative" style="margin-left: -40px;">
 								<img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
 							</div>
 							<div class="flex-grow-1 pl-3">
@@ -219,20 +219,20 @@ body{margin-top:20px;}
 						</div>
 					</div>
  
-					<div class="position-relative">
-						<div class="chat-messages " id="chatbox">
+					<div class="position-relative" style="margin-left: -40px;">
+					<div class="chat-messages " id="chatbox">
 
 
 				{% for chat in chats %}
 
 				{% set direction = "chat-message-left" %}
-				{% set margin = "margin-right: 40% ;" %}
+				{% set margin = "margin-right: 50px ;" %}
 				{% set textDirection = "text-left " %}
 
 				{% if app.user.id == chat.mfrom.id %}
 
 				{% set direction = "chat-message-right" %}
-				{% set margin = "margin-left: 40% ;" %}
+				{% set margin = "margin-left: 50px ;" %}
 				{% set textDirection = "text-right " %}
 
 				{% endif %}
@@ -374,12 +374,12 @@ body{margin-top:20px;}
 	var is_right_side="chat-message-right";
 
 	var final_class = is_left_side;
-	var margin = "margin-right: 40% ;";
+	var margin = "margin-right: 50px ;";
 	var textDirection = "text-left";
 	if(direction=="right")
 	{
 		final_class = is_right_side;
-		margin = "margin-left: 40% ;";
+		margin = "margin-left: 50px ;";
 		textDirection = "text-right";
 	}
 

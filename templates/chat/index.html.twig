@@ -91,7 +91,13 @@ body{margin-top:20px;}
 	
 }
  
-
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
 
 
 </style>
@@ -202,8 +208,8 @@ body{margin-top:20px;}
 								<img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
 							</div>
 							<div class="flex-grow-1 pl-3">
-								<strong>Sharon Lessman</strong>
-								<div class="text-muted small"><em>Typing...</em></div>
+								<p>Your are chatting with <strong>{{ user.fname }} </strong> </p>
+								{# <div class="text-muted small"><em>Typing...</em></div> #}
 							</div>
 							<div>
 								{# <button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone feather-lg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
@@ -212,28 +218,32 @@ body{margin-top:20px;}
 							</div>
 						</div>
 					</div>
-
+ 
 					<div class="position-relative">
-						<div class="chat-messages p-4" id="chatbox">
+						<div class="chat-messages " id="chatbox">
 
 
 				{% for chat in chats %}
 
-				{% set dirction = "chat-message-left" %}
+				{% set direction = "chat-message-left" %}
+				{% set margin = "margin-right: 40% ;" %}
+				{% set textDirection = "text-left " %}
 
 				{% if app.user.id == chat.mfrom.id %}
 
-				{% set dirction = "chat-message-right" %}
+				{% set direction = "chat-message-right" %}
+				{% set margin = "margin-left: 40% ;" %}
+				{% set textDirection = "text-right " %}
 
 				{% endif %}
-							<div class="{{dirction}} pb-4">
+							<div class="{{direction}} ">
 								<div>
 									<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
 									<div class="text-muted small text-nowrap mt-2">2:33 am</div>
 								</div>
 								<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-									<div class="font-weight-bold mb-1">{{ chat.mfrom.fname }}</div>
-									{{chat.message}}
+									<div class="font-weight-bold mb-1 {{ textDirection }} ">{{ chat.mfrom.fname }}</div>
+									<div  style="word-break: break-all;{{ margin }}"><p> {{chat.message}} </p> </div>
 								</div>
 							</div>
 
@@ -335,7 +345,7 @@ body{margin-top:20px;}
 <script type="text/javascript">
    
 
-    function addMessage(name, message, direction) {
+    {# function addMessageWithLoading(name, message, direction) {
       
 	var is_left_side="chat-message-left";
 	var is_right_side="chat-message-right";
@@ -345,16 +355,50 @@ body{margin-top:20px;}
 	{
 		final_class = is_right_side;
 	}
-  
+
  
-        const msg = '<div class="'+final_class+' mb-4"> <div> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"><div class="text-muted small text-nowrap mt-2">2:35 am</div></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">'+ name +'</div>'+message+'</div></div>';
+        const msg = '<div class="'+final_class+' mb-4 tempdiv "> <div> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"><div class="text-muted small text-nowrap mt-2">2:35 am</div></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1">'+ name +'</div> <p style="color:gray">'+message+' <img src="{{asset('assets/image/loading.gif')}}" style="width:20px;"></p><div></div></div></div>';
+
 
        $("#chatbox").append(msg);
 
 		//scroll animation
 	 $('#chatbox').animate({scrollTop: $('#chatbox').prop("scrollHeight")}, 500);
 
+    } #}
 
+
+    function addMessage(name, message, direction, createdAt) {
+      
+	var is_left_side="chat-message-left";
+	var is_right_side="chat-message-right";
+
+	var final_class = is_left_side;
+	var margin = "margin-right: 40% ;";
+	var textDirection = "text-left";
+	if(direction=="right")
+	{
+		final_class = is_right_side;
+		margin = "margin-left: 40% ;";
+		textDirection = "text-right";
+	}
+
+ 		var dt = createdAt.date.split('.')[0];
+		var ymd = dt.split(' ')[0];
+		var hms = dt.split(' ')[1];
+		var hr = hms.split(':')[0];
+		var min = hms.split(':')[1];
+		var hm = hr + ':' + min;
+        const msg = '<div class="'+final_class+' mb-4"> <div> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"><div class="text-muted small text-nowrap mt-2">'+ ymd +'</div><p class="text-muted small text-nowrap mt-2" >'+hm+'</p></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1 '+ textDirection + '">'+ name +'</div><div style="word-break: break-all;' + margin + '"><p> '+ message +'</p></div></div></div>';
+
+  
+ 
+      // $("#chatbox").find('.tempdiv').remove();
+	   
+       $("#chatbox").append(msg);
+
+		//scroll animation
+	 $('#chatbox').animate({scrollTop: $('#chatbox').prop("scrollHeight")}, 500);
 
     }
 
@@ -373,7 +417,7 @@ body{margin-top:20px;}
             direction: "right"
         };
        
-        addMessage(message.name, message.message, message.direction);
+        //addMessageWithLoading(message.name, message.message, message.direction);
 
 		$("#message").val('');
 
@@ -416,11 +460,11 @@ eventSource.onmessage = event => {
     
     const message = JSON.parse(event.data);
  	
-
+//console.log(message);
 	if (message.fromuuid == friend_uuid || message.fromuuid == my_uuid)
 	{
 		 
-		addMessage(message.name, message.message, message.direction);
+		addMessage(message.name, message.message, message.direction, message.createdAt);
 	}
     
 	  

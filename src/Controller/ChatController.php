@@ -35,33 +35,47 @@ class ChatController extends AbstractController
             $this->addFlash("error","self messaging is disabled for now.");
             return $this->redirectToRoute('home');
          }
+         $time = new DateTime();
 
          $chat = new Chat();
          $chat->setMfrom($fromUser);
          $chat->setMto($toUser);
          $chat->setMessage($message);
-         $chat->setCreatedAt(new DateTime());
+         $chat->setCreatedAt($time);
          
          $em->persist($chat);
          $em->flush();
 
+         $mesg = [
+            'message' => $message,
+            'name' => $fromUser->getFname(),
+            'direction' => 'left',
+            'createdAt' => $time,
+            'fromuuid' => $fromUser->getUuid(),
+         ];
+
 
         //now publish the message to the reciver(s).
-        $channel = $toUser->getUuid();
-           $update = new Update (
-            $channel,
-             json_encode([
-                 'message' => $message,
-                 'name' => $fromUser->getFname(),
-                 'direction' => 'left',
-                 'fromuuid' => $fromUser->getUuid(),
-            ]),
+        $channel1 = $toUser->getUuid();
+           $update1 = new Update (
+            $channel1,
+             json_encode($mesg ),
+             // true // private
+         );
+
+           $mesg['direction']='right';
+            //now publish the message to the reciver(s).
+            $channel2 = $fromUser->getUuid(); // the publish to sender itself, for multiple devices.
+           $update2 = new Update (
+            $channel2,
+             json_encode($mesg),
              // true // private
          );
 
          // Publisher's JWT must contain this topic, a URI template it matches or * in mercure.publish or you'll get a 401
          // Subscriber's JWT must contain this topic, a URI template it matches or * in mercure.subscribe to receive the update
-         $mercurHub->publish($update);
+         $mercurHub->publish($update1);
+         $mercurHub->publish($update2);
  
          //return new Response ('private update published! to '.$toUser->getUsername());
          return $this->json('Message sent to: '.$toUser->getUsername(),200,['contentType'=>'application/json']);

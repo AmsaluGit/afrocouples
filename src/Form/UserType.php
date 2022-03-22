@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class UserType extends AbstractType
@@ -66,11 +67,13 @@ class UserType extends AbstractType
                 'class' => Religion::class,
                 'attr' => ['class'=>'form-control']
             ])
-            ->add('height', NumberType::class, [
-                'label' => 'Height(in meter)',
+            ->add('height', IntegerType::class, [
+                'label' => 'Height(centi meter)',
                 'required' => false,
                 'attr' => ['class'=>'form-control']
             ])
+         
+
             ->add('nationality', EntityType::class, [
                 'class' => Nationality::class,
                 'attr' => ['class'=>'form-control']

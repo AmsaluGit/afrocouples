@@ -27,15 +27,24 @@
 												Contact Us
 											</a>
 										</li>
+										
+									
+
 										<li class="dropdown">
-											<a class="dropdown-item dropdown-toggle text-white" href="#">
+											<a class="dropdown-item dropdown-toggle text-white  " href="#">
 												About Us
 											</a>
 										</li>
-										<li class="dropdown">
-											<a class="dropdown-item dropdown-toggle text-white" href="#">
-												Meet Random
+
+
+											<li class="dropdown">
+										 
+											<a class="dropdown-item dropdown-toggle text-white text-muted" href="#">
+												Chat Random <sup><p style="color:yellow; font-size:8px;">Login</p></sup>
+												 
 											</a>
+										 
+											
 										</li>
 									</ul>
 								</nav>
@@ -74,7 +83,7 @@
 							<div class="dropdown-divider"></div>
 
 						{% else %}
-							<a href="{{path('app_login')}}" class="btn btn-outline-light mx-3">Sign In</a>
+							<a href="{{path('app_login')}}" class="btn btn-outline-light mx-3">Log In</a>
 							<a href="{{path('user_register')}}" class="btn btn-outline-light">Sign Up</a>
 						{% endif %}
 					</div>

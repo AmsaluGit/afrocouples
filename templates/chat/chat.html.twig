@@ -59,18 +59,18 @@
 			<div class="container">
 				<div class="row">
                     <div class="col"></div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <center><p class="pt-0">            
                                     <h4 style="color: #1884ed"> {% trans %}Afro Couples {% endtrans %}</h4>
-									<span class="badge badge-success">Let's be parents</span>
+                                     <p>Chat with <strong>{{ user.fname }} </strong> </p>
                                 </center>
                             </div>
-                            <div class="card-body " style="text-align: justify">
+                            <div class="card-body">
                                
-
-                                <p> {{about_us}} </p>
+{% include "chat/index.html.twig" %}
+                               
                             </div>
                         </div>
                         </div>

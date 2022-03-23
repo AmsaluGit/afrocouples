@@ -37,7 +37,7 @@ class Chat
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
+ 
     
 
     public function getId(): ?int
@@ -93,5 +93,6 @@ class Chat
         return $this;
     }
 
+   
    
 }

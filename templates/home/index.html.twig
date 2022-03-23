@@ -155,7 +155,9 @@
 								<form id="filter-form">
 									<h5 class="font-weight-semi-bold pt-4">Filters</h5>
 									<ul class="nav nav-list flex-column mb-5">
-										<li class="nav-item">
+
+
+										{# <li class="nav-item">
 											<div class="accordion" id="accordion3">
 												<div class="card card-default">
 													<div class="card-header" id="collapse1Headingthree">
@@ -215,7 +217,9 @@
 													</div>
 												</div>
 											</div>
-										</li>
+										</li> #}
+
+									{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 										<li class="nav-item">
 											<div class="accordion" id="accordion1">
 												<div class="card card-default">
@@ -252,6 +256,9 @@
 												</div>
 											</div>
 										</li>
+									{% endif %}
+
+										
 										<li class="nav-item">
 											<div class="accordion" id="accordion2">
 												<div class="card card-default">
@@ -356,7 +363,8 @@
  
 								<div class="row users-list">
 									{% for user in users %}
-										<div
+									{% if user.username != app.user.username %}
+<div
 											class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0">
 											<!-- Card-->
 											<div class="card shadow-sm border-0 rounded">
@@ -396,6 +404,9 @@
 												</div>
 											</div>
 										</div>
+									{% endif %}
+									
+										
 									{% endfor %}
 								</div>
 							</div>

@@ -23,12 +23,12 @@ class ChatController extends AbstractController
      */
     public function messagePublisher($uuid, HubInterface $mercurHub, UserRepository $userRepository, Request $request)
     {
-
+ 
 
         $em = $this->getDoctrine()->getManager();
 
          $message = $request->request->get('message');
-         $fromUser = $this->getUser();
+          $fromUser = $this->getUser();
          $toUser = $userRepository->findOneBy(['uuid' => $uuid]);
 
          if($toUser===$fromUser )
@@ -39,6 +39,7 @@ class ChatController extends AbstractController
          $time = new DateTime();
 
          $chat = new Chat();
+
          $chat->setMfrom($fromUser);
          $chat->setMto($toUser);
          $chat->setMessage($message);
@@ -99,7 +100,7 @@ class ChatController extends AbstractController
             dd("user not found");
         }
 
-        return $this->render('chat/index.html.twig', [
+        return $this->render('chat/chat.html.twig', [
             'user' => $friend,
             'chats'=> $chats,
         ]);

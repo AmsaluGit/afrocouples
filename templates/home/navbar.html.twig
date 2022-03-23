@@ -39,12 +39,18 @@
 
 											<li class="dropdown">
 										 
-											<a class="dropdown-item dropdown-toggle text-white text-muted" href="#">
-												Chat Random <sup><p style="color:yellow; font-size:8px;">Login</p></sup>
-												 
+										
+
+										{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+											<a class="dropdown-item dropdown-toggle text-white" href="#">
+												Random Chat
 											</a>
-										 
-											
+											{% else %}
+												<a class="dropdown-item dropdown-toggle text-white text-muted" href="#">
+												Random Chat <sup><p style="color:yellow; font-size:8px;">Login</p></sup>
+											</a>
+										{% endif %}
+
 										</li>
 									</ul>
 								</nav>

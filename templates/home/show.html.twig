@@ -176,7 +176,14 @@
 							<div class="col-md-8">
 								<div class="card mb-3">
 									<div class="card-body main-info">
-										<h4 class="name">{{user.fname | capitalize}}, {{age}}</h4>
+										<h4 class="name">{{user.fname | capitalize}}
+										{% if age %}
+										, {{age}}
+										{% endif %}
+										
+										
+										
+										</h4>
 										{% if user.city %}
 											<p>{{ user.city.name }},
 												{{user.city.country.name}}</p>
@@ -258,7 +265,12 @@
 												</div>
 												<div class="col-sm-9 text-primary">
 													{% if user.sex %}
-														{{user.sex}}
+														{% if user.sex | upper =="F" %}
+														Female
+														{% else %}
+															Male
+														{% endif %}
+														
 													{% else %}
 														<span class="text-muted">not provided</span>
 													{% endif %}

@@ -1,0 +1,34 @@
+{% extends 'master/base.html.twig' %}
+
+{% block title %}SystemSetting{% endblock %}
+
+{% block body %}
+    <h1>SystemSetting</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ system_setting.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ system_setting.code }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ system_setting.value }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ system_setting.active ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_system_setting_index') }}" class="btn-info btn-sm">back to list</a>
+
+    <a href="{{ path('app_system_setting_edit', {'id': system_setting.id}) }}" class="btn-warning btn-sm">edit</a>
+
+    {{ include('system_setting/_delete_form.html.twig') }}
+{% endblock %}

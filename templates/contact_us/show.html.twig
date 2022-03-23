@@ -1,6 +1,6 @@
-{# {% extends 'base.html.twig' %}
+ {% extends 'master/base.html.twig' %}
 
-{% block title %}ContactUs{% endblock %}
+{#{% block title %}ContactUs{% endblock %}
  #}
 
 {% block body %}
@@ -28,9 +28,9 @@
     </table>
     <table>
          <tr>
-   <td>  <a href="{{ path('contact_us_index') }}">back to list</a></td>
-
-   <td> <a href="{{ path('contact_us_edit', {'id': contact_u. id}) }}">edit</a></td>
+   <td>  <a href="{{ path('contact_us_index') }}" class="btn  btn-sm btn-info">back to list</a></td>
+{# 
+   <td> <a href="{{ path('contact_us_edit', {'id': contact_u. id}) }}" class="btn btn-sm btn-warning" >edit</a></td> #}
 
    <td>  {{ include('contact_us/_delete_form.html.twig') }} </td>
 

@@ -47,4 +47,16 @@ class ContactUsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function filterContactUs($email)
+    {
+       
+        return  $this->createQueryBuilder('u')
+            ->Where('u.email LIKE :email')
+            ->setParameter('email', '%'.$email.'%')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

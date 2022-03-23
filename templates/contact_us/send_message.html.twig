@@ -60,10 +60,10 @@
 				<div class="row">
                     <div class="col"></div>
                     <div class="col-sm-8">
-                        <div class="card card-primary pb-5 pt-2 px-5bg-white">
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <center><p class="pt-2">            
-                                    <h4 style="color: #1884ed"> {% trans %}Change password {% endtrans %}</h4>
+                                <center><p class="pt-0">            
+                                    <h4 style="color: #1884ed"> {% trans %}Send Message {% endtrans %}</h4>
                                 </center>
                             </div>
                             <div class="card-body">
@@ -75,7 +75,7 @@
 
                                 {{ form_start(form,{'attr':{'id':'form'}}) }}
                                 {{ form_widget(form)}}
-                                <input type="submit" class='btn btn-primary' style="margin-top: 20px" value={{"Change Password"| trans | raw}}>
+                                <input type="submit" class='btn btn-primary' style="margin-top: 20px" value={{"Send"| trans | raw}}>
                                 {{ form_end(form)}}
                             </div>
                         </div>

@@ -46,7 +46,7 @@
 			}
 
 			.header-body {
-				/*background: #1a84ed !important;*/
+				/*background: #1a8495 !important;*/
 				background: #1a8495 !important;
 
 			}
@@ -482,7 +482,7 @@ $.each(data['users'], function () {
 $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
 $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 var user = $(this)[0][0];
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top2"></a></div>');
+$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="/uploads/' +user.username+'/'+ user.profileImage + '" alt="" class="w-100 card-img-top2"></a></div>');
 $wrapper = $('<div class="p-2"></div>');
 
 // age calculation
@@ -493,8 +493,10 @@ var m = today.getMonth() - birthDate.getMonth();
 if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
 age1--;
 }
+/*
+$name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';*/
+$name = '<p class="mb-0 name">' + user.fname + ' <span class="play-button"></span></p>';
 
-$name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
 $city = '<p>' + user.currentCity + ', Ethiopia</p>';
 
 $citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this)[0].religionName + '<span></span>  </p>';

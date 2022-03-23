@@ -1,12 +1,9 @@
 {% extends 'master/base.html.twig' %}
-{# {% extends 'base.html.twig' %}
-
-{% block title %}ContactUs index{% endblock %}
-  #}
+ 
 
 {% block body %}
-    <h1>ContactUs index</h1>
-    <a href="{{ path('contact_us_new') }}" class="btn btn-primary" style="float:right;" ><span class="fa fa-plus"></span>Add new</a>
+    <h1>Contact us messages</h1>
+    {# <a href="{{ path('contact_us_new') }}" class="btn btn-primary" style="float:right;" ><span class="fa fa-plus"></span>Add new</a> #}
 
 
 
@@ -16,7 +13,7 @@
 					<div class="col-sm-8">
 							<div class="form-group">
 								<label class="col-sm-8 control-label no-padding-right">{% trans %}Search{% endtrans %}</label>
-								{{ form_widget(searchForm.name  ,{'attr':{'class':'form-control'},'name':'name','value':app.request.get('name') })}}
+								{{ form_widget(searchForm.email  ,{'attr':{'class':'form-control'},'email':'email','value':app.request.get('email') })}}
 					
 								<div class="help-block with-errors"></div>
 							</div>
@@ -57,7 +54,7 @@
                 <td>{{ contact_u.createdAt ? contact_u.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td style="text-align: end;">
                     <a href="{{ path('contact_us_show', {'id': contact_u.id}) }}" class="btn  btn-info" ><span class="fa fa-eye"></span>show</a>
-                    <a href="{{ path('contact_us_edit', {'id': contact_u.id}) }}" class="btn  btn-warning"><span class="fa fa-pencil"></span>edit</a>
+                    {# <a href="{{ path('contact_us_edit', {'id': contact_u.id}) }}" class="btn  btn-warning"><span class="fa fa-pencil"></span>edit</a> #}
                 </td>
             </tr>
         {% else %}

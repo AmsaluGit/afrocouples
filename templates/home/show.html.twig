@@ -52,7 +52,7 @@
 			}
 
 			.header-body {
-				background: #1a84ed !important;
+				background: #1a8495 !important;
 			}
 
 			hr {
@@ -208,6 +208,11 @@
 													</p>
 												{% endif %}
 											</div>	
+										{% else %}
+
+										<p id="like" data-label="{{user.idNumber}}">
+											<i class="badge badge-warning"><a href ="/login">Login to chat with <strong>{{user.fname}} </strong> </a></i>
+										</p>
 										{% endif %}
 									</div>
 								</div>

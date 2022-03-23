@@ -1,0 +1,39 @@
+{% extends 'master/base.html.twig' %}
+
+{% block title %}SystemSetting index{% endblock %}
+
+{% block body %}
+    <h1>SystemSetting index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Value</th>
+                <th>Active</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for system_setting in system_settings %}
+            <tr>
+                <td>{{ system_setting.id }}</td>
+                <td>{{ system_setting.code }}</td>
+                <td>{{ system_setting.value }}</td>
+                <td>{{ system_setting.active ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_system_setting_show', {'id': system_setting.id}) }}" class="btn-info btn-sm">show</a>
+                    <a href="{{ path('app_system_setting_edit', {'id': system_setting.id}) }}" class="btn-warning btn-sm">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_system_setting_new') }}" class="btn-success btn-sm">Create new</a>
+{% endblock %}

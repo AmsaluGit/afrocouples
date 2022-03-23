@@ -51,8 +51,8 @@ class UserController extends AbstractController
     
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
-    
-                return $this->redirectToRoute('user_index');
+                return $this->redirectToRoute('home');
+                //return $this->redirectToRoute('user_index');
             }
             $queryBuilder=$userRepository->filterUser($request->query->get('search'));
             $data=$paginator->paginate(

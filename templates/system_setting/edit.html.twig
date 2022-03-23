@@ -1,0 +1,13 @@
+{% extends 'master/base.html.twig' %}
+
+{% block title %}Edit SystemSetting{% endblock %}
+
+{% block body %}
+    <h1>Edit SystemSetting</h1>
+
+    {{ include('system_setting/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_system_setting_index') }}" class="btn-info btn-sm">back to list</a>
+
+    {{ include('system_setting/_delete_form.html.twig') }}
+{% endblock %}

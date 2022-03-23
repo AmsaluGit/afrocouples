@@ -11,36 +11,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\Filter\ContactUsFilterType;
+use App\Repository\SystemSettingRepository;
 use DateTime;
 
 /**
- * @Route("/contactus")
+ * @Route("/aboutus")
  */
-class ContactUsController extends AbstractController
+class AboutUsController extends AbstractController
 {
 
     /**
-     * @Route("/", name="send_message", methods={"GET", "POST"})
+     * @Route("/", name="aboutus", methods={"GET"})
      */
-    public function sendMessage(ContactUsRepository $contactUsRepository, PaginatorInterface $paginator, Request $request, ContactUsRepository $contactURepository): Response
+    public function aboutus(ContactUsRepository $contactUsRepository, PaginatorInterface $paginator, Request $request, SystemSettingRepository $systemSettingRepository): Response
     {
 
-        $contactus = new ContactUs();
-        $form = $this->createForm(ContactUsType::class, $contactus);
-        $form->handleRequest($request);
+        $aboutUs = $systemSettingRepository->findOneBy(['code'=>'about_us']);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $contactus->setCreatedAt(new DateTime());
-                $entityManager->persist($contactus);
-                $entityManager->flush();
-
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->render('contact_us/send_message.html.twig', [
-            'form' => $form->createView(),
-            'error' => ""
+        return $this->render('about_us/about_us.html.twig', [
+            'about_us' => $aboutUs 
         ]);
 
  

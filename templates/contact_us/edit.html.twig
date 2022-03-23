@@ -1,8 +1,4 @@
-{% extends 'master/base.html.twig' %}
-{# {% extends 'base.html.twig' %}
-
-{% block title %}Edit ContactUs{% endblock %}
-  #}
+{# {% extends 'master/base.html.twig' %}
 
 {% block body %}
     <h1>Edit ContactUs</h1>
@@ -12,7 +8,7 @@
 
 <table>
         <tr>
-        <td><a href="{{ path('contact_us_index') }}" class="btn  btn-info">back to list</a> </td>
+        <td><a href="{{ path('contact_us_index') }}" class="btn   btn-sm btn-info">back to list</a> </td>
 
         <td> {{ include('contact_us/_delete_form.html.twig') }} </td>
 
@@ -20,6 +16,22 @@
     </table>
 {% endblock %}
  
-       
+        #}
    
 
+{% extends 'master/base.html.twig' %}
+
+{% block title %}Edit contact us{% endblock %}
+
+{% block body %}
+    <h1>Edit contact us</h1>
+        {{ include('contact_us/_form.html.twig', {'button_label': 'Update'}) }} 
+        <hr>
+    <table>
+        <tr>
+            <td> <a href="{{ path('contact_us_index') }}" class="btn  btn-info">back to list</a> </td>
+            <td> {{ include('contact_us/_delete_form.html.twig') }} </td>
+        </tr>
+    </table>
+   
+{% endblock %}

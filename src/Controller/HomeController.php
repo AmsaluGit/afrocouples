@@ -86,6 +86,12 @@ class HomeController extends AbstractController
         $query = $em->createQuery(
             'SELECT u FROM App\Entity\User u ORDER BY u.id'
             );
+        if ($this->getUser()) {
+        $query = $em->createQuery(
+                'SELECT u FROM App\Entity\User u where u.id != '.$this->getUser()->getId().' ORDER BY u.id'
+                );
+        }
+        
             
         $users = $query->setMaxResults(20)->getResult();
 

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\Filter\ContactUsFilterType;
+use App\Repository\ChatRepository;
 use DateTime;
 
 /**
@@ -22,7 +23,7 @@ class ContactUsController extends AbstractController
     /**
      * @Route("/", name="send_message", methods={"GET", "POST"})
      */
-    public function sendMessage(ContactUsRepository $contactUsRepository, PaginatorInterface $paginator, Request $request, ContactUsRepository $contactURepository): Response
+    public function sendMessage(ContactUsRepository $contactUsRepository, PaginatorInterface $paginator, Request $request, ChatRepository $chatRepository): Response
     {
 
         $contactus = new ContactUs();
@@ -38,9 +39,14 @@ class ContactUsController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+
         return $this->render('contact_us/send_message.html.twig', [
             'form' => $form->createView(),
-            'error' => ""
+            'error' => "",
+            'totalMsgs'=> $msg[1]
         ]);
 
  

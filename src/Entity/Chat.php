@@ -37,6 +37,11 @@ class Chat
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $seen=false;
  
     
 
@@ -91,6 +96,23 @@ class Chat
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getSeen(): ?bool
+    {
+        return $this->seen;
+    }
+
+    public function setSeen(bool $seen): self
+    {
+        $this->seen = $seen;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return "Chat details";
     }
 
    

@@ -59,24 +59,38 @@
 			<div class="container">
 				<div class="row">
                     <div class="col"></div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <div class="card card-primary">
                             <div class="card-header">
                                 <center><p class="pt-0">            
-                                    <h4 style="color: #1884ed"> {% trans %}Send Message {% endtrans %}</h4>
+                                    <h4 style="color: #1884ed"> {% trans %}Afro Couples {% endtrans %}</h4>
+									<span class="badge badge-success">Let's be parents</span>
                                 </center>
                             </div>
-                            <div class="card-body">
-                                <p style="color:red">
-                                    {% if error != "" %}
-                                        {{error}}
-                                    {% endif %}
-                                </p>  
+<div class="card-body " style="text-align: justify">
+                         
+ <table class="table table-striped table-bordered table-condensed table-hover" >
+    <thead>
+      <tr>
+        <th>Sender</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+        {% for mfrom, mcount in messages %}
+         <tr>
+         {% set usr = mfrom|split('~') %} 
+         {% set uuid = usr[2] %} 
+            <td><a href="{{ path('message',{uuid:uuid}) }}"> {{ usr[1] }} </a> </td>
+            <td><span class="badge badge-danger">{{ mcount }}</span> </td>
+        </tr>  
+        {% endfor %} 
+    </tbody>
+  </table>
+                              
 
-                                {{ form_start(form,{'attr':{'id':'form'}}) }}
-                                {{ form_widget(form)}}
-                                <input type="submit" class='btn btn-primary' style="margin-top: 20px" value={{"Send"| trans | raw}}>
-                                {{ form_end(form)}}
+                                
                             </div>
                         </div>
                         </div>
@@ -87,15 +101,30 @@
 			{% include "home/footer.html.twig" %}
 
 		</div>
-<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
+
+   <script>
+   
+
+
+   </script>     
+	</body>
+	<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script> 
 	<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
-		<script>
+  <script>
     $(window).on("load", function () {
-    $("#msg-notification").html("{{ totalMsgs }}");
+		var tot = "{{ totalMsgs }}";
+		if(tot)
+		{
+		$("#msg-notification").html();
+		$("#msg-notification").show();
+		}
+		else 
+		{
+			$("#msg-notification").hide();
+		}
+    
 });
 
 </script>
-	</body>
-	
 </html>

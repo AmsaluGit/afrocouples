@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\Filter\ContactUsFilterType;
+use App\Repository\ChatRepository;
 use App\Repository\SystemSettingRepository;
 use DateTime;
 
@@ -23,13 +24,20 @@ class AboutUsController extends AbstractController
     /**
      * @Route("/", name="aboutus", methods={"GET"})
      */
-    public function aboutus(ContactUsRepository $contactUsRepository, PaginatorInterface $paginator, Request $request, SystemSettingRepository $systemSettingRepository): Response
+    public function aboutus(ChatRepository $chatRepository, PaginatorInterface $paginator, Request $request, SystemSettingRepository $systemSettingRepository): Response
     {
 
         $aboutUs = $systemSettingRepository->findOneBy(['code'=>'about_us']);
 
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+ 
+
+
         return $this->render('about_us/about_us.html.twig', [
-            'about_us' => $aboutUs 
+            'about_us' => $aboutUs,
+            'totalMsgs'=> $msg[1]
         ]);
 
  

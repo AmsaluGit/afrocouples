@@ -15,6 +15,7 @@ use App\Repository\UserRepository;
 use App\Form\RegistrationType;
 use App\Form\UserType;
 use App\Form\GalleryType;
+use App\Repository\ChatRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -78,7 +79,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(ChatRepository $chatRepository): Response
     {
         
         $em = $this->getDoctrine()->getManager();
@@ -102,11 +103,17 @@ class HomeController extends AbstractController
             $age_array[$value->getId()] = $diff->format('%y');
         }
 
+
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+ 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'religions' => $religion,
             'users' => $users,
-            'age_array' => $age_array
+            'age_array' => $age_array,
+            'totalMsgs'=> $msg[1]
         ]);
     }
 

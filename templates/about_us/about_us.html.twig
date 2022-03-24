@@ -81,8 +81,17 @@
 			{% include "home/footer.html.twig" %}
 
 		</div>
-	</body>
+
 	<script src="{{asset('externalAssets/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script> 
-	<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+	<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>	
+
+<script>
+    $(window).on("load", function () {
+    $("#msg-notification").html("{{ totalMsgs }}");
+});
+
+</script>
+	</body>
+	
 </html>

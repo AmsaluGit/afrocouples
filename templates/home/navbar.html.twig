@@ -31,7 +31,7 @@
 									
 
 										<li class="dropdown">
-											<a class="dropdown-item dropdown-toggle text-white  " href="{{path('aboutus')}}">
+											<a class="dropdown-item dropdown-toggle text-white" href="{{path('aboutus')}}">
 												About Us
 											</a>
 										</li>
@@ -52,6 +52,18 @@
 										{% endif %}
 
 										</li>
+
+									 {% if app.user  %}
+									   <li class="dropdown">
+											<a class="dropdown-item dropdown-toggle text-white notifications text-center" href="{{path('messages-list')}}">
+												<span >Message</span>
+												<span class="badge badge-danger" id="msg-notification"></span>
+ 											</a>
+										</li>
+									 {% endif %}
+									 
+	                                  
+
 									</ul>
 								</nav>
 							</div>

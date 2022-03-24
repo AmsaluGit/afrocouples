@@ -201,7 +201,7 @@
 												<p>
 									<a href="{{ path('message', { uuid: user.uuid}) }}">
 
-													{# <a href="{{ path('message',{uuid: user.uuid }) }}"> #}
+												 
 		
 													 <img src="{{asset('assets/icons/email.png')}}" alt="message-icon"> </a>
 												</p>
@@ -210,12 +210,16 @@
 
 												{% if like %}
 													<p id="like" data-label="{{user.idNumber}}">
+													
 														<img src="{{asset('assets/icons/heart (1).png')}}" alt="love-icon">
+														
 													</p>
 												{% else %}
 													<p id="like" data-label="{{user.idNumber}}">
+													
 														<img src="{{asset('assets/icons/heart.png')}}" alt="love-icon">
 													</p>
+													 
 												{% endif %}
 
 

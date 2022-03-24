@@ -207,6 +207,7 @@ class HomeController extends AbstractController
         }
 
         if($request->request->get('name')){
+            // dd($request->request->get('name'));
             foreach($request->request->get('name') as $key => $value)
             {
                 if(preg_match($pattern, $value)){
@@ -240,7 +241,7 @@ class HomeController extends AbstractController
     /**
      *  @Route("/profile", name="profile", methods={"GET", "POST"})
      */
-    public function profile(SluggerInterface $slugger, Request $request)
+    public function profile(SluggerInterface $slugger, Request $request, ChatRepository $chatRepository)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($this->getUser()->getId());
@@ -273,16 +274,21 @@ class HomeController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
         }
 
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+
         return $this->render("home/edit2.html.twig", [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'totalMsgs'=> $msg[1]
         ]);
     }
 
     /**
      *  @Route("/gallery", name="gallery", methods={"GET", "POST"})
      */
-    public function gallery(SluggerInterface $slugger,Request $request)
+    public function gallery(SluggerInterface $slugger,Request $request, ChatRepository $chatRepository)
     {
         $em = $this->getDoctrine()->getManager();
         $gly = new Gallery();
@@ -320,16 +326,22 @@ class HomeController extends AbstractController
 
         $gallery = $em->getRepository(Gallery::class)->findBy(array("user" => $this->getUser()->getId()));
 
+
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+
         return $this->render("home/gallery.html.twig", [
             'gallery' => $gallery,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'totalMsgs'=> $msg[1]
         ]);
     }
 
     /**
      *  @Route("/user/{uuid}/detail", name="user_detail", methods={"GET", "POST"})
      */
-    public function detail($uuid, UserRepository $userRepository)
+    public function detail($uuid, UserRepository $userRepository, ChatRepository $chatRepository)
     {
         $user = $userRepository->findOneBy(['uuid'=>$uuid]);
         if(!$user)
@@ -342,10 +354,18 @@ class HomeController extends AbstractController
 
         $diff = date_diff(date_create($user->getBirthdate()->format("Y-m-d")), date_create(date("Y-m-d")));
         $age = $diff->format('%y');
+
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+
+
+
         return $this->render("home/show.html.twig", [
             'user' => $user,
             'like' => $like,
-            'age' => $age
+            'age' => $age,
+            'totalMsgs'=> $msg[1]
         ]);
     }
 

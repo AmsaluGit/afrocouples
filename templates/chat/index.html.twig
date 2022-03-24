@@ -225,6 +225,16 @@ body{margin-top:20px;}
 
 				{% for chat in chats %}
 
+				{% set createdAt = chat.createdAt| date('Y.m.d H:m:s') %}
+	 
+				{# {% set  dt =   createdAt | split(" ") %} #}
+				{% set  ymd =   createdAt | split(" ")[0] %}
+				{% set  hms =   createdAt | split(" ")[1] %}
+				{% set  hr =   hms | split(":")[0] %}
+				{% set  min =   hms | split(":")[1] %}
+				{% set  hm =   hr ~ ':' ~ min %} 
+
+ 
 				{% set direction = "chat-message-left" %}
 				{% set margin = "margin-right: 50px ;" %}
 				{% set textDirection = "text-left " %}
@@ -236,11 +246,27 @@ body{margin-top:20px;}
 				{% set textDirection = "text-right " %}
 
 				{% endif %}
+
+
 							<div class="{{direction}} ">
 								<div>
-									<img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-									<div class="text-muted small text-nowrap mt-2">2:33 am</div>
+
+									{# <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"> #}
+
+								{% if app.user.id == chat.mfrom.id %}
+									<img src="{{asset('/uploads/'~app.user.username~'/'~app.user.profileImage )}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+
+								{% else %}
+									<img src="{{asset('/uploads/'~user.username~'/'~user.profileImage )}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+								{% endif %}
+
+								
+
+
+								   <div class="text-muted small text-nowrap mt-2">{{ymd}}</div>
+									<p class="text-muted small text-nowrap mt-2" >{{ hm }} </p> 
 								</div>
+
 								<div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
 									<div class="font-weight-bold mb-1 {{ textDirection }} ">{{ chat.mfrom.fname }}</div>
 									<div  style="word-break: break-all;{{ margin }}"><p> {{chat.message}} </p> </div>
@@ -389,7 +415,45 @@ body{margin-top:20px;}
 		var hr = hms.split(':')[0];
 		var min = hms.split(':')[1];
 		var hm = hr + ':' + min;
-        const msg = '<div class="'+final_class+' mb-4"> <div> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"><div class="text-muted small text-nowrap mt-2">'+ ymd +'</div><p class="text-muted small text-nowrap mt-2" >'+hm+'</p></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1 '+ textDirection + '">'+ name +'</div><div style="word-break: break-all;' + margin + '"><p> '+ message +'</p></div></div></div>';
+
+		var loggedInProfilePic = "{{ app.user.profileImage }}";
+		var friendProfilePic = "{{ user.profileImage }}";
+ 
+	 
+		 
+			{% set fsex = user.sex == "m" ? "male":"female" %}
+
+ 		    var priflePic = "{{ asset('/assets/images/'~fsex~'.png') }}";
+		  
+			  if(friendProfilePic)
+				{
+					var  priflePic = "{{ asset('/uploads/'~user.username~'/'~user.profileImage) }} ";
+
+				}
+				 
+            var path = "{{ path('user_detail',{'uuid':user.uuid}) }}";
+
+ 			//re write profilePic
+	    if(direction == "right")
+		 {
+ 			   
+			  if(loggedInProfilePic)
+				{
+					priflePic = "{{ asset('/uploads/'~app.user.username~'/'~app.user.profileImage) }}";
+				}
+				else 
+				{
+					{% set lsex = app.user.sex == "m" ? "male":"female" %}
+					priflePic = "{{ asset('/assets/images/'~lsex~'.png') }}";
+				}
+
+	       path = "{{ path('user_detail',{'uuid':app.user.uuid}) }}";
+		 }
+		 
+			
+			
+
+        const msg = '<div class="'+final_class+' mb-4"> <div> <a href="'+path+'"><img src="'+ priflePic +'" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"></a><div class="text-muted small text-nowrap mt-2">'+ ymd +'</div><p class="text-muted small text-nowrap mt-2" >'+hm+'</p></div><div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3"><div class="font-weight-bold mb-1 '+ textDirection + '">'+ name +'</div><div style="word-break: break-all;' + margin + '"><p> '+ message +'</p></div></div></div>';
 
   
  
@@ -425,8 +489,7 @@ body{margin-top:20px;}
 		var current_user_uuid = "{{app.request.attributes.get('_route_params').uuid}}";
 		var url = "{{path('chat',{uuid:'temp' })}}" ;
 		url = url.replace("temp", current_user_uuid);
-
-		 
+ 
 		$.ajax(
 			{
 				method:"POST",
@@ -462,7 +525,7 @@ eventSource.onmessage = event => {
     
     const message = JSON.parse(event.data);
  	
-//console.log(message);
+console.log(message);
 	if (message.fromuuid == friend_uuid || message.fromuuid == my_uuid)
 	{
 		 

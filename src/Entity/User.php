@@ -166,10 +166,7 @@ class User implements UserInterface
      */
     private $interests;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Chat::class, mappedBy="mfrom", orphanRemoval=true)
-     */
-    private $chats;
+   
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -191,6 +188,16 @@ class User implements UserInterface
      */
     private $uuid;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Chat::class, mappedBy="mto", orphanRemoval=true)
+     */
+    private $mto;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Chat::class, mappedBy="mfrom", orphanRemoval=true)
+     */
+    private $mfrom;
+
 
     public function __construct()
     {
@@ -199,7 +206,9 @@ class User implements UserInterface
         $this->LikedBy = new ArrayCollection();
         $this->liker = new ArrayCollection();
         $this->interests = new ArrayCollection();
-        $this->chats = new ArrayCollection();
+        $this->mto = new ArrayCollection();
+        $this->mfrom = new ArrayCollection();
+        
     }
 
    
@@ -681,35 +690,7 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Chat[]
-     */
-    public function getChats(): Collection
-    {
-        return $this->chats;
-    }
-
-    public function addChat(Chat $chat): self
-    {
-        if (!$this->chats->contains($chat)) {
-            $this->chats[] = $chat;
-            $chat->setMfrom($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChat(Chat $chat): self
-    {
-        if ($this->chats->removeElement($chat)) {
-            // set the owning side to null (unless already changed)
-            if ($chat->getMfrom() === $this) {
-                $chat->setMfrom(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function getRole(): ?string
     {
@@ -761,6 +742,66 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->fname.' '. $this->mname;
+    }
+
+    /**
+     * @return Collection<int, Chat>
+     */
+    public function getMto(): Collection
+    {
+        return $this->mto;
+    }
+
+    public function addMto(Chat $mto): self
+    {
+        if (!$this->mto->contains($mto)) {
+            $this->mto[] = $mto;
+            $mto->setMto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMto(Chat $mto): self
+    {
+        if ($this->mto->removeElement($mto)) {
+            // set the owning side to null (unless already changed)
+            if ($mto->getMto() === $this) {
+                $mto->setMto(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chat>
+     */
+    public function getMfrom(): Collection
+    {
+        return $this->mfrom;
+    }
+
+    public function addMfrom(Chat $mfrom): self
+    {
+        if (!$this->mfrom->contains($mfrom)) {
+            $this->mfrom[] = $mfrom;
+            $mfrom->setMfrom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMfrom(Chat $mfrom): self
+    {
+        if ($this->mfrom->removeElement($mfrom)) {
+            // set the owning side to null (unless already changed)
+            if ($mfrom->getMfrom() === $this) {
+                $mfrom->setMfrom(null);
+            }
+        }
+
+        return $this;
     }
 
 }

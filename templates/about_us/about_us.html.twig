@@ -6,8 +6,9 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<title>Gallery -
-			{{app.user.fname}}
+		<title>
+		AfroCouples - about us
+			{# {{app.user.fname}} #}
 		</title>
 
 		<meta name="keywords" content="HTML5 Template"/>
@@ -63,13 +64,12 @@
                         <div class="card card-primary">
                             <div class="card-header">
                                 <center><p class="pt-0">            
-                                    <h4 style="color: #1884ed"> {% trans %}Afro Couples {% endtrans %}</h4>
-									<span class="badge badge-success">Let's be parents</span>
+                                    <h4 style="color: #1884ed"> {% trans %}About Us{% endtrans %}</h4>
+									<span class="badge badge-success">AfroCouples</span>
                                 </center>
                             </div>
                             <div class="card-body " style="text-align: justify">
                                
-
                                 <p> {{about_us}} </p>
                             </div>
                         </div>
@@ -87,10 +87,9 @@
 	<script src="{{asset('externalAssets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>	
 
 <script>
-    $(window).on("load", function () {
+  /*  $(window).on("load", function () {
     $("#msg-notification").html("{{ totalMsgs }}");
-});
-
+});*/
 </script>
 	</body>
 	

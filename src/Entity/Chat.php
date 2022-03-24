@@ -17,16 +17,7 @@ class Chat
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chats")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $mfrom;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chats")
-     */
-    private $mto;
+    
 
     /**
      * @ORM\Column(type="text")
@@ -42,6 +33,18 @@ class Chat
      * @ORM\Column(type="boolean")
      */
     private $seen=false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="mto")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $mto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="mfrom")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $mfrom;
  
     
 
@@ -49,30 +52,7 @@ class Chat
     {
         return $this->id;
     }
-
-    public function getMfrom(): ?User
-    {
-        return $this->mfrom;
-    }
-
-    public function setMfrom(?User $mfrom): self
-    {
-        $this->mfrom = $mfrom;
-
-        return $this;
-    }
-
-    public function getMto(): ?User
-    {
-        return $this->mto;
-    }
-
-    public function setMto(?User $mto): self
-    {
-        $this->mto = $mto;
-
-        return $this;
-    }
+ 
 
     public function getMessage(): ?string
     {
@@ -113,6 +93,30 @@ class Chat
     public function __toString()
     {
         return "Chat details";
+    }
+
+    public function getMto(): ?User
+    {
+        return $this->mto;
+    }
+
+    public function setMto(?User $mto): self
+    {
+        $this->mto = $mto;
+
+        return $this;
+    }
+
+    public function getMfrom(): ?User
+    {
+        return $this->mfrom;
+    }
+
+    public function setMfrom(?User $mfrom): self
+    {
+        $this->mfrom = $mfrom;
+
+        return $this;
     }
 
    

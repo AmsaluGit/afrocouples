@@ -113,11 +113,14 @@ class ChatController extends AbstractController
             dd("user not found");
         }
 
-
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
 
         return $this->render('chat/chat.html.twig', [
             'user' => $friend,
             'chats'=> $chats,
+            'totalMsgs'=> $msg[1]
         ]);
     }
 

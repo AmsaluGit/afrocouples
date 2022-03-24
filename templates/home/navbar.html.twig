@@ -52,12 +52,15 @@
 										{% endif %}
 
 										</li>
-
-									 {% if app.user  %}
+{# <pre>
+	{{ dump(totalMsgs) }}
+</pre> #}
+									 {% if app.user  and totalMsgs > 0 %}
 									   <li class="dropdown">
-											<a class="dropdown-item dropdown-toggle text-white notifications text-center" href="{{path('messages-list')}}">
-												<span >Message</span>
-												<span class="badge badge-danger" id="msg-notification"></span>
+								<a class="dropdown-item dropdown-toggle text-white notifications text-center" href="{{path('messages-list')}}">
+
+												<span>Message</span>
+												<span class="badge badge-danger" id="msg-notification">{{totalMsgs}}</span>
  											</a>
 										</li>
 									 {% endif %}

@@ -20,7 +20,7 @@ class UtilityController extends AbstractController
   
     public function getTotalMessagesList($chatRepository, $toUser)
     {
-        $unreadMessages = $chatRepository->findBy(['mto'=> $toUser, 'seen'=> false]);
+        $unreadMessages = $chatRepository->findBy(['mto'=> $toUser, 'seen'=> 0]);
         $unique_messages = array();
         $totalCount = 0;
  
@@ -39,7 +39,7 @@ class UtilityController extends AbstractController
             }
             $totalCount ++;
         }
-
+ 
         return [$unique_messages, $totalCount]; 
     }
    

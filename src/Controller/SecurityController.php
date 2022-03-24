@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\PasswordChangeType;
 use App\Entity\User;
+use App\Repository\ChatRepository;
 
 class SecurityController extends AbstractController
 {
@@ -48,7 +49,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/change/password", name="change_password", methods={"GET","POST"})
      */
-    public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function changePassword(ChatRepository $chatRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
         $form = $this->createForm(PasswordChangeType::class, $user);
@@ -74,9 +75,17 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+
+
+        $util = new UtilityController();
+        $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
+       
+
+
         return $this->render('security/changePassword.html.twig', [
             'form' => $form->createView(),
-            'error' => ""
+            'error' => "",
+            'totalMsgs'=> $msg[1]
         ]);
     }
 

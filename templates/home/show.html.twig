@@ -196,15 +196,18 @@
 											{% endif %}
 											{{ user.religion.name }}
 										</p>
-										{% if app.user %}
+									{% if app.user and app.user.id != user.id %}
 											<div class="icons-list">
 												<p>
 									<a href="{{ path('message', { uuid: user.uuid}) }}">
 
 													{# <a href="{{ path('message',{uuid: user.uuid }) }}"> #}
-													
+		
 													 <img src="{{asset('assets/icons/email.png')}}" alt="message-icon"> </a>
 												</p>
+
+
+
 												{% if like %}
 													<p id="like" data-label="{{user.idNumber}}">
 														<img src="{{asset('assets/icons/heart (1).png')}}" alt="love-icon">
@@ -214,6 +217,8 @@
 														<img src="{{asset('assets/icons/heart.png')}}" alt="love-icon">
 													</p>
 												{% endif %}
+
+
 											</div>	
 										{% else %}
 
@@ -419,12 +424,12 @@
 									switch(data.responseText){
 										case "cr":
 										{
-											$("#like img").attr("src", "/assets/icons/heart (1).png");
+											$("#like img").attr("src", "/assets/icons/heart (11).png");
 											break;
 										}
 										case "rm":
 										{
-											$("#like img").attr("src", "/assets/icons/heart.png");
+											$("#like img").attr("src", "/assets/icons/heart1.png");
 											break;
 										}
 									}

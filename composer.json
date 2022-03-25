@@ -98,8 +98,10 @@
         },
         "post-install-cmd": [
             "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
         ]
-        
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -110,6 +112,6 @@
             "require": "5.2.*"
         }
     }
-          
+       
 }
   

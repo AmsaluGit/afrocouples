@@ -70,6 +70,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             if(sizeof($sex)>0){
                 $qb->andWhere('u.sex in (:sex)');
                 $qb->setParameter('sex', $sex);
+                
             }
 
             if(sizeof($religion)>0){

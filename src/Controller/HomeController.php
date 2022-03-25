@@ -88,8 +88,9 @@ class HomeController extends AbstractController
             'SELECT u FROM App\Entity\User u ORDER BY u.id'
             );
         if ($this->getUser()) {
+            $sex = $this->getUser()->getSex();
         $query = $em->createQuery(
-                'SELECT u FROM App\Entity\User u where u.id != '.$this->getUser()->getId().' ORDER BY u.id'
+                "SELECT u FROM App\Entity\User u where u.sex='".$sex."' and u.id != ".$this->getUser()->getId()." ORDER BY u.id"
                 );
         }
         
@@ -129,6 +130,8 @@ class HomeController extends AbstractController
         $pattern = "/^[A-Za-z\d]{1,30}$/";
         $error = false;
 
+        //$sex[] = strtoupper($this->getUser()->getSex())=="F" ? "m":"f";
+
         if($request->request->get('sex')){
             foreach($request->request->get('sex') as $key => $value)
             {
@@ -141,7 +144,17 @@ class HomeController extends AbstractController
                 }
             }
         }
-
+        elseif ($this->getUser()) //if logged in 
+        {
+            $sex[] = strtoupper($this->getUser()->getSex())=="F" ? "m":"f";
+          
+            
+        }
+        else 
+        {
+            //
+        }
+ 
         
         if($request->request->get('age')){
             foreach($request->request->get('age') as $key => $value)
@@ -223,18 +236,18 @@ class HomeController extends AbstractController
         $end = $request->request->get('end');
         $em = $this->getDoctrine()->getManager();
         $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end);
-        
+     
         // $dql->setParameter("age", $age);
         // $dql->setParameter("sex", $sex);
         $users = $dql->getArrayResult();
         // dd($content);
-        // dd($content);
+         //dd($users);
         $response['users'] = $users;
         $response['draw'] = $request->request->get("draw");
 
         $returnResponse = new JsonResponse();
         $returnResponse->setJson(json_encode($response));
-    
+  
         return $returnResponse;
     }
 

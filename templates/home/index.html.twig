@@ -505,6 +505,7 @@ $name.push(value.value);
 
 $.each($(".sex-checkbox:checked"), function (key, value) {
 $sex.push(value.value);
+
 });
 
 $.each($(".religion-checkbox:checked"), function (key, value) {
@@ -557,17 +558,13 @@ if(user.profileImage)
 {
 	profilePicture = '/uploads/' +user.username+'/'+ user.profileImage;
 }
-		 
-											 
-
-													{# <a href="{{ path('user_detail', { uuid: user.uuid}) }}"> #}
+ 
 
 
 
 $meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
 
-{# 
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="/uploads/' +user.username+'/'+ user.profileImage + '" alt="" class="w-100 card-img-top2"></a></div>'); #}
+ 
 
 
 
@@ -718,7 +715,7 @@ function tt() {}
 
 <script>
 
-   /*$(window).on("load", function () {
+   {# $(window).on("load", function () {
 	   var tot = "{{ totalMsgs }}";
 	   console.log(tot);
 	   if(tot > 0)
@@ -730,7 +727,7 @@ function tt() {}
  			$("#msg-notification").parent().parent().hide();
 	   }
    
-});*/
+}); #}
 
 
 

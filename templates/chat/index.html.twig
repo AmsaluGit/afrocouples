@@ -286,7 +286,7 @@ body{margin-top:20px;}
 						{% set priflePic =  asset('/assets/images/'~ lsex ~'.png') %}
 				{% endif %}
 				
-				{% set path = "{{ path('user_detail',{'uuid':app.user.uuid}) }}" %}
+				{% set path =  path('user_detail',{'uuid':app.user.uuid}) %}
 
 				{% endif %}
 
@@ -297,7 +297,9 @@ body{margin-top:20px;}
 									{# <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"> #}
 
 								{# {% if app.user.id == chat.mfrom.id %} #}
+								<a href="{{ path }}">
 									<img src="{{priflePic}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+									</a>
 
 								{# {% else %}
 									<img src="{{priflePic}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
@@ -403,9 +405,9 @@ body{margin-top:20px;}
 	</div>
 </main>
 
-<div class="flex-grow-0 py-3 px-4 border-top">
+<div class="flex-grow-0 py-3 px-4 border-top pl-5">
 						<div class="input-group">
- 							<a class="btn btn-primary " href="{{path('home')}}">Back to Home</a>
+ 							<a class="btn btn-primary btn-sm " href="{{path('home')}}">Back to Home</a>
 						</div>
 					</div>
 
@@ -584,13 +586,17 @@ console.log(message);
 </script>
 
 
-
-
-
   <!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+</script>
 
+<script>
+/*
+$("body").load(function() {
+   $('#chatbox, body').animate({scrollTop: $('#chatbox').prop("scrollHeight")}, 500);
+});*/
+</script>
 
 {% endblock %}

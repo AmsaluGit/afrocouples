@@ -16,7 +16,10 @@
 						<div class="header-nav header-nav-links justify-content-center">
 							<div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
 								<nav class="collapse header-mobile-border-top">
-									<ul class="nav nav-pills" id="mainNav">
+									<ul class="nav nav-pills" id="mainNav" 
+
+									style="background-color:#1a8495"
+									>
 										<li class="dropdown">
 											<a class="dropdown-item dropdown-toggle text-white" href="/">
 												Home
@@ -104,8 +107,8 @@
 							<div class="dropdown-divider"></div>
 
 						{% else %}
-							<a href="{{path('app_login')}}" class="btn btn-outline-light mx-3">Log In</a>
-							<a href="{{path('user_register')}}" class="btn btn-outline-light">Sign Up</a>
+							<a href="{{path('app_login')}}" class="btn btn-outline-light mx-3 btn-sm small">Log In</a>
+							<a href="{{path('user_register')}}" class="btn btn-outline-light btn-sm small">Sign Up</a>
 						{% endif %}
 					</div>
 				</div>

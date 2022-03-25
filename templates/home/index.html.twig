@@ -73,10 +73,10 @@
 				font-size: 0.8rem;
 			}
 
-			.card-body img {
+		/*.card-body img {
 				height: 170px;
-				/*   width: 100% !important;*/
-			}
+				  width: 100% !important;
+			}*/
 
 			.card-header {
 				background-color: white;
@@ -121,15 +121,25 @@
 			}
 
 			@media(max-width: 992px) {
-				a.dropdown-item {
+				/*li > a.dropdown-item {
+					color: white !important;
+				}*/
+				li > a.dropdown-item
+				{
 					color: black !important;
 				}
+				li > a.dropdown-toggle
+				{
+					color: white !important;
+				}
+				 
 			}
 
 			@media(max-width: 600) {
 				.card-body img {
 					height: auto;
 				}
+				 
 			}
 
 .notifications {
@@ -181,7 +191,7 @@
 									<ul class="nav nav-list flex-column mb-5">
 
 
-										 <li class="nav-item">
+										 {# <li class="nav-item">
 											<div class="accordion" id="accordion3">
 												<div class="card card-default">
 													<div class="card-header" id="collapse1Headingthree">
@@ -241,7 +251,7 @@
 													</div>
 												</div>
 											</div>
-										</li> 
+										</li>  #}
 
 
 										
@@ -396,8 +406,17 @@
 											<!-- Card-->
 											<div class="card shadow-sm border-0 rounded">
 												<div class="card-body p-0">
+												{% set sex = user.sex == "m"? "male" : "female" %}
+
+												{% set profilePicture = asset('uploads/'~ user.username ~'/' ~ user.profileImage ~'') %}
+
+												{% if not user.profileImage %}
+													{% set profilePicture = asset('/assets/images/'~ sex ~'.png') %}
+												{% endif %}
+
 													<a href="{{ path('user_detail', { uuid: user.uuid}) }}">
-				<img src="{{ asset('uploads/'~ user.username ~'/' ~ user.profileImage ~'') }}" alt="" class="w-100 card-img-top1">
+
+												<img src="{{ profilePicture }}" alt="" class="w-100 card-img-top1">
 													</a>
 													<div class="p-2">
 														<p class="mb-0 name">{{user.fname}}
@@ -520,7 +539,38 @@ $.each(data['users'], function () {
 $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
 $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 var user = $(this)[0][0];
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="/uploads/' +user.username+'/'+ user.profileImage + '" alt="" class="w-100 card-img-top2"></a></div>');
+
+ 
+{% set sex = "{{ user.sex }}" %}
+{% if sex=="m" %}
+{% set sex = "male" %}
+{% else %}
+	{% set sex = "female" %}
+{% endif %}
+
+ 
+
+var profilePicture = "{{asset('/assets/images/'~ sex ~'.png')}}";
+
+ 
+if(user.profileImage)
+{
+	profilePicture = '/uploads/' +user.username+'/'+ user.profileImage;
+}
+		 
+											 
+
+													{# <a href="{{ path('user_detail', { uuid: user.uuid}) }}"> #}
+
+
+
+$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
+
+{# 
+$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="/uploads/' +user.username+'/'+ user.profileImage + '" alt="" class="w-100 card-img-top2"></a></div>'); #}
+
+
+
 $wrapper = $('<div class="p-2"></div>');
 
 // age calculation
@@ -681,6 +731,11 @@ function tt() {}
 	   }
    
 });*/
+
+
+
+
+
 
 </script>
 

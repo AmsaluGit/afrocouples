@@ -146,7 +146,16 @@
 											<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 												<div class="carousel-inner">
 													<div class="carousel-item active" data-bs-interval="10000">
-														<img src="/uploads/{{ user.username }}/{{ user.profileImage }}" class="d-block w-100" alt="...">
+
+												{% set sex = user.sex == "m"? "male" : "female" %}
+
+												{% set profilePicture = asset('uploads/'~ user.username ~'/' ~ user.profileImage ~'') %}
+
+												{% if not user.profileImage %}
+													{% set profilePicture = asset('/assets/images/'~ sex ~'.png') %}
+												{% endif %}
+
+														<img src="{{ profilePicture }}" class="d-block w-100" alt="...">
 														<div
 															class="carousel-caption d-none d-md-block">{# <h5>First slide label</h5>																																																			                                             <p>Some representative placeholder content for the first slide.</p> #}
 														</div>
@@ -225,10 +234,14 @@
 
 											</div>	
 										{% else %}
+											{% if not app.user %}
+												<p id="like" data-label="{{user.idNumber}}">
+												<i class="badge badge-warning"><a href ="/login">Login to chat with <strong>{{user.fname}} </strong> </a></i>
+												</p>
 
-										<p id="like" data-label="{{user.idNumber}}">
-											<i class="badge badge-warning"><a href ="/login">Login to chat with <strong>{{user.fname}} </strong> </a></i>
-										</p>
+											{% endif %}
+
+									
 										{% endif %}
 									</div>
 								</div>

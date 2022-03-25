@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}Log in!
+{# {% block title %}Log in!
 {% endblock %}
 
 {% block stylesheets %}
@@ -33,13 +33,146 @@
 			}
 	</style>
 
-{% endblock %}
+{% endblock %} #}
+
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Sign UP</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		{# <link rel="stylesheet" href="{{asset('assets/vendor/materialize/css/materialize.css')}}"> #}
+		<link rel="stylesheet" href="{{asset('externalAssets/bootstrap/css/bootstrap.min.css')}}"> <link rel="stylesheet" href="{{asset('externalAssets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('externalAssets/theme.css')}}">
+		<link
+		rel="stylesheet" href="{{asset('externalAssets/theme-elements.css')}}">
+
+		<!-- Skin CSS -->
+		<link id="skinCSS" rel="stylesheet" href="{{asset('externalAssets/skins/default.css')}}">
+		<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+			.sign-up-form {
+				max-width: 680px;
+				margin: 0 auto;
+			}
+
+         .form-group .row{
+            margin-bottom: 20px;
+         }
+
+         div > ul{
+            display: none;
+         }
+
+         .help-block > ul{
+            display: block;
+         }
+
+         .row .form-control{
+
+         }
+
+			.card {
+				position: relative;
+				border: 1px solid rgba(0, 0, 0, 0.06);
+				padding: 30px 50px;
+            border-radius: 10px;
+			}
+
+			.collapse ul {
+				padding: 6px 0;
+			}
+
+         .sign-up-form h2 {
+            color: #636363;
+            margin: 0 0 15px;
+            position: relative;
+            text-align: center;
+         }
+
+         .sign-up-form h2:before, .sign-up-form h2:after {
+            content: "";
+            height: 2px;
+            width: 30%;
+            background: #d4d4d4;
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+         }	
+         .sign-up-form h2:before {
+            left: 0;
+         }
+         .sign-up-form h2:after {
+            right: 0;
+         }
+
+			.header-body {
+				background: #1a8495 !important;
+			}
+			#header i {
+				color: white;
+			}
+			a {
+				color: #0088CC;
+			}
+
+			.tab-content {
+				overflow: scroll;
+			}
+
+         .body{
+            background: linear-gradient(to top right,#b9a0a9 0%,#0675b7 100%);
+         }
+
+			@media(max-width: 800px) {
+				#smartwizard .nav {
+					display: none;
+				}
+
+			}
+		</style>
+	</head>
 
 {% block body %}
+	{% include "home/navbar.html.twig" %}
 	<div class="container">
-		<div class="row py-5">
+	
+{# <div class="card card-info"> #}
+   {# <div class="card-header">
+                                <center><p class="pt-0">            
+                                    <h4 style="color: #1884ed"> {% trans %}AfroCouples{% endtrans %}</h4>
+									<span class="badge badge-success">Let's be parents</span>
+                                </center>
+                            </div> #}
+{# <div class="card card-body"> #}
+<div class="row ">
 				<div class="col-md-3 col-lg-3"></div>
-				<div class="col-md-6 col-lg-5 mb- mb-lg-0 my-5 card sign-in-form">
+				<div class="col-md-6 col-lg-5 mb- mb-lg-0  card sign-in-form">
 					<h2>Login</h2>
 					<form method="post">
 						{% if error %}
@@ -84,6 +217,13 @@
 					</div>
 				</form>
 			</div>
+{# </div> #}
+{# </div> #}
+
+
+		
+
+
 
 			<div class="col-sm-3"></div>
 

@@ -223,6 +223,17 @@ body{margin-top:20px;}
 					<div class="chat-messages " id="chatbox">
 
 
+
+
+
+
+
+
+       
+	
+
+
+
 				{% for chat in chats %}
 
 				{% set createdAt = chat.createdAt| date('Y.m.d H:m:s') %}
@@ -239,11 +250,43 @@ body{margin-top:20px;}
 				{% set margin = "margin-right: 50px ;" %}
 				{% set textDirection = "text-left " %}
 
+
+
+
+		
+		{% set loggedInProfilePic = app.user.profileImage %}
+		{% set friendProfilePic = user.profileImage %}
+ 
+		{% set fsex = user.sex == "m" ? "male":"female" %}
+		{% set priflePic = asset('/assets/images/'~ fsex ~'.png')  %}
+ 		     
+		  {% if friendProfilePic %}
+		  		{% set priflePic = asset('/uploads/'~ user.username ~'/'~ user.profileImage)  %}
+		  {% endif %}
+		  
+		 {% set path = path('user_detail',{'uuid':user.uuid}) %}
+
+
+
+
+
 				{% if app.user.id == chat.mfrom.id %}
 
 				{% set direction = "chat-message-right" %}
 				{% set margin = "margin-left: 50px ;" %}
 				{% set textDirection = "text-right " %}
+ 
+ 
+				{# re write profilePic #}
+				{% if loggedInProfilePic %}
+				{% set priflePic = asset('/uploads/'~ app.user.username ~'/'~ app.user.profileImage) %}
+
+				{% else %}
+						{% set lsex = app.user.sex == "m" ? "male":"female" %}
+						{% set priflePic =  asset('/assets/images/'~ lsex ~'.png') %}
+				{% endif %}
+				
+				{% set path = "{{ path('user_detail',{'uuid':app.user.uuid}) }}" %}
 
 				{% endif %}
 
@@ -253,12 +296,12 @@ body{margin-top:20px;}
 
 									{# <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"> #}
 
-								{% if app.user.id == chat.mfrom.id %}
-									<img src="{{asset('/uploads/'~app.user.username~'/'~app.user.profileImage )}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+								{# {% if app.user.id == chat.mfrom.id %} #}
+									<img src="{{priflePic}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
 
-								{% else %}
-									<img src="{{asset('/uploads/'~user.username~'/'~user.profileImage )}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-								{% endif %}
+								{# {% else %}
+									<img src="{{priflePic}}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+								{% endif %} #}
 
 								
 

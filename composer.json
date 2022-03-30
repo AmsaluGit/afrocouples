@@ -52,6 +52,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "deployer/deployer": "^6.8",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
@@ -114,4 +115,3 @@
     }
        
 }
-  

@@ -39,7 +39,7 @@
 											</a>
 										</li>
 
-
+{# 
 											<li class="dropdown">
 										 
 										
@@ -55,9 +55,7 @@
 										{% endif %}
 
 										</li>
-{# <pre>
-	{{ dump(totalMsgs) }}
-</pre> #}
+  #}
 									 {% if app.user  and totalMsgs > 0 %}
 									   <li class="dropdown">
 								<a class="dropdown-item dropdown-toggle text-white notifications text-center" href="{{path('messages-list')}}">

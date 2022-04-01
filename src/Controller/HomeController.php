@@ -247,6 +247,7 @@ class HomeController extends AbstractController
 
         $returnResponse = new JsonResponse();
         $returnResponse->setJson(json_encode($response));
+        
   
         return $returnResponse;
     }

@@ -41,6 +41,7 @@ class ChatController extends AbstractController
          $time = new DateTime();
 
          $chat = new Chat();
+         
 
          $chat->setMfrom($fromUser);
          $chat->setMto($toUser);

@@ -584,7 +584,9 @@ $name = '<p class="mb-0 name">' + user.fname + ' <span class="play-button"></spa
 
 $city = '<p>' + user.currentCity + ', Ethiopia</p>';
 
-$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this)[0].religionName + '<span></span>  </p>';
+//$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this)[0].religionName + '<span></span>  </p>';
+$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + user.religionName + '<span></span>  </p>';
+
 $wrapper.append($name);
 $wrapper.append($city);
 $wrapper.append($citizenAndReleigion);

@@ -442,9 +442,15 @@
 															{% if user.nationality %}
 																{# {{user.nationality.name}}/ #}
 															{% endif %}
-															<span>
-																<a>Orthodox</a>
+
+															{% if user.religion %}
+																 
+
+																 <span>
+																<a>{{user.religion.name}}  </a>
 															</span>
+															{% endif %}
+															
 														</p>
 													</div>
 												</div>

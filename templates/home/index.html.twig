@@ -583,9 +583,10 @@ $name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-
 $name = '<p class="mb-0 name">' + user.fname + ' <span class="play-button"></span></p>';
 
 $city = '<p>' + user.currentCity + ', Ethiopia</p>';
+console.log($(this)[0]);
 
 //$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this)[0].religionName + '<span></span>  </p>';
-$citizenAndReleigion = '<p class=" text-muted">' + user.riligion + '/ ' + user.religionName + '<span></span>  </p>';
+$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + user.religionName + '<span></span>  </p>';
 
 $wrapper.append($name);
 $wrapper.append($city);

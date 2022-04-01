@@ -83,7 +83,7 @@ class HomeController extends AbstractController
     {
         
         $em = $this->getDoctrine()->getManager();
-        $religion = $em->getRepository(Religion::class)->findAll();
+        $religion = $em->getRepository(Religion::class)->findBy([],['name'=>'asc'], null,null);
         $query = $em->createQuery(
             'SELECT u FROM App\Entity\User u ORDER BY u.id'
             );

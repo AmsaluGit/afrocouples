@@ -248,3 +248,5 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home5/afrocouplescom/public_html/afrocouples/public/index.php on line 8
+[01-Apr-2022 15:05:37 UTC] 2022-04-01T15:05:37+00:00 [info] User Deprecated: Since symfony/security-core 5.3: The "Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager" class is deprecated, use the new authenticator system instead.
+[01-Apr-2022 15:05:37 UTC] 2022-04-01T15:05:37+00:00 [info] User Deprecated: Since symfony/security-core 5.3: The "Symfony\Component\Security\Core\Event\AuthenticationFailureEvent" class is deprecated, use "Symfony\Component\Security\Http\Event\LoginFailureEvent" with the new authenticator system instead.

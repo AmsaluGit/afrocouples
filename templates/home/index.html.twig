@@ -462,9 +462,6 @@
 									{% endfor %}
 								</div>
 							</div>
-							<div class="spinner-border" role="status">
-								<span class="visually-hidden">Loading...</span>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -501,6 +498,7 @@ $sex = [];
 $religion = [];
 $name = [];
 $age = [];
+loadControl.more = true;
 $.each($(".age-checkbox:checked"), function (key, value) {
 $age.push(value.value);
 });
@@ -520,7 +518,7 @@ $religion.push(value.value);
 
 loadControl.start = 0;
 loadControl.end = 20;
-loadControl.round = 1
+loadControl.round = 0
 if (loadControl.more) {
 $.ajax({
 method: 'POST',
@@ -535,17 +533,22 @@ religion: $religion,
 draw: loadControl.round
 },
 success: function (data) {
-if (data.length == 0) {
+if (data.users.length == 0) {
 loadControl.more = false;
+}
+else{
+	loadControl.more = true;
+	loadControl.free = true;
 }
 $container = $(".users-list");
 $(".users-list").html("");
 if (data['users'].length > 0 && data['draw'] == loadControl.round) {
 loadControl.round += 1;
-$.each(data['users'], function () {
+								console.log("addded from scroll");
+data['users'].forEach(user => {
 $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
 $card = $('<div class="card shadow-sm border-0 rounded"></div>');
-var user = $(this)[0][0];
+//var user = $(this)[0][0];
 
  
 {% set sex = "{{ user.sex }}" %}
@@ -559,7 +562,7 @@ var user = $(this)[0][0];
 
 var profilePicture = "{{asset('/assets/images/'~ sex ~'.png')}}";
 
- 
+  
 if(user.profileImage)
 {
 	profilePicture = '/uploads/' +user.username+'/'+ user.profileImage;
@@ -570,15 +573,11 @@ if(user.profileImage)
 
 $meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
 
- 
-
-
-
 $wrapper = $('<div class="p-2"></div>');
 
 // age calculation
 var today = new Date();
-var birthDate = new Date($(this)[0].dob);
+var birthDate = new Date(user.dob);
 var age1 = today.getFullYear() - birthDate.getFullYear();
 var m = today.getMonth() - birthDate.getMonth();
 if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -586,13 +585,11 @@ age1--;
 }
 /*
 $name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';*/
-$name = '<p class="mb-0 name">' + user.fname + ' <span class="play-button"></span></p>';
+$name = '<p class="mb-0 name">' + user.fname + ", " +age1 + ' <span class="play-button"></span></p>';
 
-$city = '<p>' + user.currentCity + ', Ethiopia</p>';
+$city = '<p>' + user.nationality +", "+ user.city + '</p>';
  
- console.log(user);
-
-$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this).religionName + '<span></span>  </p>';
+$citizenAndReleigion = '<p class=" text-muted">' + user.religionName + '<span></span>  </p>';
 
 $wrapper.append($name);
 $wrapper.append($city);
@@ -616,122 +613,124 @@ $container.append("<center>No Match Found!</center>");
 
 
 $(".blog-posts").append($container);
-loadControl.round ++;
 },
 error: function (data) {
-console.log("lksjdf");
 }
 });
 }
 });
-
 $(window).bind('scroll', function () {
+    if ($(window).scrollTop() >= $('.main').offset().top + $('.main').outerHeight() - (window.innerHeight + 300)) {
+		if (loadControl.free) {
+			loadControl.free=false;
+            $sex = [];
+            $religion = [];
+            $name = [];
+            $age = [];
+            $.each($(".age-checkbox:checked"), function (key, value) {
+                $age.push(value.value);
+            });
 
-if ($(window).scrollTop() >= $('.main').offset().top + $('.main').outerHeight() - (window.innerHeight + 300)) {
-if (loadControl.free) {
-$sex = [];
-$religion = [];
-$name = [];
-$age = [];
-$.each($(".age-checkbox:checked"), function (key, value) {
-$age.push(value.value);
-});
+            $.each($(".name-checkbox:checked"), function (key, value) {
+                $name.push(value.value);
+            });
 
-$.each($(".name-checkbox:checked"), function (key, value) {
-$name.push(value.value);
-});
+            $.each($(".sex-checkbox:checked"), function (key, value) {
+                $sex.push(value.value);
+            });
 
-$.each($(".sex-checkbox:checked"), function (key, value) {
-$sex.push(value.value);
-});
+            $.each($(".religion-checkbox:checked"), function (key, value) {
+                $religion.push(value.value);
+            });
 
-$.each($(".religion-checkbox:checked"), function (key, value) {
-$religion.push(value.value);
-});
+            loadControl.start = loadControl.round * 20;
+            if (loadControl.more) {
+				loadControl.more=false;
+                $(".spinner-border").removeClass("ds-none");
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ path("user_filter") }}',
+                    data: {
+                        start: loadControl.start,
+                        end: loadControl.end,
+                        name: $name,
+                        age: $age,
+                        sex: $sex,
+                        religion: $religion,
+                        draw: loadControl.round
+                    },
+                    success: function (data) {
 
-loadControl.start = loadControl.round * 20;
-if (loadControl.more) {
+                        var $container = $(".users-list");
 
-$(".spinner-border").removeClass("ds-none");
-loadControl.free = false;
-$.ajax({
-method: 'POST',
-url: '{{ path("user_filter") }}',
-data: {
-start: loadControl.start,
-end: loadControl.end,
-name: $name,
-age: $age,
-sex: $sex,
-religion: $religion,
-draw: loadControl.round
-},
-success: function (data) {
-if (data.length == 0) {
-loadControl.more = false;
-}
+                        console.log(data);
 
-$container = $(".users-list");
+                        if (data['users'].length > 0) {
+                            if (data['draw'] == loadControl.round) {
+								
+                                loadControl.round += 1;
+								console.log("addded from scroll");
+                                data['users'].forEach(user => {
+                                    $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
+                                    $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 
-console.log(data);
+                                    $meta = $('<div class="card-body p-0"><a href="/user/' + user.userId + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top3"></a></div>');
 
-if (data['users'].length > 0) {
-if (data['draw'] == loadControl.round) {
+                                    $wrapper = $('<div class="p-2"></div>');
 
-loadControl.round += 1;
-$.each(data['users'], function () {
-$col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
-$card = $('<div class="card shadow-sm border-0 rounded"></div>');
-var user = $(this)[0][0];
+                                    // age calculation
+                                    var today = new Date();
+                                    var birthDate = new Date(user.dob);
+                                    var age1 = today.getFullYear() - birthDate.getFullYear();
+                                    var m = today.getMonth() - birthDate.getMonth();
+                                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                                        age1--;
+                                    }
 
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.userId + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top3"></a></div>');
+                                    $name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
+                                    $city = '<p>'+user.nationality+ ", " + user.city + '</p>';
 
-$wrapper = $('<div class="p-2"></div>');
+                                    $citizenAndReleigion = '<p class=" text-muted">' +  user.religionName + '<span></span>  </p>';
+                                    $wrapper.append($name);
+                                    $wrapper.append($city);
+                                    $wrapper.append($citizenAndReleigion);
+                                    $meta.append($wrapper);
+                                    $card.append($meta);
+                                    $col.append($card);
+                                    $container.append($col);
+                                });
+                            }
+							
+							if (data.users.length > 0) {
+								loadControl.more = true;
+								loadControl.free = true;
+							}
+                        } else {
+                            if (loadControl.round > 1) {
+								
+							 }
+                            else 
+							{
+								loadControl.more = false;
+								loadControl.free = false;
+							}
 
-// age calculation
-var today = new Date();
-var birthDate = new Date($(this)[0].dob);
-var age1 = today.getFullYear() - birthDate.getFullYear();
-var m = today.getMonth() - birthDate.getMonth();
-if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-age1--;
-}
-
-$name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
-$city = '<p>' + $(this)[0].currentCity + ', Ethiopia</p>';
-
-$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this).religionName + '<span></span>  </p>';
-$wrapper.append($name);
-$wrapper.append($city);
-$wrapper.append($citizenAndReleigion);
-$meta.append($wrapper);
-$card.append($meta);
-$col.append($card);
-$container.append($col);
-});
-}
-} else {
-if (loadControl.round > 1) {} 
-//else 
-//$container.append("<center>No Match Found!</center>");
-
-}
+                        }
 
 
-$(".blog-posts").append($container);
-loadControl.round ++;
-},
-error: function (data) {
-console.log("lksjdf");
-}
-});
+                        $(".blog-posts").append($container);
+						setTimeout(tt, 10000);
+                		loadControl.free = true;
+                    },
+                    error: function (data) {
+                        console.log("lksjdf");
+                    }
+                });
 
-setTimeout(tt, 10000);
-$(".spinner-border").addClass("ds-none");
-loadControl.free = true;
-}
-}
-}
+                
+            }
+        }
+    }
 });
 function tt() {}
 		</script>
@@ -751,8 +750,6 @@ function tt() {}
 	   }
    
 }); #}
-
-
 
 
 

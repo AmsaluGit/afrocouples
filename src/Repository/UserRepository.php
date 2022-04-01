@@ -50,7 +50,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function getFilteredData($name, $sex, $religion, $age, $start, $end)
     {
         $qb = $this->createQueryBuilder('u');
-        $qb->select('u','r.id as religion', 'r.name as religionName', "DATE_FORMAT(u.birthdate, '%Y-%m-%d') as dob")->join('u.religion', 'r');
+        $qb->select('u.fname','u.profileImage', 'c.name as city', 'n.name as nationality','u.username','r.id as religion', 'r.name as religionName', "DATE_FORMAT(u.birthdate, '%Y-%m-%d') as dob")
+           ->join('u.religion', 'r')
+           ->join('u.city', 'c')
+           ->join('u.nationality', 'n');
             
             if(sizeof($age)>0){
                 $totalRange = sizeof($age);
@@ -79,9 +82,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             }
 
             // $qb->orderBy('u.id', 'ASC')
-            // dd($qb->getDQL());
             $qb->setMaxResults($end)
             ->setFirstResult($start)
+                        // dd($qb->getDQL());
+
         ;
         return $qb->getQuery();
     }

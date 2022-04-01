@@ -1,0 +1,24 @@
+
+# To switch to production mode from dev mode, comment out all directives where
+# app_dev.php appears, and uncomment all directives where app.php appears.
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+# Apache
+RewriteRule ^(.*) - [E=BASE:%1/afrocouples/public]
+# LiteSpeed
+RewriteRule ^(.*) - [E:BASE=%1/afrocouples/public]
+
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^index\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+#RewriteRule ^app\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .? - [L]
+
+# Rewrite all other queries to the front controller.
+# RewriteRule .? %{ENV:BASE}/index.php [L]
+#RewriteRule .? %{ENV:BASE}/app.php [L]
+RewriteRule .? %{ENV:BASE}/afrocouples/public/index.php [L]
+
+ 

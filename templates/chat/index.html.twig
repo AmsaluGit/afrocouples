@@ -531,7 +531,7 @@ body{margin-top:20px;}
 
 		$("#message").val('');
 
-		var current_user_uuid = "{{app.request.attributes.get('_route_params').uuid}}";
+		var current_user_uuid = "{{ app.request.attributes.get('_route_params').uuid }}";
 		var url = "{{path('chat',{uuid:'temp' })}}" ;
 		url = url.replace("temp", current_user_uuid);
  
@@ -540,7 +540,8 @@ body{margin-top:20px;}
 			url: url,
 			data: message,
 			success: function (data) { 
-				location.reload();
+				//when chatting is enabled, then comment the following line....
+				 window.location.href = "{{ path('message',{ uuid:app.request.attributes.get('_route_params').uuid  }) }}";
 			}
 		});
 

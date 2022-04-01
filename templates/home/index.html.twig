@@ -590,9 +590,9 @@ $name = '<p class="mb-0 name">' + user.fname + ' <span class="play-button"></spa
 
 $city = '<p>' + user.currentCity + ', Ethiopia</p>';
  
+ console.log(user);
 
-//$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this)[0].religionName + '<span></span>  </p>';
-$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + user.religionName + '<span></span>  </p>';
+$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this).religionName + '<span></span>  </p>';
 
 $wrapper.append($name);
 $wrapper.append($city);
@@ -603,7 +603,13 @@ $col.append($card);
 $container.append($col);
 });
 } else {
-if (loadControl.round > 1) {} else 
+if (loadControl.round > 1) 
+{
+
+} 
+
+else 
+
 $container.append("<center>No Match Found!</center>");
 
 }
@@ -664,9 +670,14 @@ success: function (data) {
 if (data.length == 0) {
 loadControl.more = false;
 }
+
+$container = $(".users-list");
+
+console.log(data);
+
 if (data['users'].length > 0) {
 if (data['draw'] == loadControl.round) {
-$container = $(".users-list");
+
 loadControl.round += 1;
 $.each(data['users'], function () {
 $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
@@ -689,7 +700,7 @@ age1--;
 $name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
 $city = '<p>' + $(this)[0].currentCity + ', Ethiopia</p>';
 
-$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this)[0].religionName + '<span></span>  </p>';
+$citizenAndReleigion = '<p class=" text-muted">' + user.nationality + '/ ' + $(this).religionName + '<span></span>  </p>';
 $wrapper.append($name);
 $wrapper.append($city);
 $wrapper.append($citizenAndReleigion);
@@ -700,8 +711,9 @@ $container.append($col);
 });
 }
 } else {
-if (loadControl.round > 1) {} else 
-$container.append("<center>No Match Found!</center>");
+if (loadControl.round > 1) {} 
+//else 
+//$container.append("<center>No Match Found!</center>");
 
 }
 

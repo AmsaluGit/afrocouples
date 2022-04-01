@@ -535,7 +535,16 @@ body{margin-top:20px;}
 		var url = "{{path('chat',{uuid:'temp' })}}" ;
 		url = url.replace("temp", current_user_uuid);
  
-		$.ajax(
+		$.ajax({
+			type: "POST",
+			url: url,
+			success: function (data) { 
+
+			}
+		});
+
+
+		/*$.ajax(
 			{
 				method:"POST",
 				data: message,
@@ -544,7 +553,7 @@ body{margin-top:20px;}
 		).success(function(data){
 
 			
-		});
+		});*/
 
        
     });

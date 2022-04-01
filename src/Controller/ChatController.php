@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
-
+ 
 class ChatController extends AbstractController
 {
 
@@ -41,8 +41,9 @@ class ChatController extends AbstractController
          $time = new DateTime();
 
          $chat = new Chat();
-         
-
+// dd($message);
+if(!$message) return new  Response("please enter message");
+ 
          $chat->setMfrom($fromUser);
          $chat->setMto($toUser);
          $chat->setMessage($message);

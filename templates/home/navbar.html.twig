@@ -39,6 +39,14 @@
 											</a>
 										</li>
 
+								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+										<li class="dropdown">
+											<a class="dropdown-item dropdown-toggle text-white" href="/gallery">
+											Photo
+											</a>
+										</li>
+										{% endif %}
+
 {# 
 											<li class="dropdown">
 										 
@@ -85,7 +93,7 @@
 									</li>
 									<li>
 										<a href="/gallery" class="dropdown-item">
-											{% trans %}Gallery{% endtrans %}
+											{% trans %}Photo{% endtrans %}
 										</a>
 									</li>
 									<li>

@@ -90,7 +90,7 @@ class HomeController extends AbstractController
         if ($this->getUser()) {
             $sex = $this->getUser()->getSex();
         $query = $em->createQuery(
-                "SELECT u FROM App\Entity\User u where u.sex='".$sex."' and u.id != ".$this->getUser()->getId()." ORDER BY u.id"
+                "SELECT u FROM App\Entity\User u where u.sex != '".$sex."' and u.id != ".$this->getUser()->getId()." ORDER BY u.id"
                 );
         }
         
@@ -237,13 +237,15 @@ class HomeController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $loggedInSex = $this->getUser()? $this->getUser()->getSex(): null;
+
+ 
         if($loggedInSex)
         {
             $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end, $loggedInSex);
         }
         else 
         {
-            $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end);
+            $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end, null);
         }
 
        

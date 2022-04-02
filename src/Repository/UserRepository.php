@@ -70,17 +70,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
             // dd($qb->getDQL());
 
-            if(sizeof($sex)>0){
-                $qb->andWhere('u.sex in (:sex)');
-                $qb->setParameter('sex', $sex);
-                
-            }
+           
 
             if($loggedInSex){
+               
                 $friendSex = strtoupper($loggedInSex) == "M"? "f":"m";
                 $qb->andWhere('u.sex = :sex');
                 $qb->setParameter('sex', $friendSex);
                 
+            }
+            else 
+            {
+                if(sizeof($sex)>0){
+                    $qb->andWhere('u.sex in (:sex)');
+                    $qb->setParameter('sex', $sex);
+                    
+                }
             }
 
             if(sizeof($religion)>0){
@@ -91,7 +96,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             // $qb->orderBy('u.id', 'ASC')
             $qb->setMaxResults($end)
             ->setFirstResult($start)
-                        // dd($qb->getDQL());
+                        //  dd($qb->getDQL());
 
         ;
         return $qb->getQuery();

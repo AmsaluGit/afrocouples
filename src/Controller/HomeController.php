@@ -235,7 +235,18 @@ class HomeController extends AbstractController
         $start = $request->request->get('start');
         $end = $request->request->get('end');
         $em = $this->getDoctrine()->getManager();
-        $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end);
+
+        $loggedInSex = $this->getUser()? $this->getUser()->getSex(): null;
+        if($loggedInSex)
+        {
+            $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end, $loggedInSex);
+        }
+        else 
+        {
+            $dql = $user_repo->getFilteredData($name, $sex, $religion, $age, $start, $end);
+        }
+
+       
      
         // $dql->setParameter("age", $age);
         // $dql->setParameter("sex", $sex);

@@ -47,7 +47,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
 
-    public function getFilteredData($name, $sex, $religion, $age, $start, $end)
+    public function getFilteredData($name, $sex, $religion, $age, $start, $end, $loggedInSex=null)
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select('u.fname','u.profileImage', 'c.name as city', 'n.name as nationality','u.username','r.id as religion', 'r.name as religionName', "DATE_FORMAT(u.birthdate, '%Y-%m-%d') as dob")
@@ -73,6 +73,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             if(sizeof($sex)>0){
                 $qb->andWhere('u.sex in (:sex)');
                 $qb->setParameter('sex', $sex);
+                
+            }
+
+            if($loggedInSex){
+                $friendSex = strtoupper($loggedInSex) == "M"? "f":"m";
+                $qb->andWhere('u.sex = :sex');
+                $qb->setParameter('sex', $friendSex);
                 
             }
 

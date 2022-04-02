@@ -11,11 +11,13 @@ use App\Entity\User;
 use App\Entity\Religion;
 use App\Entity\Likes;
 use App\Entity\Gallery;
+use App\Entity\Nationality;
 use App\Repository\UserRepository;
 use App\Form\RegistrationType;
 use App\Form\UserType;
 use App\Form\GalleryType;
 use App\Repository\ChatRepository;
+use App\Repository\NationalityRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -405,7 +407,7 @@ class HomeController extends AbstractController
     /**
      *  @Route("/register", name="user_register", methods={"GET", "POST"})
      */
-    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface)
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, NationalityRepository $nationalityRepository)
     {
         $user = new User();
         $user->setUuid(uniqid("",true));
@@ -418,6 +420,8 @@ class HomeController extends AbstractController
             $password = $form['plainPassword']->getData();
             $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $password));
             $user->setIdNumber(time());
+            $nationality = $nationalityRepository->find(1);//Ethiopian by default
+            $user->setNationality($nationality);
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute("app_login");

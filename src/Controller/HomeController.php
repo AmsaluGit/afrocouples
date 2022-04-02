@@ -407,7 +407,7 @@ class HomeController extends AbstractController
     /**
      *  @Route("/register", name="user_register", methods={"GET", "POST"})
      */
-    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, NationalityRepository $nationalityRepository)
+    public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, NationalityRepository $nationalityRepository, UserRepository $userRepository)
     {
         $user = new User();
         $user->setUuid(uniqid("",true));
@@ -418,6 +418,15 @@ class HomeController extends AbstractController
         {
             $em = $this->getDoctrine()->getManager();
             $password = $form['plainPassword']->getData();
+            $username = $form['username']->getData();
+            $userExists = $userRepository->findOneBy(['username'=>$username]);
+            if($userExists )
+            {
+                $this->addFlash('danger', 'Change the username, '.$username.' is reserved.  '.$username.' የሚለው ተይዧል  ሌላ ይመክሩ');
+                return $this->redirectToRoute("user_register");
+                
+            }
+
             $user->setPassword($userPasswordEncoderInterface->encodePassword($user, $password));
             $user->setIdNumber(time());
             $nationality = $nationalityRepository->find(1);//Ethiopian by default

@@ -25,9 +25,14 @@
 		<!-- Web Fonts  -->
 		<link id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
 
+		 {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> #}
+
+
 		<!-- Vendor CSS -->
 		{# <link rel="stylesheet" href="{{asset('assets/vendor/materialize/css/materialize.css')}}"> #}
+
 		<link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}"> <link rel="stylesheet" href="{{asset('assets/fontawesome-free/css/all.min.css')}}">
+
 		<link rel="stylesheet" href="{{asset('assets/theme.css')}}">
 		<link
 		rel="stylesheet" href="{{asset('assets/theme-elements.css')}}">
@@ -122,11 +127,48 @@
 	</head>
 	<body data-plugin-page-transition>
 
+
+
+
+
+
+
 		<div class="body">
 			{% include "home/navbar.html.twig" %}
 
 			<div role="main" class="main mt-5">
+
+		
+
+
+
 				<div class="container">
+
+
+		<div class="row">
+			<div class="col-md-12">
+
+				{% for label, messages in app.flashes %}
+					{% for message in messages %}
+						<div class=" alert alert-{{ label }} alert-dismissible">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						 
+								<i class="icon fa fa-{% if label=='success' %}check {% else %}ban {% endif %}"></i>
+							 
+							{{ message }}
+
+						</div>
+
+
+					{% endfor %}
+				{% endfor %}
+
+			</div>
+		</div>
+
+
+
+
 					{% if not form.vars.valid %}
 						<div class="alert alert-error">
 							<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -204,6 +246,11 @@
 		<script src="{{asset('assets/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 		<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
 		<script src="{{asset('assets/theme.init.js')}}"></script>
+
+		  {# <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> #}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
 
 	</body>
 </html>

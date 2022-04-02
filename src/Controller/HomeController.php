@@ -85,12 +85,12 @@ class HomeController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $religion = $em->getRepository(Religion::class)->findBy([],['name'=>'asc'], null,null);
         $query = $em->createQuery(
-            'SELECT u FROM App\Entity\User u ORDER BY u.id'
+            'SELECT u FROM App\Entity\User u ORDER BY u.id desc'
             );
         if ($this->getUser()) {
             $sex = $this->getUser()->getSex();
         $query = $em->createQuery(
-                "SELECT u FROM App\Entity\User u where u.sex != '".$sex."' and u.id != ".$this->getUser()->getId()." ORDER BY u.id"
+                "SELECT u FROM App\Entity\User u where u.sex != '".$sex."' and u.id != ".$this->getUser()->getId()." ORDER BY u.id desc"
                 );
         }
         

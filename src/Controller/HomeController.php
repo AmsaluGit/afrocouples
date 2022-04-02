@@ -18,6 +18,7 @@ use App\Form\UserType;
 use App\Form\GalleryType;
 use App\Repository\ChatRepository;
 use App\Repository\NationalityRepository;
+use DateTime;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -409,6 +410,7 @@ class HomeController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $userPasswordEncoderInterface, NationalityRepository $nationalityRepository, UserRepository $userRepository)
     {
+        $ALLOWED_MIN_AGE_IN_DAYS = 6575; //minimum of 18 years old
         $user = new User();
         $user->setUuid(uniqid("",true));
         $form = $this->createForm(RegistrationType::class, $user);
@@ -419,6 +421,17 @@ class HomeController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $password = $form['plainPassword']->getData();
             $username = $form['username']->getData();
+            $birthdate = $form['birthdate']->getData();
+            $today = new DateTime();
+            $dt = date_diff($birthdate,$today) ;
+           $days = $dt->format('%a');
+            // date_format($birthdate, 'Y-m-d H:i:s')
+            $days = intval($days);
+            if($days < $ALLOWED_MIN_AGE_IN_DAYS) 
+            {
+                $this->addFlash('danger', 'Please check your birthdate. under 18 are not allowed to register. ያስገቡትን የትውል ቅን ያረጋግጡ ከ18 አመት በታች ከሆኑ መመዝገብ አይፈቀድም');
+                return $this->redirectToRoute("user_register");
+            }
             $userExists = $userRepository->findOneBy(['username'=>$username]);
             if($userExists )
             {

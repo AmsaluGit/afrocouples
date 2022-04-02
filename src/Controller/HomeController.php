@@ -422,6 +422,7 @@ class HomeController extends AbstractController
             $user->setIdNumber(time());
             $nationality = $nationalityRepository->find(1);//Ethiopian by default
             $user->setNationality($nationality);
+            $user->setRoles(["USER_ROLE"]);
             $em->persist($user);
             $em->flush();
             return $this->redirectToRoute("app_login");

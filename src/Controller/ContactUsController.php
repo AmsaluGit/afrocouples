@@ -35,8 +35,8 @@ class ContactUsController extends AbstractController
                 $contactus->setCreatedAt(new DateTime());
                 $entityManager->persist($contactus);
                 $entityManager->flush();
-
-            return $this->redirectToRoute('home');
+                $this->addFlash('success', 'message sent successfully. ምልዕክትዎ በተሳካ ሁኔታ ተልኳል');
+               return $this->redirectToRoute('send_message');
         }
 
         $util = new UtilityController();

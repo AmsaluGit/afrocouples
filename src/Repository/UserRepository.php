@@ -93,7 +93,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 $qb->setParameter('religion', $religion);
             }
 
-            // $qb->orderBy('u.id', 'ASC')
+             $qb->orderBy('u.id', 'DESC');
             $qb->setMaxResults($end)
             ->setFirstResult($start)
                         //  dd($qb->getDQL());

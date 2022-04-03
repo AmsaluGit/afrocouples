@@ -316,6 +316,17 @@ class HomeController extends AbstractController
     }
 
 
+        /**
+     * @Route("/{id}", name="user_show", methods={"GET"})
+    */
+    public function show(User $user): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user
+        ]);
+    }
+    
+
      /**
      * @Route("/{id}", name="update_profile")
     */
@@ -334,7 +345,7 @@ class HomeController extends AbstractController
         return $this->redirectToRoute("gallery");
     }
 
-    
+
     /**
      *  @Route("/gallery", name="gallery", methods={"GET", "POST"})
      */

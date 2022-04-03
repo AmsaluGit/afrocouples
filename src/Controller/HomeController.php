@@ -354,7 +354,7 @@ class HomeController extends AbstractController
             }
         }
 
-        $gallery = $em->getRepository(Gallery::class)->findBy(array("user" => $this->getUser()->getId()));
+        $gallery = $em->getRepository(Gallery::class)->findBy( ["user" => $this->getUser()] );
 
 
         $util = new UtilityController();

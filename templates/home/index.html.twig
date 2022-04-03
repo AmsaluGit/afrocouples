@@ -683,7 +683,27 @@ $(window).bind('scroll', function () {
                                     $col = $('<div class="col-lg-custom col-md-3  col-sm-6 mb-4 mb-lg-0"></div>');
                                     $card = $('<div class="card shadow-sm border-0 rounded"></div>');
 
-                                    $meta = $('<div class="card-body p-0"><a href="/user/' + user.userId + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top3"></a></div>');
+                                  /* {# $meta = $('<div class="card-body p-0"><a href="/user/' + user.userId + '/detail"><img src="' + user.profileImage + '" alt="" class="w-100 card-img-top3"></a></div>'); #} */
+
+								    {% set sex = "{{ user.sex }}" %}
+									{% if sex=="m" %}
+									{% set sex = "male" %}
+									{% else %}
+										{% set sex = "female" %}
+									{% endif %}
+
+									var profilePicture = "{{asset('/assets/images/'~ sex ~'.png')}}";
+									if(user.profileImage)
+									{
+										profilePicture = '/uploads/' +user.username+'/'+ user.profileImage;
+									}
+									$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
+
+
+
+
+
+
 
                                     $wrapper = $('<div class="p-2"></div>');
 
@@ -696,7 +716,10 @@ $(window).bind('scroll', function () {
                                         age1--;
                                     }
 
-                                    $name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
+                                    /*$name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '<span class="play-button"><i class="far fa-play-circle"></i></span></p>';
+                                    $city = '<p>'+user.nationality+ ", " + user.city + '</p>';*/
+
+                                    $name = '<p class="mb-0 name">' + user.fname + ', ' + age1 + '</p>';
                                     $city = '<p>'+user.nationality+ ", " + user.city + '</p>';
 
                                     $citizenAndReleigion = '<p class=" text-muted">' +  user.religionName + '<span></span>  </p>';

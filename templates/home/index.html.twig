@@ -580,7 +580,7 @@ if(user.profileImage)
 
 
 
-$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
+$meta = $('<div class="card-body p-0"><a href="/user/' + user.uuid + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
 
 $wrapper = $('<div class="p-2"></div>');
 
@@ -697,7 +697,7 @@ $(window).bind('scroll', function () {
 									{
 										profilePicture = '/uploads/' +user.username+'/'+ user.profileImage;
 									}
-									$meta = $('<div class="card-body p-0"><a href="/user/' + user.idNumber + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
+									$meta = $('<div class="card-body p-0"><a href="/user/' + user.uuid + '/detail"><img src="'+ profilePicture +'" alt="" class="w-100 card-img-top2"></a></div>');
 
 
 

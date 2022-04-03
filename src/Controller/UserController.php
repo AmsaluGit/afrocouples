@@ -16,7 +16,7 @@ use App\Form\Filter\UserFilterType;
 
 
 /**
- * @Route("/user")
+ * @Route("/admin/user")
  */
 class UserController extends AbstractController
 {

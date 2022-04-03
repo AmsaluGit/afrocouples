@@ -16,7 +16,7 @@ use App\Form\Filter\UserFilterType;
 
 
 /**
- * @Route("/admin/user")
+ * @Route("/user")
  */
 class UserController extends AbstractController
 {
@@ -31,7 +31,7 @@ class UserController extends AbstractController
     // }
 
     /**
-     * @Route("/", name="user_index", methods={"GET","POST"})
+     * @Route("/userindex", name="user_index", methods={"GET","POST"})
      */
     public function index(UserPasswordEncoderInterface $encoder,Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response 
     {
@@ -95,9 +95,33 @@ class UserController extends AbstractController
         ]);
     }
 
-   
+    /**
+     * @Route("/{id}", name="update_profile")
+    */
+    public function changeProfile(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $gallery = $em->getRepository(Gallery::class)->findOneBy(array('photo'=>$id, 'user'=>$this->getUser()));
+        if($gallery){
+            $user = $this->getUser();
+            $user->setProfileImage($gallery->getPhoto());
+            $em->persist($user);
+            $em->flush();          
+        }
+        
+        return $this->redirectToRoute("gallery");
+    }
 
+    /**
+     * @Route("/{id}", name="user_show", methods={"GET"})
+    */
+    public function show(User $user): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})

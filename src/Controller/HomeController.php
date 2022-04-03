@@ -315,37 +315,6 @@ class HomeController extends AbstractController
         ]);
     }
 
-
-        /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
-    */
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user
-        ]);
-    }
-    
-
-     /**
-     * @Route("/{id}", name="update_profile")
-    */
-    public function changeProfile(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $gallery = $em->getRepository(Gallery::class)->findOneBy(array('photo'=>$id, 'user'=>$this->getUser()));
-        if($gallery){
-            $user = $this->getUser();
-            $user->setProfileImage($gallery->getPhoto());
-            $em->persist($user);
-            $em->flush();          
-        }
-        
-        return $this->redirectToRoute("gallery");
-    }
-
-
     /**
      *  @Route("/gallery", name="gallery", methods={"GET", "POST"})
      */
@@ -385,7 +354,7 @@ class HomeController extends AbstractController
             }
         }
 
-        $gallery = $em->getRepository(Gallery::class)->findBy( ["user" => $this->getUser()] );
+        $gallery = $em->getRepository(Gallery::class)->findBy(["user" => $this->getUser()] );
 
 
         $util = new UtilityController();

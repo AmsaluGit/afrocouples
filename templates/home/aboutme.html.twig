@@ -98,24 +98,14 @@
                             <div class="profile-image-outer-container">
 
 
-
-                            	 
-
-
-
-
                                 <div class="profile-image-inner-container bg-color-primary">
-                                    <img src="/uploads/{{user.username}}/{{user.profileImage}}">
-                                    {# <span class="profile-image-button bg-color-dark"> #}
-											{# <i class="fas fa-camera text-light"></i> #}
-										{# </span> #}
+                                <a href="/gallery"><img src="/uploads/{{user.username}}/{{user.profileImage}}"></a>
+                                    
+                                     
                                 </div>
-                                {# {{form_widget(form.profileImage)}} #}
-                                <div class="form-error">
-                                    {# {{ form_errors(form.profileImage) }} #}
-                                </div> 
-                                {# <input type="file" id="file" class="form-control profile-image-input"> #}
-                            </div>
+                                 <div class="form-error">
+                                 </div> 
+                             </div>
                         </div>
 
                     </div>

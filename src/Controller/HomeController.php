@@ -308,7 +308,7 @@ class HomeController extends AbstractController
         $msg = $util->getTotalMessagesList($chatRepository, $this->getUser());
        
 
-        return $this->render("home/edit2.html.twig", [
+        return $this->render("home/aboutme.html.twig", [
             'user' => $user,
             'form' => $form->createView(),
             'totalMsgs'=> $msg[1]

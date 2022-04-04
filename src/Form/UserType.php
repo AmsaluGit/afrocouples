@@ -60,7 +60,7 @@ class UserType extends AbstractType
             ])
            
             ->add('email', EmailType::class, [
-                'required' => false,
+                'required' => true,
                 'attr' => ['class'=>'form-control']
             ])
             ->add('religion', EntityType::class,[

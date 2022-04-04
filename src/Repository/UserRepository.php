@@ -50,7 +50,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function getFilteredData($name, $sex, $religion, $age, $start, $end, $loggedInSex=null)
     {
         $qb = $this->createQueryBuilder('u');
-        $qb->select('u.fname','u.profileImage', 'c.name as city', 'n.name as nationality','u.username','r.id as religion', 'r.name as religionName', "DATE_FORMAT(u.birthdate, '%Y-%m-%d') as dob")
+        $qb->select('u.fname','u.profileImage', 'c.name as city', 'n.name as nationality','u.username','r.id as religion', 'r.name as religionName', 'u.uuid as uuid',"DATE_FORMAT(u.birthdate, '%Y-%m-%d') as dob")
            ->join('u.religion', 'r')
            ->join('u.city', 'c')
            ->join('u.nationality', 'n');

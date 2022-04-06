@@ -1,0 +1,37 @@
+
+ 
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+# Apache
+RewriteRule ^(.*) - [E=BASE:%1/afrocouples/public]
+# LiteSpeed
+RewriteRule ^(.*) - [E:BASE=%1/afrocouples/public]
+
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^index\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+#RewriteRule ^app\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .? - [L]
+
+# Rewrite all other queries to the front controller.
+RewriteRule .? %{ENV:BASE}/afrocouples/public/index.php [L]
+#RewriteRule .? %{ENV:BASE}/app.php [L]
+
+RewriteRule .? %{ENV:BASE}/afrocouples/public/index.php [L]
+
+
+
+ 
+ 
+#  .	Matches any single character	c.t will match cat, cot, cut, etc
+# +	Repeats the previous match one or more times	a+ matches a, aa, aaa, etc
+# *	Repeats the previous match zero or more times	a* matches all the same things a+ matches, but will also match an empty string
+# ?	Makes the match optional	colou?r will match color and colour
+# \	Escape the next character	\. will match . (dot) and not any single character as explain above
+# ^	Called an anchor, matches the beginning of the string	^a matches a string that begins with a
+# $	The other anchor, this matches the end of the string	a$ matches a string that ends with a
+# ( )	Groups several characters into a single unit, and captures a match for use in a backreference	(ab)+ matches ababab - that is, the + applies to the group. For more on backreferences see below
+# [ ]	A character class - matches one of the characters	c[uoa]t matches cut, cot or cat
+# [^ ]	Negative character class - matches any character not specified	c[^/]t matches cat or c=t but not c/t

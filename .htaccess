@@ -1,5 +1,5 @@
 
- 
+#put this .htaccess in public_html folder, not in symfony project directory. 
 RewriteEngine on
 
 RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$

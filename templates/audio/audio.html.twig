@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RZ11993Q2V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RZ11993Q2V');
+</script>
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Audio upload -
+			{{app.user.fname}}
+		</title>
+
+		<meta name="keywords" content="HTML5 Template"/>
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta
+		name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+		<link
+		rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link
+		id="googleFonts" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/fontawesome-free/css/all.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/theme.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/theme-elements.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/vendor/owl-carousel/owl-carousel.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/theme-blog.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/cropperjs/dist/cropper.min.css')}}">
+		<link id="skinCSS" rel="stylesheet" href="{{asset('assets/skins/default.css')}}">
+<style>
+			.switch-primary {
+				padding: 6px 10px;
+			}
+
+			.dropdown-toggle i {
+				display: none;
+			}
+
+			.collapse ul {
+				padding: 6px 0;
+			}
+
+			.header-body {
+				background: #1a8495 !important;
+			}
+
+			hr {
+				margin: 15px 0 !important;
+			}
+
+			#header i {
+				color: white;
+			}
+			span a {
+				color: #0088CC !important;
+			}
+			.ds-none {
+				display: none;
+			}
+
+			.body {
+				margin-top: 20px !important;
+			}
+
+			.col-md-5,
+			.col-md-7 {
+				padding: 0 50px;
+			}
+
+			.image-container {
+				width: 100%;
+				display: flex;
+			}
+			.image-add-icon {
+				width: 100px;
+				height: 100px;
+				border-radius: 60px;
+			}
+
+			.image-add-icon i {
+				;
+				width: 50px;
+				height: 50px;
+				padding-top: 20px;
+			}
+
+			.image-add {
+				margin: 0 35px;
+			}
+
+			.image-uploader {
+				clear: both;
+				display: none;
+			}
+
+			/* .image-list img {
+				width: 23%;
+				margin: 5px;
+			} */
+
+			#image-uploader-hide i {
+				padding: 10px 15px;
+				background: white;
+				color: #1884ed;
+				cursor: pointer;
+				border-radius: 40px;
+			}
+
+			.card-header {
+				padding: 5px 20px;
+			}
+
+			.image_area {
+		  position: relative;
+		}
+
+		img {
+		  	display: block;
+		  	max-width: 100%;
+		}
+
+		.preview {
+  			overflow: hidden;
+  			width: 160px; 
+  			height: 160px;
+  			margin: 10px;
+  			border: 1px solid red;
+		}
+
+		.modal-lg{
+  			max-width: 1000px !important;
+		}
+
+		.overlay {
+		  position: absolute;
+		  bottom: 10px;
+		  left: 0;
+		  right: 0;
+		  background-color: rgba(255, 255, 255, 0.5);
+		  overflow: hidden;
+		  height: 0;
+		  transition: .5s ease;
+		  width: 100%;
+		}
+
+		.image_area:hover .overlay {
+		  height: 50%;
+		  cursor: pointer;
+		}
+
+			/* Ensure the size of the image fit the container perfectly */
+			img {
+				display: block;
+
+			/* This rule is very important, please don't ignore this */
+				max-width: 100%;
+			}
+
+		</style>
+	</head>
+	<body data-plugin-page-transition>
+		{% include "home/navbar.html.twig" %}
+		<div class="body">
+			<div class="container-fluid">
+				<div
+					class="row">
+					{# <div class="col-md-3">
+					<div class="">
+						<img src="/uploads/{{app.user.username}}/{{ app.user.profileImage }}" alt="sdf" width="100%"></div>
+					</div> #}
+					<div class="col-md-9">
+						<div class"row">
+							<div class="col-md-12 main-area">
+								<div class="image-list">
+									<div class="card">
+										<div class="card-header">
+											{# {% if audio|length < 9 %} #}
+												<button class="btn btn-primary float-end" id="image-uploader-show">
+												<i class="fas fa-plus"></i>
+												Add Audio </button>
+											{# {% endif %} #}
+											<h4>My Audio</h4>
+											
+											<span id="image-uploader-hide" style="display:none">
+												<i class="fas fa-times fa-2x float-end"></i>
+											</span>
+											<div class="image-uploader">
+												{{form_start(form)}}
+												<div class="container">
+													<div class="row">
+														<div class="col-md-6 col-xs-12">
+															{{ form_row(form.audio,{'label':'Audio' })}}
+															<div class="help-block text-danger">{{form_errors(form.audio)}}</div>
+														</div>
+													</div>
+												</div>
+												{{form_end(form)}}
+											</div>
+										</div>
+
+
+										 <div class="card-body" style="wd">
+											<div class="row portfolio-list sort-destination" data-sort-id="portfolio" data-filter="*" style="">
+
+
+ 
+												
+													 <div class="col-12 col-sm-6 col-lg-3 isotope-item websites">
+{# <pre>
+	{{ dump(user) }}
+</pre> #}
+
+						{% if user is defined and user.audio is defined and user.audio != 0 %}
+
+						{% set myAudio = asset('uploads/'~ app.user.username ~'/'~ user.audio) %}
+					
+					
+							<span class="play-button" onclick="play()" >
+							<audio controls id="audioval">
+								<source src="{{ myAudio }}" type="audio/mp3">
+								</audio>
+							</span>
+
+					{% endif %}
+
+
+													</div> 
+
+
+	 												<div class="col-12 col-sm-12 col-lg-12 float-right">
+												 
+													</div> 
+
+													 <div class="col-12 col-sm-12 col-lg-12 float-right">
+												{% if user is defined and user.audio is defined and user.audio != 0 %}
+														<i class="fa fa-trash" style="color:red" id="oldaudio">
+														</i>	 
+													{% endif %}
+													</div> 
+ 
+											</div>
+										</div> 
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+ 
+
+		</div>
+	</body>
+	<script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script> 
+	<script src="{{asset('assets/bootstrap/js/bootstrap.bundle.min.js')}}"> </script>
+	<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+	<script src="{{asset('assets/cropperjs/dist/cropper.min.js')}}"></script>
+	<script src="{{asset('assets/jquery-cropper/dist/jquery-cropper.min.js')}}"></script>
+   <script>
+
+      $("#image-uploader-show").on("click", function(e){
+			$("#image-uploader-hide").show();
+			$(".image-uploader").css("display", "block");
+			$(this).hide();
+      });
+
+		$("#image-uploader-hide").on("click", function(e){
+			$("#image-uploader-show").show();
+			$(".image-uploader").css("display", "none");
+			$(this).hide();
+		});
+/*
+		window.addEventListener("load", function(){
+			var myModal = new bootstrap.Modal(document.getElementById('modal'), {
+				backdrop: 'static',
+				keyboard: false
+			});	
+
+			var modal = document.getElementById('modal');
+			modal.addEventListener('shown.bs.modal', function() {
+				cropper = new Cropper(image, {
+					aspectRatio: 1,
+					viewMode: 1,
+					preview:'.preview'
+				});
+			});
+			modal.addEventListener('hidden.bs.modal', function() {
+				cropper.destroy();
+				cropper = null;
+			});
+
+			$("#audio_photos").on("change", function(e){
+				$("#image").attr("src", URL.createObjectURL(e.target.files[0]));		
+
+				var image = $('#image')[0];
+				
+				myModal.show();
+				
+				{# $('#crop').click(function(){
+					var canvas = cropper.getCroppedCanvas({
+						width:400,
+						height:500
+					});
+
+					canvas.toBlob(function(blob){
+						url = URL.createObjectURL(blob);
+						var reader = new FileReader();
+						reader.readAsDataURL(blob);
+						reader.onloadend = function(){
+							var base64data = reader.result;
+							$.ajax({
+								url:"{{ path('upload_image')}}",
+								method:'POST',
+								data:{image:base64data},
+								success:function(data)
+								{
+									myModal.hide();
+									if(data.status){
+										location.reload();
+									}
+									else{
+										alert("image not uploaded");
+									}		
+								}
+							});
+						};
+					});
+				}); #}
+
+
+			});
+
+			$("#cancel").on("click", function(){
+				$("#audio_photos").val("");
+				myModal.hide();
+			})
+		});
+*/
+
+
+
+
+
+
+		/*$('#save').click(function(){
+					
+							$.ajax({
+								url:"{{ path('upload_image')}}",
+								method:'POST',
+								data:{image:base64data},
+								success:function(data)
+								{
+									myModal.hide();
+									if(data.status){
+										location.reload();
+									}
+									else{
+										alert("image not uploaded");
+									}		
+								}
+							});
+				});*/
+
+
+</script>
+
+
+ <script type="text/javascript">
+      function Play()
+      {
+        var myAudio = document.getElementById("audioval");
+        if(myAudio.paused) {
+            myAudio.play();
+        }
+        else {
+           myAudio.pause();
+        }
+      }
+</script>
+
+
+ <script type="text/javascript">
+       
+       
+		$('#oldaudio').click(function(){
+			 
+
+			 
+					url = "#";
+
+				{% if user.audio is defined and user.audio is not null and user.id is not null %}
+					url = "{{ path('audio_delete',{'id':user.id })}}";  
+				{% endif %}
+
+
+
+							$.ajax({
+								url:url,
+								method:'DELETE',
+						 
+								success:function(data)
+								{
+									console.log("11111111111");
+								window.location.href = "{{ path('audio_update') }}";
+
+								}
+							});
+				});
+
+       
+</script>
+
+
+
+
+</html>

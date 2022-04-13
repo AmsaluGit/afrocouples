@@ -51,6 +51,11 @@
 		<!-- Skin CSS -->
 		<link id="skinCSS" rel="stylesheet" href="{{asset('assets/skins/default.css')}}">
 		<style>
+
+ 
+
+
+
 			.switch-primary {
 				padding: 6px 10px;
 			}
@@ -117,7 +122,12 @@
 			.play-button {
 				color: #1a84ed;
 				float: right;
+
 			}
+			
+			
+
+			/*media of width greater than or equal to 992px, laptops, desktops, projectors */
 			@media(min-width: 992px) {
 				.col-lg-custom {
 					flex: 0 0 auto;
@@ -133,8 +143,19 @@
 					flex: 0 0 auto;
 					width: 20%;
 				}
+
+				#audioval
+				{
+					position: relative;
+					display: inline-block; 
+					width: 160px;
+				}
+
+
+
 			}
 
+		   /*media of width less than or equal to 992px, phones, tablets*/
 			@media(max-width: 992px) {
 				/*li > a.dropdown-item {
 					color: white !important;
@@ -151,6 +172,12 @@
 				.w-100 {
 				   height: auto; 
 		     	}
+				 	#audioval
+				{
+					position: relative;
+					display: inline-block; 
+					width: 320px;
+				}
 				 
 			}
 
@@ -185,10 +212,23 @@
   background: red;
   color: white;
 }
+
+
+
+
 		</style>
-		{# <link rel="stylesheet" href="{{asset('assets/custom.css')}}"> #}
-	</head>
+ 	</head>
 	<body data-plugin-page-transition>
+
+
+
+
+
+		
+
+										 
+
+
 
 {# <div {{ turbo_stream_listen('product_views') }}></div> #}
 		<div class="body">
@@ -443,12 +483,23 @@
 														{% if age_array[user.id] %}
 														, {{age_array[user.id]}}
 														{% endif %}
-														
+
+
+
+
+
+
+
+
+   
+
+ 
+
+
 															
-															
-															{# <span class="play-button">
+															{# <span class="play-button" onclick="play()">
 																<i class="far fa-play-circle"></i>
-															</span> #}
+															</span>  #}
 														</p>
 														{% if user.city %}
 															<p>
@@ -471,6 +522,20 @@
 															</span>
 															{% endif %}
 															
+
+															 
+
+													{% set myAudio = asset('uploads/'~ user.username ~'/'~ user.audio) %}
+  
+													<span class="play-button" onclick="play()" >
+													
+													<audio controls id="audioval">
+														<source src="{{ myAudio }}" type="audio/mp3">
+														</audio>
+													</span>
+												 
+
+
 														</p>
 													</div>
 												</div>
@@ -611,9 +676,16 @@ $city = '<p>' + user.nationality +", "+ user.city + '</p>';
  
 $citizenAndReleigion = '<p class=" text-muted">' + user.religionName + '<span></span>  </p>';
 
+
+var myAudio = '/uploads/' +user.username+'/'+ user.audio;
+  
+$theAudio = '<span class="play-button" onclick="play()" ><audio controls id="audioval"><source src="'+ myAudio +'" type="audio/mp3"></audio></span>';
+
+												 
 $wrapper.append($name);
 $wrapper.append($city);
 $wrapper.append($citizenAndReleigion);
+$wrapper.append($theAudio);
 $meta.append($wrapper);
 $card.append($meta);
 $col.append($card);
@@ -734,9 +806,19 @@ $(window).bind('scroll', function () {
                                     $city = '<p>'+user.nationality+ ", " + user.city + '</p>';
 
                                     $citizenAndReleigion = '<p class=" text-muted">' +  user.religionName + '<span></span>  </p>';
+
+
+
+									var myAudio = '/uploads/' +user.username+'/'+ user.audio;
+  
+									$theAudio = '<span class="play-button" onclick="play()" ><audio controls id="audioval"><source src="'+ myAudio +'" type="audio/mp3"></audio></span>';
+
+
+
                                     $wrapper.append($name);
                                     $wrapper.append($city);
                                     $wrapper.append($citizenAndReleigion);
+                                    $wrapper.append($theAudio);
                                     $meta.append($wrapper);
                                     $card.append($meta);
                                     $col.append($card);
@@ -795,9 +877,74 @@ function tt() {}
 }); #}
 
 
+ /*var x = document.getElementById("myAudio"); 
 
+function playAudio() { 
+  x.play(); 
+} 
+
+function pauseAudio() { 
+  x.pause(); 
+} */
 
 </script>
+
+
+
+<script>
+/*
+var myAudio = document.getElementById("myAudios");
+var isPlaying = false;
+
+function togglePlay() {
+  isPlaying ? myAudio.pause() : myAudio.play();
+};
+
+myAudio.onplaying = function() {
+  isPlaying = true;
+  console.log("8888888888");
+};
+myAudio.onpause = function() {
+  isPlaying = false;
+   console.log("99999999999");
+};*/
+
+</script>
+
+
+
+
+<script>
+
+ /* function aud_play_pause() {
+    var myAudio = document.getElementById("myTune");
+    if (myAudio.paused) {
+      $('#stateicon').removeClass('fa fa-play');
+      $('#stateicon').addClass('fa fa-pause');
+      myAudio.play();
+    } else {
+      $('#stateicon').removeClass('fa fa-pause');
+      $('#stateicon').addClass('fa fa-play');
+      myAudio.pause();
+   }
+ }*/
+
+</script>
+
+
+ <script type="text/javascript">
+      function Play()
+      {
+        var myAudio = document.getElementById("audioval");
+        if(myAudio.paused) {
+            myAudio.play();
+        }
+        else {
+           myAudio.pause();
+        }
+      }
+    </script>
+
 
 
 	</body>

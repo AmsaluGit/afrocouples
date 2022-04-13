@@ -90,6 +90,7 @@ class HomeController extends AbstractController
         $query = $em->createQuery(
             'SELECT u FROM App\Entity\User u ORDER BY u.id desc'
             );
+             
         if ($this->getUser()) {
             $sex = $this->getUser()->getSex();
         $query = $em->createQuery(
@@ -257,7 +258,7 @@ class HomeController extends AbstractController
         // $dql->setParameter("sex", $sex);
         $users = $dql->getArrayResult();
         // dd($content);
-         //dd($users);
+        //  dd($users);
         $response['users'] = $users;
         $response['draw'] = $request->request->get("draw");
 

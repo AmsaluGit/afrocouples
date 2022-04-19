@@ -224,9 +224,7 @@
  
 												
 													 <div class="col-12 col-sm-6 col-lg-3 isotope-item websites">
-{# <pre>
-	{{ dump(user) }}
-</pre> #}
+ 
 
 						{% if user is defined and user.audio is defined and user.audio != 0 %}
 
@@ -282,6 +280,7 @@
 			$("#image-uploader-hide").show();
 			$(".image-uploader").css("display", "block");
 			$(this).hide();
+			$('#audio_audio').addClass('mb-4');
       });
 
 		$("#image-uploader-hide").on("click", function(e){
@@ -289,97 +288,14 @@
 			$(".image-uploader").css("display", "none");
 			$(this).hide();
 		});
-/*
-		window.addEventListener("load", function(){
-			var myModal = new bootstrap.Modal(document.getElementById('modal'), {
-				backdrop: 'static',
-				keyboard: false
-			});	
-
-			var modal = document.getElementById('modal');
-			modal.addEventListener('shown.bs.modal', function() {
-				cropper = new Cropper(image, {
-					aspectRatio: 1,
-					viewMode: 1,
-					preview:'.preview'
-				});
-			});
-			modal.addEventListener('hidden.bs.modal', function() {
-				cropper.destroy();
-				cropper = null;
-			});
-
-			$("#audio_photos").on("change", function(e){
-				$("#image").attr("src", URL.createObjectURL(e.target.files[0]));		
-
-				var image = $('#image')[0];
-				
-				myModal.show();
-				
-				{# $('#crop').click(function(){
-					var canvas = cropper.getCroppedCanvas({
-						width:400,
-						height:500
-					});
-
-					canvas.toBlob(function(blob){
-						url = URL.createObjectURL(blob);
-						var reader = new FileReader();
-						reader.readAsDataURL(blob);
-						reader.onloadend = function(){
-							var base64data = reader.result;
-							$.ajax({
-								url:"{{ path('upload_image')}}",
-								method:'POST',
-								data:{image:base64data},
-								success:function(data)
-								{
-									myModal.hide();
-									if(data.status){
-										location.reload();
-									}
-									else{
-										alert("image not uploaded");
-									}		
-								}
-							});
-						};
-					});
-				}); #}
-
-
-			});
-
-			$("#cancel").on("click", function(){
-				$("#audio_photos").val("");
-				myModal.hide();
-			})
-		});
-*/
+ 
 
 
 
 
 
 
-		/*$('#save').click(function(){
-					
-							$.ajax({
-								url:"{{ path('upload_image')}}",
-								method:'POST',
-								data:{image:base64data},
-								success:function(data)
-								{
-									myModal.hide();
-									if(data.status){
-										location.reload();
-									}
-									else{
-										alert("image not uploaded");
-									}		
-								}
-							});
-				});*/
+	 
 
 
 </script>

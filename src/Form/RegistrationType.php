@@ -33,6 +33,16 @@ class RegistrationType extends AbstractType
                'label' => 'Username Name',
                'attr' => ['class'=>'form-control col-3']
            ])
+            ->add('phone', null, [
+               'label' => 'Phone number',
+               'required' => false,
+               'attr' => ['class'=>'form-control col-3']
+           ])
+           ->add('email', EmailType::class, [
+            'label' => 'Email',
+            'required' => false,
+            'attr' => ['class'=>'form-control']
+        ])
             ->add('sex' ,ChoiceType::class,[
                 'required' => true,
                 'attr'=>['class'=>'form-control'],

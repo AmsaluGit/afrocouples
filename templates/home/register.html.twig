@@ -209,6 +209,16 @@
 						</div>
                   <div class="row">
 							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.phone,{'label':'Phone' })}}
+								<div class="help-block text-danger">{{form_errors(form.phone)}}</div>
+							</div>
+							<div class="col-md-6 col-xs-12">
+								{{ form_row(form.email,{'label':'Email' })}}
+								<div class="help-block text-danger">{{form_errors(form.email)}}</div>
+							</div>
+						</div>
+                  <div class="row">
+							<div class="col-md-6 col-xs-12">
 								{{ form_row(form.city,{'label':'City' })}}
 								<div class="help-block text-danger">{{form_errors(form.city)}}</div>
 							</div>

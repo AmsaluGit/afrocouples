@@ -1,3 +1,4 @@
+{#
 <!DOCTYPE html>
 <html>
  {% for i in 26..35 %}
@@ -23,6 +24,20 @@ GRANT ALL PRIVILEGES ON site{{i}}db.* TO 'site{{i}}user'@'localhost';<br><br>
 {% endfor %}
 
 
-</html>
+</html>  
+#}
+
+
+
+ {#  below for csv to po translation #}
+{% for result in  results %}
+
+msgid "{{result.original | trim }}" <br>
+msgstr "{{result.translated | trim }}" </br>
+<br>
+
+{% endfor %}
+ 
+
 
 

@@ -43,8 +43,10 @@
 		<link rel="stylesheet" href="{{asset('assets/theme-elements.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/vendor/owl-carousel/owl-carousel.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/theme-blog.css')}}">
-		<link rel="stylesheet" href="{{asset('assets/cropperjs/dist/cropper.min.css')}}">
 		<link id="skinCSS" rel="stylesheet" href="{{asset('assets/skins/default.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/cropperjs/dist/cropper.min.css')}}">
+		<link rel="stylesheet" href="{{asset('assets/css/audio.css')}}">
+		
 <style>
 			.switch-primary {
 				padding: 6px 10px;
@@ -213,7 +215,33 @@
 													</div>
 												</div>
 												{{form_end(form)}}
+
+<br>
+<br>
+
+
+	{# <div id="controls">
+  	 <button id="recordButton">Record</button>
+  	 <button id="pauseButton" disabled>Pause</button>
+  	 <button id="stopButton" disabled>Stop</button>
+    </div>
+    <div id="formats">Format: start recording to see sample rate</div>
+  	<p><strong>Recordings:</strong></p>
+
+	 
+  	<ol id="recordingsList"></ol>  #}
+
+
+
+
+
+
+	  
 											</div>
+
+
+
+
 										</div>
 
 
@@ -267,6 +295,17 @@
  
 
 		</div>
+
+
+
+
+    
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+ 
+
+
+
+	  
 	</body>
 	<script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/owl-carousel/owl-carousel.min.js')}}"></script> 
@@ -274,6 +313,11 @@
 	<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
 	<script src="{{asset('assets/cropperjs/dist/cropper.min.js')}}"></script>
 	<script src="{{asset('assets/jquery-cropper/dist/jquery-cropper.min.js')}}"></script>
+
+	<script src="{{asset('assets/js/recorder.js')}}"></script>
+  	<script src="{{asset('assets/js/app.js')}}"></script>
+
+
    <script>
 
       $("#image-uploader-show").on("click", function(e){

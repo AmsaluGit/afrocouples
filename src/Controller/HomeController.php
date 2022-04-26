@@ -19,6 +19,7 @@ use App\Form\GalleryType;
 use App\Repository\ChatRepository;
 use App\Repository\NationalityRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -33,6 +34,24 @@ class HomeController extends AbstractController
 {
  
    
+
+    /**
+     * @Route("/extra1", name="extra1")
+     */
+    public function extra1(EntityManagerInterface $em): Response
+    {
+   
+        $conn = $em->getConnection();
+         $sql= "SELECT original, translated FROM translations";
+        $results = $conn
+        ->executeQuery($sql)->fetchAllAssociative();
+ 
+        return $this->render('home/delete.html.twig', [
+            'results' => $results,
+        ]);
+
+ 
+    }
     /**
      * @Route("/messages", name="messages")
      */
